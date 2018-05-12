@@ -33,16 +33,6 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group{{ $errors->has('identifier') ? ' has-error' : '' }}">
-                                    <label for="identifier" class="col-md-4 control-label">Идентификатор</label>
-                                    <div class="col-md-6">
-                                        <input id="identifier" type="text" class="form-control" name="identifier" required autofocus>
-                                        @if ($errors->has('identifier'))
-                                            <span class="help-block"><strong>{{ $errors->first('identifier') }}</strong></span>
-                                        @endif
-                                    </div>
-                                </div>
-
                                 <div class="form-group">
                                     <div class="col-md-6 col-md-offset-4">
                                         <button type="submit" class="btn btn-primary">Създай</button>

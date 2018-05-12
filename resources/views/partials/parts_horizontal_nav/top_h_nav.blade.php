@@ -1,9 +1,13 @@
 <nav class="topBar">
     <div class="container">
+
+        <div class="navbar-header">
+
+            <a class="navbar-brand" href="#"><img width="200" height="70" src="https://ebags.bg/image/data/124567789.png" alt=""/></a>
+        </div>
+
+
         <ul class="list-inline pull-left">
-            <li><span class="text-primary"><a id="view-contact-form">Имате ли въпроси? </a></span>
-                <i class="fa fa-phone" aria-hidden="true"></i>  {{ isset($siteViewInformation->phone_com) ? $siteViewInformation->phone_com : '0888 888 888'}}  |
-                <i class="fa fa-envelope-open" aria-hidden="true"></i>   {{ isset($siteViewInformation->phone_com) ? $siteViewInformation->email_com : 'example@com.com' }}</li>
         </ul>
 
         <div id="modal-contact-form-wrapper" class="modal-contact-forma-c">
@@ -71,11 +75,20 @@
 
 
         <ul class="topBarNav pull-right">
+            <li>
+                <div id="wrap-search">
+                    <form action="" autocomplete="on">
+                        <input id="search" name="search" type="text" placeholder="What're we looking for ?"><input id="search_submit" value="Rechercher" type="submit">
+                    </form>
+                </div>
+            </li>
+
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="false"> <i class="fa fa-bgn mr-5"></i>BGN<i class="fa fa-angle-down ml-5"></i>
-                </a>
 
             </li>
+
+
+
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="false">
                     <img src="http://icons.iconarchive.com/icons/osiris/world-flags/16/00-cctld-bg-icon.png" class="mr-5" alt="">

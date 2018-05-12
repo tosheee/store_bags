@@ -4,23 +4,17 @@
         <span class="empty">No items in cart.</span>
     </div>
 
-    <h3>CATEGORIES</h3>
+    <h3>Категории</h3>
     <div class="checklist categories">
         <ul>
-            <li><a href=""><span></span>New Arivals</a></li>
-            <li><a href=""><span></span>Accesories</a></li>
-            <li><a href=""><span></span>Bags</a></li>
-            <li><a href=""><span></span>Dressed</a></li>
-            <li><a href=""><span></span>Jackets</a></li>
-            <li><a href=""><span></span>jewelry</a></li>
-            <li><a href=""><span></span>Shoes</a></li>
-            <li><a href=""><span></span>Shirts</a></li>
-            <li><a href=""><span></span>Sweaters</a></li>
-            <li><a href=""><span></span>T-shirts</a></li>
+            @foreach($subCategoriesButtonsName as $sub_category_vertical_button)
+                <li><a href=""><span></span>{{ $sub_category_vertical_button->name }}</a></li>
+            @endforeach
+
         </ul>
     </div>
 
-    <h3>COLORS</h3>
+    <h3>Цветове</h3>
     <div class="checklist colors">
         <ul>
             <li><a href=""><span></span>Beige</a></li>
@@ -39,7 +33,7 @@
         </ul>
     </div>
 
-    <h3>SIZES</h3>
+    <h3>Размер</h3>
     <div class="checklist sizes">
         <ul>
             <li><a href=""><span></span>XS</a></li>
@@ -54,6 +48,4 @@
         </ul>
     </div>
 
-    <h3>PRICE RANGE</h3>
-    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/price-range.png" alt="" />
 </div>

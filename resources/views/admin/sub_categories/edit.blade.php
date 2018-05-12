@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-default">
-                        <div class="panel-heading">Създа</div>
+                        <div class="panel-heading">Обнови</div>
                         <div class="panel-body">
                             <form class="form-horizontal" method="POST" action="/admin/sub_categories/{{ $subCategory->id }}">
                                 {{ csrf_field() }}
@@ -32,16 +32,6 @@
                                         <input id="name" type="text" class="form-control" name="name" value="{{ $subCategory->name }}" required autofocus>
                                         @if ($errors->has('name'))
                                             <span class="help-block"><strong>{{ $errors->first('name') }}</strong></span>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="form-group{{ $errors->has('identifier') ? ' has-error' : '' }}">
-                                    <label for="identifier" class="col-md-4 control-label">Идентификатор</label>
-                                    <div class="col-md-6">
-                                        <input id="identifier" type="text" class="form-control" value="{{ $subCategory->identifier }}" name="identifier" required autofocus>
-                                        @if ($errors->has('identifier'))
-                                            <span class="help-block"><strong>{{ $errors->first('identifier') }}</strong></span>
                                         @endif
                                     </div>
                                 </div>

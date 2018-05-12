@@ -35,13 +35,12 @@ class SubCategoriesController extends Controller
         $this->validate($request, [
             'category_id' => 'required',
             'name'        => 'required',
-            'identifier'  => 'required',
         ]);
 
         $subCategory = new SubCategory;
         $subCategory->category_id = $request->input('category_id');
         $subCategory->name        = $request->input('name');
-        $subCategory->identifier  = preg_replace('/\s+/', '_', trim($request->input('identifier')));
+        $subCategory->identifier  = preg_replace('/\s+/', '_', trim(mb_strtolower($request->input('name'))));
         $subCategory->save();
 
         return redirect('admin/sub_categories')->with('success', 'Подкатегорията е създадена');
@@ -68,14 +67,13 @@ class SubCategoriesController extends Controller
         $this->validate($request, [
             'category_id' => 'required',
             'name' => 'required',
-            'identifier' => 'required',
         ]);
 
         $subCategory = SubCategory::find($id);
 
         $subCategory->category_id = $request->input('category_id');
         $subCategory->name        = $request->input('name');
-        $subCategory->identifier  = $request->input('identifier');
+        $subCategory->identifier  = preg_replace('/\s+/', '_', trim(mb_strtolower($request->input('name'))));
         $subCategory->save();
 
         return redirect('/admin/sub_categories')->with('success', 'Подкатегорията е обновена');

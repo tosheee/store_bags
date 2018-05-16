@@ -18,10 +18,9 @@
 
 
 .topBar {
-    background-color: #ffffff;
+    background-color: #020708;
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
     font-size: 13px;
-    padding: 2%;
 }
 
 .topBar ul {
@@ -38,6 +37,7 @@ select.input-lg {
 }
 
 .topBar a {
+    top: 100px;
     color: #878c94;text-decoration:none;
 }
 
@@ -127,30 +127,30 @@ select.input-lg {
 /*CART/////////////////////*/
 
 
-#navbar-main-navbar-default .cart-items::-webkit-scrollbar {
+.cart-items::-webkit-scrollbar {
     width: 6px;
     background-color: #ECECEC;
 }
-#navbar-main-navbar-default .cart-items::-webkit-scrollbar-track {
+.cart-items::-webkit-scrollbar-track {
 
 }
-#navbar-main-navbar-default .cart-items::-webkit-scrollbar-thumb {
+.cart-items::-webkit-scrollbar-thumb {
     background-color: #084951;
     outline: 1px solid black;
 }
 
-#navbar-main-navbar-default .topBar ul.topBarNav li ul.cart .cart-items{
+.topBar ul.topBarNav li ul.cart .cart-items{
     padding: 10px;
     height: 200px;
     overflow: auto;
 }
 
-#navbar-main-navbar-default .topBar ul.topBarNav li ul.cart .cart-items .items {
+.topBar ul.topBarNav li ul.cart .cart-items .items {
     margin: 0;
     padding: 0;
     list-style-type: none;
 }
-#navbar-main-navbar-default .topBar ul.topBarNav li ul.cart .cart-items .items li {
+.topBar ul.topBarNav li ul.cart .cart-items .items li {
     overflow: hidden;
     clear: left;
     padding-bottom: 10px;
@@ -158,34 +158,35 @@ select.input-lg {
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-#navbar-main-navbar-default .topBar ul.topBarNav li ul.cart .cart-items .items li .product-image {
+.topBar ul.topBarNav li ul.cart .cart-items .items li .product-image {
     width: 60px;
     float: left;
 }
-#navbar-main-navbar-default .topBar ul.topBarNav li ul.cart .cart-items .items li a {
+.topBar ul.topBarNav li ul.cart .cart-items .items li a {
+    font-size: 10px;
     margin: 0;
     padding: 0;
     line-height: normal;
     background-color: transparent;
     display: inline;
 }
-#navbar-main-navbar-default .topBar ul.topBarNav li ul.cart .cart-items .items li .product-details {
+.topBar ul.topBarNav li ul.cart .cart-items .items li .product-details {
     position: relative;
     margin-left: 60px;
     padding: 0 15px 0 10px;
 }
-#navbar-main-navbar-default .topBar ul.topBarNav li ul.cart .cart-items .items li .product-details .close-icon {
+.topBar ul.topBarNav li ul.cart .cart-items .items li .product-details .close-icon {
     position: absolute;
     top: 0;
     right: 0;
     font-size: 10px;
     line-height: normal;
 }
-#navbar-main-navbar-default .topBar ul.topBarNav li ul.cart .cart-footer {
+.topBar ul.topBarNav li ul.cart .cart-footer {
     overflow: hidden;
     background-color: rgba(0, 0, 0, 0.02);
 }
-#navbar-main-navbar-default .topBar ul.topBarNav li ul.cart .cart-footer a {
+.topBar ul.topBarNav li ul.cart .cart-footer a {
     text-align: center;
     padding: 10px 20px;
     margin: 0;
@@ -370,12 +371,18 @@ select.input-lg {
     /*padding:1%;*/
 }
 
+#navbar-main-navbar-default.navbar-default li:hover{
+    background-color: #ffffff;
+    /*padding:1%;*/
+}
+
+
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
-    color:  #5def8a;
+    color: #c8d5de;
     background-color: transparent;
 }
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:after {
-    border-top:solid 2px  #2ab27b;
+    border-top:solid 2px #e9f6ff;
 
 }
 .navbar-default .dropdown-menu {
@@ -409,7 +416,7 @@ select.input-lg {
     white-space: nowrap;
 }
 .dropdown-menu > li > a:hover{
-    color: #5def8a;
+    color: rgba(159, 107, 255, 0.33);
 }
 
 
@@ -452,7 +459,7 @@ select.input-lg {
     max-width: 100%;
     padding: 20px;
 }
-/*search */
+/****************************    search   ****************************************************************/
 
 @import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700);
 @import url(https://raw.github.com/FortAwesome/Font-Awesome/master/docs/assets/css/font-awesome.min.css);
@@ -515,9 +522,9 @@ select.input-lg {
     right: 0;
     z-index: 2;
     cursor: pointer;
-    opacity: 0.4;
+    /*opacity: 0.4;*/
     cursor: pointer;
-    transition: opacity .4s ease;
+    /*transition: opacity .4s ease;*/
 }
 
 #wrap-search input[type="submit"]:hover {

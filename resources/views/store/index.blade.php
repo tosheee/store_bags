@@ -69,8 +69,29 @@
                                         <span>XXL</span>
                                     </div>
 -->
-                                <button class="add-cart-large">
+                                <button class="add-cart-large add-product-button">
                                     Добави
+                                    <i class="fa fa-shopping-cart" ></i>
+
+                                    <?php if(Session::has('cart'))
+                                    {
+                                        $oldCart = Session::get('cart');
+                                        if(isset($oldCart->items[$product->id]['qty']))
+                                        {
+                                            $product_qty = $oldCart->items[$product->id]['qty'];
+                                        }
+
+                                    }
+                                    ?>
+                                    @if(!empty($oldCart->items[$product->id]) )
+                                        <sup id="sup-product-qty"> {{ isset($product_qty) ? $product_qty : '' }}</sup>
+                                        <input id="quantity-product" type="hidden" value="{{ isset($product_qty) ? $product_qty + 1 : '1' }}"  >
+                                    @else
+                                        <sup id="sup-product-qty"></sup>
+                                        <input id="quantity-product" type="hidden" value="1"  >
+                                    @endif
+
+                                    <input id="id-product" type="hidden" value="{{ $product->id }}"/>
                                 </button>
 
                             </div>
@@ -88,9 +109,33 @@
 
                                     <div class="image_overlay"></div>
 
-                                    <div class="add_to_cart">
-                                        Добави
-                                    </div>
+
+
+                                         <button class="add-product-button add_to_cart" title="Добави в количката" >
+                                            Добави
+                                            <i class="fa fa-shopping-cart" ></i>
+
+                                            <?php if(Session::has('cart'))
+                                            {
+                                                $oldCart = Session::get('cart');
+                                                if(isset($oldCart->items[$product->id]['qty']))
+                                                {
+                                                    $product_qty = $oldCart->items[$product->id]['qty'];
+                                                }
+
+                                            }
+                                            ?>
+                                            @if(!empty($oldCart->items[$product->id]) )
+                                                <sup id="sup-product-qty"> {{ isset($product_qty) ? $product_qty : '' }}</sup>
+                                                <input id="quantity-product" type="hidden" value="{{ isset($product_qty) ? $product_qty + 1 : '1' }}"  >
+                                            @else
+                                                <sup id="sup-product-qty"></sup>
+                                                <input id="quantity-product" type="hidden" value="1"  >
+                                            @endif
+
+                                            <input id="id-product" type="hidden" value="{{ $product->id }}"/>
+                                        </button>
+
 
                                     <div class="view_gallery">Галерия</div>
                                     <a href="/store/{{ $product->id }}">
@@ -355,14 +400,15 @@
                 var carousel = $(this).parent().parent().find(".carousel-container");
                 var img = carousel.find('img').eq(carousel.attr("rel"))[0];
                 var position = $(img).offset();
+                console.log(position);
 
                 var productName = $(this).parent().find('h4').get(0).innerHTML;
 
                 $("body").append('<div class="floating-cart"></div>');
                 var cart = $('div.floating-cart');
-                $("<img src='"+img.src+"' class='floating-image-large' />").appendTo(cart);
+                $("<img width='20' height='20' src='"+img.src+"' class='floating-image-large' />").appendTo(cart);
 
-                $(cart).css({'top' : position.top + 'px', "left" : position.left + 'px'}).fadeIn("slow").addClass('moveToCart');
+                $(cart).css({'top' : position.top + 'px', "right" : position.right + 'px'}).fadeIn("slow").addClass('moveToCart');
                 setTimeout(function(){$("body").addClass("MakeFloatingCart");}, 800);
 
                 setTimeout(function(){
@@ -471,19 +517,22 @@
             var productImage = $(productCard).find('img').get(0).src;
             var productName = $(productCard).find('.product_name').get(0).innerHTML;
 
+            var kolichka = $('#new-view-cart').offset();
+
+            console.log(kolichka.top);
+
             $("body").append('<div class="floating-cart"></div>');
+            var window_width = $( window ).width();
             var cart = $('div.floating-cart');
             productCard.clone().appendTo(cart);
-
-            $(cart).css({'top' : position.top + 'px', "left" : position.left + 'px'}).fadeIn("slow").addClass('moveToCart');
-            //$(cart).css({'top' : position.top + 'px', "left" : position.left + 500 }).fadeIn("slow").addClass('moveToCart');
-            setTimeout(function(){$("body").addClass("MakeFloatingCart");}, 800);
+            $(cart).css({'top' : position.top + 'px', "left" : position.left + 'px'}).fadeIn("slow").addClass('moveToCart').animate({left: kolichka.left + 'px', top: '-10px'});;
+            setTimeout(function(){$("body").addClass("MakeFloatingCart").css('left', '2000px');}, 800);
             setTimeout(function(){
                 $('div.floating-cart').remove();
                 $("body").removeClass("MakeFloatingCart");
 
 
-                var cartItem = "<div class='cart-item'><div class='img-wrap'><img  src='"+productImage+"' alt='' height='42' width='42' /></div><span>"+productName+"</span><strong>$39</strong><div class='cart-item-border'></div><div class='delete-item'></div></div>";
+                var cartItem = "<div class='cart-item'><div class='img-wrap'><img src='"+productImage+"' alt='' /></div><span>"+productName+"</span><strong>$39</strong><div class='cart-item-border'></div><div class='delete-item'></div></div>";
 
                 $("#cart .empty").hide();
                 $("#cart").append(cartItem);

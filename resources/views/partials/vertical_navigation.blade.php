@@ -1,18 +1,24 @@
 <div id="sidebar">
-    <h3>CART</h3>
-    <div id="cart">
-        <span class="empty">No items in cart.</span>
-    </div>
+    <?php $paramOfUrl = explode('=', Request::fullUrl()) ?>
+    @foreach($categoriesButtonsName as $categoryButton)
+        <h3>{{ $categoryButton->name }}</h3>
+        <div class="checklist categories">
+            <ul class="">
 
-    <h3>Категории</h3>
-    <div class="checklist categories">
-        <ul>
-            @foreach($subCategoriesButtonsName as $sub_category_vertical_button)
-                <li><a href=""><span></span>{{ $sub_category_vertical_button->name }}</a></li>
-            @endforeach
+                @foreach($subCategoriesButtonsName as $subCategoryButtonsName)
+                    @if ($subCategoryButtonsName->category_id == $categoryButton->id)
 
-        </ul>
-    </div>
+                        @if(isset($paramOfUrl[1]) && urldecode($paramOfUrl[1]) == $subCategoryButtonsName->identifier)
+                            <li class="" ><span></span><a style="color: #5ff7d2;" class="" href="/store/search?sub_category={{ $subCategoryButtonsName->identifier }}">{{ $subCategoryButtonsName->name }}</a></li>
+                        @else
+                            <li class=""><a class="" href="/store/search?sub_category={{ $subCategoryButtonsName->identifier }}">{{ $subCategoryButtonsName->name }}</a></li>
+                        @endif
+
+                    @endif
+                @endforeach
+            </ul>
+        </div>
+    @endforeach
 
     <h3>Цветове</h3>
     <div class="checklist colors">

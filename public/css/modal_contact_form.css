@@ -17,10 +17,10 @@
 
 .modal-content-contact-form {
     width: 65%;
-    background-color: #dbe1de;
+    background-color: #fcdcd2;
     margin: auto;
     padding: 0 3% 0 3%;
-    border-radius: 0px;
+    border-radius: 10px;
     border: 1px solid #888;
 
 }
@@ -50,7 +50,7 @@
     border:none;
     border:solid 1px #555;
     background:rgba(0,0,0,0.3);
-    border-radius:0 !important;
+    border-radius: 10px !important;
 }
 
 .modal-contact-forma-c #contact_form input[type=submit]{
@@ -63,13 +63,11 @@
 }
 
 
-
-
 .modal-contact-forma-c #contact_form input{
-    border-radius: 0px;
+    border-radius: 5px;
 }
 
 .modal-contact-forma-c #contact_form textarea{
-    border-radius: 0px;
+    border-radius: 5px;
     height:90px;
 }

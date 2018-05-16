@@ -23,16 +23,6 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-/*
-body, html {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    font-size: 100%;
-
-    font-family: 'Titillium Web', sans-serif;
-}
-*/
 
 #header{
     height:92px;
@@ -47,6 +37,7 @@ body, html {
     float:left;
     margin-right:30px;
 }
+
 #header li a{
     font-weight:700;
     color:#333;
@@ -55,15 +46,11 @@ body, html {
     text-transform:uppercase;
     letter-spacing:1px;
 }
+
 #headerli a:hover{
     color:#000;
     cursor:pointer;
 }
-
-body{
-    /*background-color: #e9f6ff;*/
-}
-
 
 .col-md-3.item-block{
     margin: 10px;
@@ -79,7 +66,6 @@ body{
 
 
 #grid-selector{
-    /*border: solid 0.5px;*/
     height: 10px;
     width: 90%;
     padding: 20px 20px 40px 20px;
@@ -109,19 +95,15 @@ body{
 }
 
 #grid-menu li a{
-    /*display:block;*/
     width:25px;
     height:25px;
     /*background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/grid-menu.png") 0 0  no-repeat;*/
 }
 
-
 #grid-menu li a.active{ color: red }
 
 #sidebar{
-    /*float:left;*/
     background:#fff;
-    padding:5% 0 0 5%;
     height:1400px;
     border-right:1px solid #eee;
 }
@@ -289,11 +271,11 @@ body{
 
 
 .product{
-    margin: 20px;
-    width: 260px;
+    margin: 2px;
+    width: 300px;
+    height:400px;
     position: relative;
     perspective: 800px;
-    height:500px;
     transform-style: preserve-3d;
     transition: transform 5s;
     -webkit-transition: width 500ms ease-in-out;
@@ -304,37 +286,15 @@ body{
 }
 
 
-/*
-.product{
--webkit-box-shadow: 1px 0px 2px 0px #000000;
-box-shadow: 1px 0px 2px 0px #000000;
-position: relative;
-perspective: 800px;
-width:30%;
-height:500px;
-transform-style: preserve-3d;
-transition: transform 5s;
-float:right;
-margin: 10px;
-/*border: solid 1px;
-
--webkit-transition: width 500ms ease-in-out;
--moz-transition: width 500ms ease-in-out;
--ms-transition: width 500ms ease-in-out;
--o-transition: width 500ms ease-in-out;
-transition: width 500ms ease-in-out;
-}*/
 
 .product-front img{
-
     margin-left: auto;
     margin-right: auto;
     width:99%;
 }
 
 .product-front, .product-back{
-
-    height:500px;
+    height:400px;
     background:#fff;
     position:absolute;
     /*left:-5px;
@@ -378,7 +338,7 @@ div.large .product-back{
 .make3D{
 
     width:100%;
-    height:520px;
+    height:400px;
     position:absolute;
     /*top:10px;
     left:10px;*/
@@ -422,7 +382,7 @@ div.make3D.flip180{
     /*top:5px;
     left:5px;*/
     width:100%;
-    height:520px;
+    height:400px;
     box-shadow:0px 5px 31px -1px rgba(0, 0, 0, 0.15);
     -webkit-transition:  100ms ease-out;
     -moz-transition:  100ms ease-out;
@@ -872,12 +832,74 @@ div.shadow{
     -webkit-transform: rotate(135deg);
     transform: rotate(135deg);
 }
+/******************************************************************************************/
 div.floating-cart{
     position:absolute;
     top:0;
     left:0;
-    width:100%;
-    height:460px;
+    width:315px;
+    height:480px;
+    background:#fff;
+    z-index:200;
+    overflow:hidden;
+    box-shadow:0px 5px 31px -1px rgba(0, 0, 0, 0.15);
+    display:none;
+}
+
+@media screen and (min-width: 1400px) and (max-width: 1700px)   {
+
+    div.floating-cart .stats-container{display:none;}
+    div.floating-cart .product-front{width:100%; top:0; left:0;}
+    div.floating-cart.moveToCart{
+        left: 1300px !important;
+        top: 55px !important;
+    }
+}
+
+@media screen and (min-width: 1400px) and (max-width: 1800px)   {
+
+    body.MakeFloatingCart div.floating-cart.moveToCart{
+        left: 1300px !important;
+        top: 20px !important;
+    }
+}
+
+
+div.floating-cart .stats-container{display:none;}
+div.floating-cart .product-front{width:100%; top:0; left:0;}
+div.floating-cart.moveToCart{
+    left: 1175px !important;
+    top: 55px !important;
+    width: 47px;
+    height: 47px;
+    -webkit-transition: all 800ms ease-in-out;
+    -moz-transition: all 800ms ease-in-out;
+    -ms-transition: all 800ms ease-in-out;
+    -o-transition: all 800ms ease-in-out;
+    transition: all 800ms ease-in-out;
+}
+
+body.MakeFloatingCart div.floating-cart.moveToCart{
+    /*left: 1130px !important;*/
+    top: 20px !important;
+    width: 21px;
+    height: 22px;
+    box-shadow:0px 5px 31px -1px rgba(0, 0, 0, 0);
+    -webkit-transition: all 200ms ease-out;
+    -moz-transition: all 200ms ease-out;
+    -ms-transition: all 200ms ease-out;
+    -o-transition: all 200ms ease-out;
+    transition: all 200ms ease-out;
+}
+
+
+/*
+div.floating-cart{
+    position:absolute;
+    top:10px;
+    left: 1000px;
+    width:20%;
+    height:50%;
     background:#fff;
     z-index:200;
     overflow:hidden;
@@ -888,8 +910,10 @@ div.floating-cart{
 div.floating-cart .stats-container{display:none;}
 div.floating-cart .product-front{width:100%; top:0; left:0;}
 div.floating-cart.moveToCart{
-    left: 75px !important;
-    top: 55px !important;
+    /*right: 0px !important;
+    left: 1150px !important;
+
+    top: 45px !important;
     width: 47px;
     height: 47px;
     -webkit-transition: all 800ms ease-in-out;
@@ -898,9 +922,10 @@ div.floating-cart.moveToCart{
     -o-transition: all 800ms ease-in-out;
     transition: all 800ms ease-in-out;
 }
+
 body.MakeFloatingCart div.floating-cart.moveToCart{
-    right: 90px !important;
-    top: 140px !important;
+    right: 1000px !important;
+    top: 70px !important;
     width: 21px;
     height: 22px;
     box-shadow:0px 5px 31px -1px rgba(0, 0, 0, 0);
@@ -910,6 +935,9 @@ body.MakeFloatingCart div.floating-cart.moveToCart{
     -o-transition: all 200ms ease-out;
     transition: all 200ms ease-out;
 }
+*/
+
+/**************************************************************************************************/
 div.cart-icon-top{
     position:absolute;
     background:#fff url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/cart.png") 0 -3px no-repeat;
@@ -918,7 +946,7 @@ div.cart-icon-top{
     height:3px;
     z-index:1;
     top: 140px;
-    left: 90px;
+    right: 90px;
 }
 div.cart-icon-bottom{
     position:absolute;
@@ -928,7 +956,7 @@ div.cart-icon-bottom{
     height:19px;
     z-index:1;
     top: 143px;
-    left: 90px;
+    right: 90px;
 }
 body.MakeFloatingCart div.cart-icon-top{z-index:30;}
 body.MakeFloatingCart div.cart-icon-bottom{z-index:300;}
@@ -1004,7 +1032,8 @@ body.MakeFloatingCart div.cart-icon-bottom{z-index:300;}
 }
 
 .product.large{
-    width: 620px;
+    width: 97%;
+    height: 430px;
     margin-bottom:25px;
     overflow:hidden;
     -webkit-transition: all 500ms ease-in-out;
@@ -1249,3 +1278,53 @@ img {
 .gallery__thumbs a.is-active {
     opacity: 0.2;
 }
+/*********************show page*************************************/
+
+
+.product-slider#product-slider-id .carousel{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.product-slider #carousel {
+    border: 4px solid #1089c0; margin: 0;
+}
+
+.product-slider #thumbcarousel {
+    margin: 12px 0 0; padding: 0 45px;
+}
+
+.product-slider #thumbcarousel .item {
+    text-align: center;
+}
+
+.product-slider #thumbcarousel .item .thumb {
+    border: 4px solid #cecece; width: 20%; margin: 0 2%; display: inline-block; vertical-align: middle; cursor: pointer; max-width: 98px; }
+
+.product-slider #thumbcarousel .item .thumb:hover { border-color: #1089c0; }
+
+.product-slider .item img { width: 100%; height: auto; }
+
+.carousel-control { color: #0284b8; text-align: center; text-shadow: none; font-size: 30px; width: 30px; height: 30px; line-height: 20px; top: 23%; }
+
+.carousel-control:hover, .carousel-control:focus, .carousel-control:active { color: #333; }
+
+.carousel-caption, .carousel-control .fa { font: normal normal normal 30px/26px FontAwesome; }
+.carousel-control { background-color: rgba(0, 0, 0, 0); bottom: auto; font-size: 20px; left: 0; position: absolute; top: 30%; width: auto; }
+
+.carousel-control.right, .carousel-control.left { background-color: rgba(0, 0, 0, 0); background-image: none; }
+
+
+/***************************************************************/
+
+
+
+
+
+
+
+
+
+

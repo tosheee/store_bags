@@ -2,142 +2,103 @@
 
 @section('content')
 
-    <div class="col-md4">
-<div class="show-product container">
+    <?php $descriptions = json_decode($product->description, true); ?>
+    <br>
+    <br>
 
-    <!-- Gallery -->
-    <div id="js-gallery" class="gallery">
+    <ul>
+        <li>
+            <div class="order-breadcrumb">
+                <a href="/" class="">Начало</a>
+                @foreach($categories as $category)
+                    @if($product->category_id == $category->id)
+                        › <a href="/store/search?category={{ $category->id }}" class=""> {{ $category->name }}</a>
+                    @endif
+                @endforeach
 
-        <!--Gallery Hero-->
-        <div class="gallery__hero">
-            <a  class="gallery__hero-enlarge ir" data-gallery="zoom">Zoom</a>
+                @foreach($subCategories as $subCategory)
+                    @if($product->sub_category_id == $subCategory->id)
+                        › <a href="/store/search?sub_category={{ $subCategory->identifier }}" class="active">{{ $subCategory->name }}</a>
+                    @endif
+                @endforeach
+            </div>
+        </li>
+    </ul>
 
-            <img src="https://public-619e3.firebaseapp.com/Product-Gallery/products/normal/product-01_view-01.jpg">
+    <hr>
+
+
+    <div class="col-md-5">
+        <div class="container-fluid">
+
+            <div class="product-slider" id="product-slider-id">
+                <div id="carousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            @if (isset($descriptions['main_picture_url']))
+                                <img width="40" height="40" src="{{ $descriptions['main_picture_url'] }}" alt="pic" />
+                            @elseif(isset($descriptions['upload_main_picture']))
+                                <img width="40" height="40" src="/storage/upload_pictures/{{ $product->id }}/{{ $descriptions['upload_main_picture'] }}" alt="pic" />
+                            @else
+                                <img width="40" height="40" src="/storage/common_pictures/noimage.jpg" alt="pic" />
+                            @endif
+                        </div>
+
+                        @if (isset($descriptions['gallery']))
+                            @foreach( $descriptions['gallery'] as $key => $type_pictures)
+                                @foreach($type_pictures as $key_picture => $picture)
+                                    <div class="item">
+                                        @if($key_picture == 'upload_picture')
+                                            <img width="40" height="40" src="/storage/upload_pictures/{{ $product->id }}/{{ $type_pictures[$key_picture] }}" class="img-responsive">
+                                        @else
+                                            <img width="40" height="40" src="{{ $type_pictures[$key_picture] }}" class="img-responsive">
+                                        @endif
+                                    </div>
+                                @endforeach
+                            @endforeach
+                        @endif
+                    </div>
+                </div>
+
+
+                <div class="clearfix">
+                    <div id="thumbcarousel" class="carousel slide" data-interval="false">
+                        <div class="carousel-inner">
+                            <div class="item active">
+
+                                <div data-target="#carousel" data-slide-to="0" class="thumb">
+                                    @if (isset($descriptions['main_picture_url']))
+                                        <img width="40" height="40" src="{{ $descriptions['main_picture_url'] }}" alt="pic" />
+                                    @else
+                                        <img width="40" height="40" src="/storage/upload_pictures/{{ $product->id }}/{{ $descriptions['upload_main_picture'] }}" alt="pic" />
+                                    @endif
+                                </div>
+
+                                @if (isset($descriptions['gallery']))
+                                    @foreach( $descriptions['gallery'] as $key => $type_pictures)
+                                        @foreach($type_pictures as $key_picture => $picture)
+                                            <div data-target="#carousel" data-slide-to="{{ $key+1 }}" class="thumb">
+                                                @if($key_picture == 'upload_picture')
+                                                    <img width="40" height="40" src="/storage/upload_pictures/{{ $product->id }}/{{ $type_pictures[$key_picture] }}" class="img-responsive">
+                                                @else
+                                                    <img width="40" height="40" src="{{ $type_pictures[$key_picture] }}" class="img-responsive">
+                                                @endif
+                                            </div>
+                                        @endforeach
+                                    @endforeach
+                                @endif
+
+                            </div>
+                        </div>
+                        <!-- /carousel-inner -->
+                        <a class="left carousel-control" href="#thumbcarousel" role="button" data-slide="prev"> <i class="fa fa-angle-left" aria-hidden="true"></i> </a> <a class="right carousel-control" href="#thumbcarousel" role="button" data-slide="next"><i class="fa fa-angle-right" aria-hidden="true"></i> </a> </div>
+                    <!-- /thumbcarousel -->
+                </div>
+            </div>
         </div>
-        <!--Gallery Hero-->
-
-        <!--Gallery Thumbs-->
-        <div class="gallery__thumbs">
-            <a href="https://public-619e3.firebaseapp.com/Product-Gallery/products/normal/product-01_view-01.jpg" data-gallery="thumb" class="is-active">
-                <img src="https://public-619e3.firebaseapp.com/Product-Gallery/products/thumb/product-01_view-01.jpg">
-            </a>
-            <a href="https://public-619e3.firebaseapp.com/Product-Gallery/products/normal/product-01_view-02.jpg" data-gallery="thumb">
-                <img src="https://public-619e3.firebaseapp.com/Product-Gallery/products/thumb/product-01_view-02.jpg">
-            </a>
-            <a href="https://public-619e3.firebaseapp.com/Product-Gallery/products/normal/product-01_view-03.jpg" data-gallery="thumb">
-                <img src="https://public-619e3.firebaseapp.com/Product-Gallery/products/thumb/product-01_view-03.jpg">
-            </a>
-        </div>
-        <!--Gallery Thumbs-->
-
-    </div><!--.gallery-->
-    <!-- Gallery -->
-
-</div><!--.container-->
     </div>
-<script>
 
+    <div class="com-md-5">
 
-    var App = (function () {
-
-        //=== Use Strict ===//
-        'use strict';
-
-        //=== Private Variables ===//
-        var gallery = $('#js-gallery');
-
-        //=== Gallery Object ===//
-        var Gallery = {
-            zoom: function(imgContainer, img) {
-                var containerHeight = imgContainer.outerHeight(),
-                        src = img.attr('src');
-
-                if ( src.indexOf('/products/normal/') != -1 ) {
-                    // Set height of container
-                    imgContainer.css( "height", containerHeight );
-
-                    // Switch hero image src with large version
-                    img.attr('src', src.replace('/products/normal/', '/products/zoom/') );
-
-                    // Add zoomed class to gallery container
-                    gallery.addClass('is-zoomed');
-
-                    // Enable image to be draggable
-                    img.draggable({
-                        drag: function( event, ui ) {
-                            ui.position.left = Math.min( 100, ui.position.left );
-                            ui.position.top = Math.min( 100, ui.position.top );
-                        }
-                    });
-                } else {
-                    // Ensure height of container fits image
-                    imgContainer.css( "height", "auto" );
-
-                    // Switch hero image src with normal version
-                    img.attr('src', src.replace('/products/zoom/', '/products/normal/') );
-
-                    // Remove zoomed class to gallery container
-                    gallery.removeClass('is-zoomed');
-                }
-            },
-            switch: function(trigger, imgContainer) {
-                var src = trigger.attr('href'),
-                        thumbs = trigger.siblings(),
-                        img = trigger.parent().prev().children();
-
-                // Add active class to thumb
-                trigger.addClass('is-active');
-
-                // Remove active class from thumbs
-                thumbs.each(function() {
-                    if( $(this).hasClass('is-active') ) {
-                        $(this).removeClass('is-active');
-                    }
-                });
-
-                // Reset container if in zoom state
-                if ( gallery.hasClass('is-zoomed') ) {
-                    gallery.removeClass('is-zoomed');
-                    imgContainer.css( "height", "auto" );
-                }
-
-                // Switch image source
-                img.attr('src', src);
-            }
-        };
-
-        //=== Public Methods ===//
-        function init() {
-
-            // Listen for clicks on anchors within gallery
-            gallery.delegate('a', 'click', function(event) {
-                var trigger = $(this);
-                var triggerData = trigger.data("gallery");
-
-                if ( triggerData === 'zoom') {
-                    var imgContainer = trigger.parent(),
-                            img = trigger.siblings();
-                    Gallery.zoom(imgContainer, img);
-                } else if ( triggerData === 'thumb') {
-                    var imgContainer = trigger.parent().siblings();
-                    Gallery.switch(trigger, imgContainer);
-                } else {
-                    return;
-                }
-
-                event.preventDefault();
-            });
-
-        }
-
-        //=== Make Methods Public ===//
-        return {
-            init: init
-        };
-
-    })();
-
-    App.init();
-</script>
-
+    </div>
 @endsection

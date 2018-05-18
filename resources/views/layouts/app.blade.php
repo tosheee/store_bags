@@ -35,6 +35,17 @@
                     z-index: 0;
                 }
             </style>
+            <script>
+
+                $(document).ready(function () {
+                    var part_url = window.location.pathname.split('/')[1];
+
+                    if (part_url == 'admin') {
+                        $("header").css('display', 'none')
+                    };
+                });
+            </script>
+
     </head>
 
     <body>

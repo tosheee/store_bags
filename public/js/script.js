@@ -1,4 +1,3 @@
-
     $('.product_buttons').on('click', '.button-like', function() {
         var idProduct = $(this).parent().find('input#id-product').val()
 
@@ -11,8 +10,6 @@
             }
         });
     });
-
-
 
     $('ol.items, p#button-wrapper-sc').on('click','.remove-item-button', function() {
         var remove_item_button = $(this);

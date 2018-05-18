@@ -252,12 +252,6 @@
 
 
 <script>
-    $( function() {
-        $( "#resizable" ).resizable();
-        $('#vertical-nav-bar').resizable();
-        $('.product').resizable();
-    } );
-
     $(window).resize(function () {
         var viewportWidth = $(window).width();
 
@@ -267,12 +261,6 @@
             $("#vertical-nav-bar").css('display', 'inline-block')
         }
     });
-
-    $( window ).resize(function() {
-        $( ".product" ).css('margin', 'auto');
-    });
-
-
 </script>
 
 
@@ -441,7 +429,7 @@
 
 
             });
-        })
+        });
 
         /* ----  Image Gallery Carousel   ---- */
         function makeCarousel(el){

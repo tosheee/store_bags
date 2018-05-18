@@ -2,11 +2,13 @@
 
 @section('content')
 
-    <?php $descriptions = json_decode($product->description, true); ?>
-    <br>
-    <br>
 
-    <ul>
+    <?php $descriptions = json_decode($product->description, true); ?>
+
+    <div class="col-md-10">
+        <div class="row">
+
+    <ul style="padding: 20px 20px 20px 20px; ">
         <li>
             <div class="order-breadcrumb">
                 <a href="/" class="">Начало</a>
@@ -21,14 +23,15 @@
                         › <a href="/store/search?sub_category={{ $subCategory->identifier }}" class="active">{{ $subCategory->name }}</a>
                     @endif
                 @endforeach
+
             </div>
         </li>
+
     </ul>
 
-    <hr>
 
-
-    <div class="col-md-5">
+<div class="show-page-product">
+    <div id="showPageProductImages">
         <div class="container-fluid">
 
             <div class="product-slider" id="product-slider-id">
@@ -98,7 +101,193 @@
         </div>
     </div>
 
-    <div class="com-md-5">
+
+    <div class="productInfo">
+        <h1 class="title">{{ $descriptions['title_product'] }}</h1>
+        <span class="productId">Продуктов код: {{ $descriptions['article_id'] }}</span>
+        <div class="subProdInfo">
+            <span class="price">
+                Цена: {{ number_format($descriptions['price'], 2) }} {{ $descriptions['currency'] }}
+                @if (isset($descriptions['old_price']))
+                    <span class="old-price">   {{ number_format($descriptions['old_price'], 2) }} {{ $descriptions['currency'] }}</span>
+                @endif
+            </span>
+            <span class="stock"></span>
+        </div>
+
+        <p> {{ isset($descriptions['short_description']) ? $descriptions['short_description'] : '' }}</p>
+
+        <label><a href="#"></a></label>
+        <div class="select-wrapper">
+            <span class="stock">Статус: {{ isset($descriptions['product_status'])  ? $descriptions['product_status'] : '' }}</span>
+
+        </div>
+
+        <div class="colors">
+            <div class="color selected" style="background-color: #222" title="Black"></div>
+            <div class="color" style="background-color: #FFF" title="White"></div>
+            <div class="color" style="background-color: #00F" title="Dark Blue"></div>
+            <div class="color" style="background-color: #08F" title="Light Blue"></div>
+        </div>
+
+        <div class="addToCart">
+            <div class="qntySection">
+                <span class="btn" data-type="remove">-</span>
+                <span id="qnty">1</span>
+                <span class="btn" data-type="add">+</span>
+            </div>
+            <button class="add-cart-large add-product-button">
+                Добави
+                <i class="fa fa-shopping-cart" ></i>
+
+                <?php if(Session::has('cart'))
+                {
+                    $oldCart = Session::get('cart');
+                    if(isset($oldCart->items[$product->id]['qty']))
+                    {
+                        $product_qty = $oldCart->items[$product->id]['qty'];
+                    }
+
+                }
+                ?>
+                @if(!empty($oldCart->items[$product->id]) )
+                    <sup id="sup-product-qty"> {{ isset($product_qty) ? $product_qty : '' }}</sup>
+                    <input id="quantity-product" type="hidden" value="{{ isset($product_qty) ? $product_qty + 1 : '1' }}"  >
+                @else
+                    <sup id="sup-product-qty"></sup>
+                    <input id="quantity-product" type="hidden" value="1"  >
+                @endif
+
+                <input id="id-product" type="hidden" value="{{ $product->id }}"/>
+            </button>
+
+        </div>
+
 
     </div>
-@endsection
+</div>
+        </div>
+
+
+        <div class="col-md-9">
+            <div>
+                @if(isset($descriptions['general_description']))
+                    <ul class="menu-items">
+                        <li class="active">Информация за продукта</li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+
+                    <div style="width:100%;border-top:1px solid silver">
+                        <p style="padding:15px;">
+                        <p style="font-size: 150%;"> {!! $descriptions['general_description'] !!} </p>
+                        </p>
+                    </div>
+                @endif
+
+                @if(isset($descriptions['properties']))
+                    <?php $table_data = array_chunk($descriptions['properties'], 2) ?>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th class="text-left">Детайли</th>
+                            <th class="text-left"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($table_data as $row )
+                            <tr>
+                                <td class="text-left"> {{ isset($row[0]['name']) ?  $row[0]['name'] : '' }}</td>
+                                <td class="text-left"> {{ isset($row[1]['text']) ?  $row[1]['text'] : '' }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                @endif
+            </div>
+        </div>
+
+
+    <script>
+        var slider = document.getElementById("sliderImages");
+        var sliderIndex = document.getElementById("sliderIndex");
+        var slidingImages = slider.children;
+        var amountOfImages = slidingImages.length;
+        var increment = 100 / amountOfImages;
+
+        slider.style.width = 100 * amountOfImages + "%";
+        slider.style.transform = "translateX(0%)";
+
+        for(var i = 1; i <= amountOfImages; i++){
+            var node = document.createElement("div");
+            node.classList.add("slide");
+            if (i === 1) node.classList.add('active');
+            node.setAttribute("data-amount", (i - 1));
+            node.addEventListener("click", handleSlideClick);
+            sliderIndex.appendChild(node);
+        }
+
+        function handleSlideClick(e){
+            for(var x = 0; x < sliderIndex.children.length; x++){
+                sliderIndex.children[x].classList.remove("active");
+            }
+            e.target.classList.add("active");
+            var move = e.target.getAttribute('data-amount') * increment;
+            slider.style.transform = "translateX(-"+move+"%)";
+        }
+    </script>
+
+
+    <script>
+
+
+        /*
+        $('.add-cart-large').each(function(i, el){
+            $(el).click(function(){
+                var carousel = $(this).parent().parent().find(".carousel-container");
+                var img = carousel.find('img').eq(carousel.attr("rel"))[0];
+                var position = $(img).offset();
+                console.log(position);
+
+                var productName = $(this).parent().find('h4').get(0).innerHTML;
+
+                $("body").append('<div class="floating-cart"></div>');
+                var cart = $('div.floating-cart');
+                $("<img width='20' height='20' src='"+img.src+"' class='floating-image-large' />").appendTo(cart);
+
+                $(cart).css({'top' : position.top + 'px', "right" : position.right + 'px'}).fadeIn("slow").addClass('moveToCart');
+                setTimeout(function(){$("body").addClass("MakeFloatingCart");}, 800);
+
+                setTimeout(function(){
+                    $('div.floating-cart').remove();
+                    $("body").removeClass("MakeFloatingCart");
+
+
+                    var cartItem = "<div class='cart-item'><div class='img-wrap'><img src='"+img.src+"' alt='' /></div><span>"+productName+"</span><strong>$39</strong><div class='cart-item-border'></div><div class='delete-item'></div></div>";
+
+                    $("#cart .empty").hide();
+                    $("#cart").append(cartItem);
+                    $("#checkout").fadeIn(500);
+
+                    $("#cart .cart-item").last()
+                            .addClass("flash")
+                            .find(".delete-item").click(function(){
+                                $(this).parent().fadeOut(300, function(){
+                                    $(this).remove();
+                                    if($("#cart .cart-item").size() == 0){
+                                        $("#cart .empty").fadeIn(500);
+                                        $("#checkout").fadeOut(500);
+                                    }
+                                })
+                            });
+                    setTimeout(function(){
+                        $("#cart .cart-item").last().removeClass("flash");
+                    }, 10 );
+
+                }, 1000);
+
+
+            });
+        });*/
+    </script>
+    @endsection

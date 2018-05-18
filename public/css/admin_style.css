@@ -6,7 +6,9 @@
 .padding-top > .col-md-6{padding-bottom:15px;}
 
 
-
+#admin-wrapper{
+padding: 2.5%;
+}
 
 .wrapper {
     min-height: 1000px;

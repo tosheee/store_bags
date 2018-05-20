@@ -443,7 +443,7 @@ div.large .make3D{
 .stats-container .product_price{
     text-align: center;
     /*float:right;*/
-    color:#5ff7d2;
+    color: #2a19eb;
     font-size: 1.3em;
     font-weight:400;
 }
@@ -1095,7 +1095,7 @@ div.sku strong{
 .price-big{
     font-size: 34px;
     font-weight: 600;
-    color: #5ff7d2;
+    color: #2a19eb;
     margin-top: 21px;
 }
 .price-big span{
@@ -1339,7 +1339,7 @@ img {
     font-family: helvetica;
 }
 .show-page-product {
-    width: 100vw;
+    /*width: 100vw;*/
     height: 100vh;
     position: relative;
     top: 0;

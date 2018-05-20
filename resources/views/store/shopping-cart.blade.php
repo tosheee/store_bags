@@ -454,7 +454,7 @@
                             <h4>{{ $descriptions['title_product'] }}</h4>
 
                             <p><strong>Navy, Size 10</strong></p>
-                            <p>Продуктов код: {{$descriptions['title_product']}}</p>
+                            <p>Продуктов код: </p>
                         </div>
 
                     </div>
@@ -503,7 +503,7 @@
                 </div>
 
                 <div class="summary-checkout">
-                    <button class="checkout-cta">Продължи</button>
+                    <button class="checkout-cta" onclick="location.href='/checkout'">Продължи</button>
                 </div>
             </div>
         </aside>

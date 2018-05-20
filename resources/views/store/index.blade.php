@@ -152,9 +152,10 @@
                                                     <div>
                                                         <span class="price">
 
-                                                              {{ isset($descriptions['price']) ? $descriptions['price'] : '' }}
+                                                            <strong>
+                                                            {{ isset($descriptions['price']) ? $descriptions['price'] : '' }}
                                                             {{ isset($descriptions['currency']) ? $descriptions['currency'] : '' }}
-
+                                                            </strong>
                                                          </span>
 
                                                         @if(isset($descriptions['old_price']))

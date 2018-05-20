@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="col-md-2" id="vertical-nav-bar">
+        @include('partials.vertical_navigation')
+    </div>
 
 
     <?php $descriptions = json_decode($product->description, true); ?>

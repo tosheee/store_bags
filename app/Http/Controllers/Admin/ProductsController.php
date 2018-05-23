@@ -52,7 +52,6 @@ class ProductsController extends Controller
         $this->validate($request, [
             'category_id'     => 'required',
             'sub_category_id' => 'required',
-            'identifier'      => 'required',
         ]);
 
         if(!isset(DB::table('products')->latest('id')->first()->id))
@@ -138,11 +137,12 @@ class ProductsController extends Controller
         $descriptionRequest['old_price'] = isset($descriptionRequest['old_price']) ? number_format($descriptionRequest['old_price'], 2) : null;
 
         $description = json_encode( $descriptionRequest, JSON_UNESCAPED_UNICODE );
+        $subCategoryName = SubCategory::find($request->input('sub_category_id'))->name;
 
         $product = new Product;
         $product->category_id     = $request->input('category_id');
         $product->sub_category_id = $request->input('sub_category_id');
-        $product->identifier      = $request->input('identifier');
+        $product->identifier      = preg_replace('/\s+/', '_', mb_strtolower($subCategoryName));
         $product->active          = $request->input('active');
         $product->sale            = $request->input('sale');
         $product->recommended     = $request->input('recommended');
@@ -171,7 +171,6 @@ class ProductsController extends Controller
         $this->validate($request, [
             'category_id'     => 'required',
             'sub_category_id' => 'required',
-            'identifier'      => 'required',
         ]);
 
         $old_descriptions = json_decode($product->description, true);
@@ -232,7 +231,7 @@ class ProductsController extends Controller
                 $fileNameToStore = 'gallery_'.$i.'_'.time().'.'.$extension;
                 $image = Image::make($files_gallery_pic[$i]->getRealPath());
                 $path = storage_path('app/public/upload_pictures/'.$id.'/'. $fileNameToStore);
-		$water_mark = storage_path('app/public/common_pictures/watermark.png');
+		        $water_mark = storage_path('app/public/common_pictures/watermark.png');
             
 	        if(file_exists($water_mark) && $request->input('watermark_checked') == 1)
 	        {
@@ -251,10 +250,11 @@ class ProductsController extends Controller
         $descriptionRequest['old_price'] = isset($descriptionRequest['old_price']) ? number_format($descriptionRequest['old_price'], 2) : null;
 
         $description = json_encode( $descriptionRequest, JSON_UNESCAPED_UNICODE );
+        $subCategoryName = SubCategory::find($request->input('sub_category_id'))->name;
 
         $product->category_id     = $request->input('category_id');
         $product->sub_category_id = $request->input('sub_category_id');
-        $product->identifier      = $request->input('identifier');
+        $product->identifier      = preg_replace('/\s+/', '_', mb_strtolower($subCategoryName));
         $product->active          = $request->input('active');
         $product->sale            = $request->input('sale');
         $product->recommended     = $request->input('recommended');

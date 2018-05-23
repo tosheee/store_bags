@@ -29,18 +29,6 @@
                     </label>
                 </div>
 
-                <div class="form-group{{ $errors->has('identifier') ? ' has-error' : '' }}">
-                    <label>
-                        <span>Идентификатор:</span>
-                        <select class="form-control" name="identifier" id="select-identifier">
-                            <option value="">Избери идентификатор</option>
-                            @foreach($subCategories as $sub_category)
-                                <option value="{{ $sub_category->identifier }}">{{ $sub_category->identifier }}</option>
-                            @endforeach
-                        </select>
-                    </label>
-                </div>
-
                 <label>
                     <span style="margin: 0;">Активен продукт в магазина: </span>
                     <input type="radio" name="active" value="1" checked> ДА
@@ -155,7 +143,7 @@
         </div>
 
         <script>
-            $( "#select-category" ).change(function() {
+           /* $( "#select-category" ).change(function() {
                 var category_val =  $( "#select-category option:selected" ).val();
                 $("#select-sub-category").children().remove();
 
@@ -183,7 +171,7 @@
                     }
                 });
             });
-
+*           */
             $(document).ready(function() {
                 var max_fields = 2;
                 var wrapper    = $(".basic-img-wrap");

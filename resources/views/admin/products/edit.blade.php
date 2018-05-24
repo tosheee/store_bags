@@ -268,7 +268,7 @@
 
 
                 <script>
-/*
+
                     $(document).ready(function() {
                     $( "#select-category" ).change(function() {
                         var category_val =  $( "#select-category option:selected" ).val();
@@ -300,7 +300,7 @@
                         });
                     });
                     });
-*/
+*
                     $(document).ready(function() {
                         var max_fields = 5;
                         var wrapper    = $(".input_fields_wrap");

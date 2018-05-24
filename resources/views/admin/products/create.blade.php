@@ -143,7 +143,7 @@
         </div>
 
         <script>
-           /* $( "#select-category" ).change(function() {
+            $( "#select-category" ).change(function() {
                 var category_val =  $( "#select-category option:selected" ).val();
                 $("#select-sub-category").children().remove();
 
@@ -171,7 +171,7 @@
                     }
                 });
             });
-*           */
+
             $(document).ready(function() {
                 var max_fields = 2;
                 var wrapper    = $(".basic-img-wrap");

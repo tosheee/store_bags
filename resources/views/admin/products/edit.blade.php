@@ -300,7 +300,7 @@
                         });
                     });
                     });
-
+*
                     $(document).ready(function() {
                         var max_fields = 5;
                         var wrapper    = $(".input_fields_wrap");

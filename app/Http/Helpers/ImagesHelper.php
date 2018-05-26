@@ -43,10 +43,10 @@ class ImagesHelper{
         $fileNameToStore = 'basic_'.time().'.'.$extension;
 
         $rootProjectPatchDir = base_path();
-        $outsideProjectPatchDir = dirname($rootProjectPatchDir, 1);
+        $outsideProjectPatchDir = dirname($rootProjectPatchDir, 2);
 
         if(!is_dir($outsideProjectPatchDir.'/shared/storage/upload_pictures')){
-            File::makeDirectory($outsideProjectPatchDir.'/shared');
+            File::makeDirectory($outsideProjectPatchDir.'/shared', 0777, true);
             File::makeDirectory($outsideProjectPatchDir.'/shared/storage');
             File::makeDirectory($outsideProjectPatchDir.'/shared/storage/upload_pictures');
         }

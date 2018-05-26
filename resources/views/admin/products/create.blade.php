@@ -7,8 +7,8 @@
                 {{ csrf_field() }}
                 <div class="form-group{{ $errors->has('category_id') ? ' has-error' : '' }}">
                     <label>
-                        <span>Категории:</span>
-                        <select class="form-control" name="category_id" id="select-category">
+                        <span>Категории:<sup style="color: red;">*</sup></span>
+                        <select class="form-control" name="category_id" id="select-category" required="required"  oninvalid="this.setCustomValidity('Моля, въведете категория!')" oninput="setCustomValidity('')">
                             <option value="">Избери категория</option>
                             @foreach($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -19,8 +19,8 @@
 
                 <div class="form-group{{ $errors->has('sub_category_id') ? ' has-error' : '' }}">
                     <label>
-                        <span>Подкатегория:</span>
-                        <select class="form-control" name="sub_category_id" id="select-sub-category">
+                        <span>Подкатегория:<sup style="color: red;">*</sup></span>
+                        <select class="form-control" name="sub_category_id" id="select-sub-category" required="required"  oninvalid="this.setCustomValidity('Моля, въведете подкатегория!')" oninput="setCustomValidity('')">
                             <option value="">Избери подкатегория</option>
                             @foreach($subCategories as $sub_category)
                                 <option value="{{ $sub_category->id }}">{{ $sub_category->name }}</option>

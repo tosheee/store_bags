@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-
 use App\Admin\SubCategory;
 use App\Admin\Category;
 use App\Admin\Product;
+
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
 use Image;
+use ImagesHelper;
 
 class ProductsController extends Controller
 {
@@ -19,7 +21,6 @@ class ProductsController extends Controller
     {
         $this->middleware('auth:admin');
     }
-
 
     public function index()
     {
@@ -39,7 +40,6 @@ class ProductsController extends Controller
         return view('admin.products.show')->with('categories', $categories)->with('subCategories', $subCategories)->with('product', $product)->with('title', 'Преглед на продукта');
     }
 
-
     public function create()
     {
         $categories = Category::all();
@@ -48,6 +48,54 @@ class ProductsController extends Controller
     }
 
     public function store(Request $request)
+    {
+        $this->validate($request, [
+            'category_id'     => 'required',
+            'sub_category_id' => 'required',
+        ]);
+
+        $productId = ImagesHelper::getLastProductId() + 1;
+        $descriptionRequest =  $request->input('description');
+
+        if($request->hasFile('upload_main_picture'))
+        {
+            $descriptionRequest['upload_main_picture'] = ImagesHelper::resizeImages($request->file('upload_main_picture'), $productId, $request->input('watermark_checked'), 1000, 1000);
+        }
+        else
+        {
+            $descriptionRequest['upload_main_picture'] = 'noimage.jpg';
+        }
+
+        if($request->hasFile('upload_gallery_pictures') && $request->hasFile('upload_main_picture'))
+        {
+            $files_gallery_pic = $request->file('upload_gallery_pictures');
+
+            for($i = 0; $i < count($files_gallery_pic); $i++)
+            {
+                $descriptionRequest['gallery'][$i]['upload_picture'] = ImagesHelper::resizeImages($files_gallery_pic[$i], $productId, $request->input('watermark_checked'), 1000, 1000);
+            }
+        }
+
+        $description = json_encode( $descriptionRequest, JSON_UNESCAPED_UNICODE );
+        $subCategoryName = SubCategory::find($request->input('sub_category_id'))->name;
+
+        $product = new Product;
+        $product->category_id     = $request->input('category_id');
+        $product->sub_category_id = $request->input('sub_category_id');
+        $product->identifier      = preg_replace('/\s+/', '_', mb_strtolower($subCategoryName));
+        $product->active          = $request->input('active');
+        $product->sale            = $request->input('sale');
+        $product->recommended     = $request->input('recommended');
+        $product->best_sellers    = $request->input('best_sellers');
+        $product->description     = $description;
+        $product->save();
+
+        session()->flash('notif', 'Продукта е създаден');
+
+        return redirect('admin/products/create');
+    }
+
+    public function store_old(Request $request)
     {
         $this->validate($request, [
             'category_id'     => 'required',

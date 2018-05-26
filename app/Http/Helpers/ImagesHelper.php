@@ -44,18 +44,19 @@ class ImagesHelper{
         $rootProjectPatchDir = base_path();
         $outsideProjectPatchDir = dirname($rootProjectPatchDir, 2);
 
-        if(!is_dir($outsideProjectPatchDir.'/shared/storage/upload_pictures')){
+        if(!is_dir($outsideProjectPatchDir.'/shared/storage/public/upload_pictures')){
             File::makeDirectory($outsideProjectPatchDir.'/shared', 0777, true);
-            File::makeDirectory($outsideProjectPatchDir.'/shared/storage', 0777, true);
-            File::makeDirectory($outsideProjectPatchDir.'/shared/storage/upload_pictures', 0777, true);
+            File::makeDirectory($outsideProjectPatchDir.'/shared/public', 0777, true);
+            File::makeDirectory($outsideProjectPatchDir.'/shared/public/storage', 0777, true);
+            File::makeDirectory($outsideProjectPatchDir.'/shared/public/storage/upload_pictures', 0777, true);
         }
 
-        if(!is_dir($outsideProjectPatchDir.'/shared/storage/common_pictures')) {
-            File::makeDirectory($outsideProjectPatchDir . '/shared/storage/common_pictures', 0777, true);
+        if(!is_dir($outsideProjectPatchDir.'/shared/public/storage/common_pictures')) {
+            File::makeDirectory($outsideProjectPatchDir . '/shared/public/storage/common_pictures', 0777, true);
         }
 
-        $upload_pic_path = $outsideProjectPatchDir.'/shared/storage/upload_pictures';
-        $common_pic_path = $outsideProjectPatchDir . '/shared/storage/common_pictures';
+        $upload_pic_path = $outsideProjectPatchDir.'/shared/public/storage/upload_pictures';
+        $common_pic_path = $outsideProjectPatchDir . '/shared/public/storage/common_pictures';
 
         if(!is_dir($upload_pic_path.'/'.$productId)) {
             File::makeDirectory($upload_pic_path.'/'.$productId, 0777, true);

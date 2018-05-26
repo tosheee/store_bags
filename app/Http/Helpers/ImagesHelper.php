@@ -4,7 +4,6 @@ use App\Admin\Product;
 use Illuminate\Support\Facades\DB;
 use Image;
 
-
 class ImagesHelper{
 
     public static function getLastProductId()
@@ -47,27 +46,24 @@ class ImagesHelper{
 
         if(!is_dir($outsideProjectPatchDir.'/shared/storage/upload_pictures')){
             File::makeDirectory($outsideProjectPatchDir.'/shared', 0777, true);
-            File::makeDirectory($outsideProjectPatchDir.'/shared/storage');
-            File::makeDirectory($outsideProjectPatchDir.'/shared/storage/upload_pictures');
+            File::makeDirectory($outsideProjectPatchDir.'/shared/storage', 0777, true);
+            File::makeDirectory($outsideProjectPatchDir.'/shared/storage/upload_pictures', 0777, true);
         }
 
         if(!is_dir($outsideProjectPatchDir.'/shared/storage/common_pictures')) {
-            File::makeDirectory($outsideProjectPatchDir . '/shared/storage/common_pictures');
+            File::makeDirectory($outsideProjectPatchDir . '/shared/storage/common_pictures', 0777, true);
         }
 
         $upload_pic_path = $outsideProjectPatchDir.'/shared/storage/upload_pictures';
         $common_pic_path = $outsideProjectPatchDir . '/shared/storage/common_pictures';
 
         if(!is_dir($upload_pic_path.'/'.$productId)) {
-            File::makeDirectory($upload_pic_path.'/'.$productId);
+            File::makeDirectory($upload_pic_path.'/'.$productId, 0777, true);
         }
 
         $image = Image::make($file_main_pic->getRealPath());
         $path = $upload_pic_path.'/'.$productId.'/'. $fileNameToStore;
         $water_mark = $common_pic_path.'/watermark.png';
-
-
-        echo var_dump($path);
 
         if(file_exists($water_mark) && $water_checked == 1)
         {

@@ -76,9 +76,9 @@ class ProductsController extends Controller
             }
         }
 
-        $descriptionRequest['delivery_price'] = number_format(str_replace(",", ".", $descriptionRequest['delivery_price']), 2);
-        $descriptionRequest['price'] = number_format(str_replace(",", ".", $descriptionRequest['price']), 2);
-        $descriptionRequest['old_price'] = number_format(str_replace(",", ".", $descriptionRequest['old_price']), 2);
+        $descriptionRequest['delivery_price'] = number_format(str_replace(",", ".", floatval($descriptionRequest['delivery_price'])), 2);
+        $descriptionRequest['price'] = number_format(str_replace(",", ".", floatval($descriptionRequest['price'])), 2);
+        $descriptionRequest['old_price'] = number_format(str_replace(",", ".", floatval($descriptionRequest['old_price'])), 2);
 
         $descriptionRequest['article_id'] = mt_rand();
 
@@ -300,8 +300,9 @@ class ProductsController extends Controller
             }
         }
 
-        $descriptionRequest['price'] = number_format($descriptionRequest['price'], 2);
-        $descriptionRequest['old_price'] = isset($descriptionRequest['old_price']) ? number_format($descriptionRequest['old_price'], 2) : null;
+        $descriptionRequest['delivery_price'] = number_format(str_replace(",", ".", floatval($descriptionRequest['delivery_price'])), 2);
+        $descriptionRequest['price'] = number_format(str_replace(",", ".", floatval($descriptionRequest['price'])), 2);
+        $descriptionRequest['old_price'] = number_format(str_replace(",", ".", floatval($descriptionRequest['old_price'])), 2);
 
         $description = json_encode( $descriptionRequest, JSON_UNESCAPED_UNICODE );
         $subCategoryName = SubCategory::find($request->input('sub_category_id'))->name;

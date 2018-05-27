@@ -59,7 +59,7 @@ class ProductsController extends Controller
 
         if($request->hasFile('upload_main_picture'))
         {
-            $descriptionRequest['upload_main_picture'] = ImagesHelper::resizeImages($request->file('upload_main_picture'), $productId, $request->input('watermark_checked'), 1000, 1000);
+            $descriptionRequest['upload_main_picture'] = ImagesHelper::resizeImages($request->file('upload_main_picture'), $productId, $request->input('watermark_checked'), 1500, 1000);
         }
         else
         {
@@ -72,7 +72,7 @@ class ProductsController extends Controller
 
             for($i = 0; $i < count($files_gallery_pic); $i++)
             {
-                $descriptionRequest['gallery'][$i]['upload_picture'] = ImagesHelper::resizeImages($files_gallery_pic[$i], $productId, $request->input('watermark_checked'), 1000, 1000);
+                $descriptionRequest['gallery'][$i]['upload_picture'] = ImagesHelper::resizeImages($files_gallery_pic[$i], $productId, $request->input('watermark_checked'), 1500, 1000);
             }
         }
 
@@ -81,114 +81,6 @@ class ProductsController extends Controller
         $descriptionRequest['old_price'] = number_format(str_replace(",", ".", floatval($descriptionRequest['old_price'])), 2);
 
         $descriptionRequest['article_id'] = mt_rand();
-
-        $description = json_encode( $descriptionRequest, JSON_UNESCAPED_UNICODE );
-        $subCategoryName = SubCategory::find($request->input('sub_category_id'))->name;
-
-        $product = new Product;
-        $product->category_id     = $request->input('category_id');
-        $product->sub_category_id = $request->input('sub_category_id');
-        $product->identifier      = preg_replace('/\s+/', '_', mb_strtolower($subCategoryName));
-        $product->active          = $request->input('active');
-        $product->sale            = $request->input('sale');
-        $product->recommended     = $request->input('recommended');
-        $product->best_sellers    = $request->input('best_sellers');
-        $product->description     = $description;
-        $product->save();
-
-        session()->flash('notif', 'Продукта е създаден');
-
-        return redirect('admin/products/create');
-    }
-
-    public function store_old(Request $request)
-    {
-        $this->validate($request, [
-            'category_id'     => 'required',
-            'sub_category_id' => 'required',
-        ]);
-
-        if(!isset(DB::table('products')->latest('id')->first()->id))
-        {
-            $product = new Product;
-            $product->category_id     = 1;
-            $product->sub_category_id = 1;
-            $product->identifier      = '';
-            $product->sale            = 0;
-            $product->active          = 0;
-            $product->recommended     = 0;
-            $product->best_sellers    = 0;
-            $product->description     = '';
-            $product->save();
-            $oldId = DB::table('products')->latest('id')->first()->id;
-
-            $product = Product::find($oldId);
-            $product->delete();
-        }
-        else
-        {
-            $oldId = DB::table('products')->latest('id')->first()->id;
-        }
-
-        $productId = $oldId + 1;
-        $descriptionRequest =  $request->input('description');
-
-        if($request->hasFile('upload_main_picture'))
-        {
-            $file_main_pic = $request->file('upload_main_picture');
-            $extension = $file_main_pic->getClientOriginalExtension();
-            $fileNameToStore = 'basic_'.time().'.'.$extension;
-            Storage::makeDirectory('public/upload_pictures/'.$productId);
-            $image = Image::make($file_main_pic->getRealPath());
-
-            $path = storage_path('app/public/upload_pictures/'.$productId.'/'. $fileNameToStore);
-            
-            $water_mark = storage_path('app/public/common_pictures/watermark.png');
-            
-            if(file_exists($water_mark) && $request->input('watermark_checked') == 1)
-            {
-            	$image->resize(1500, 1000)->insert($water_mark, 'bottom-right', 10, 10)->save($path);
-            }
-            else
-            {
-            	$image->resize(1500, 1000)->save($path);
-            }
-            
-            $descriptionRequest['upload_main_picture'] = $fileNameToStore;
-        }
-        else
-        {
-            $fileNameToStore = 'noimage.jpg';
-        }
-
-        if($request->hasFile('upload_gallery_pictures') && $request->hasFile('upload_main_picture'))
-        {
-            $files_gallery_pic =$request->file('upload_gallery_pictures');
-
-            for($i = 0; $i < count($files_gallery_pic); $i++)
-            {
-                $extension = $files_gallery_pic[$i]->getClientOriginalExtension();
-                $fileNameToStore = 'gallery_'.$i.'_'.time().'.'.$extension;
-                Storage::makeDirectory('public/upload_pictures/'.$productId);
-                $image = Image::make($files_gallery_pic[$i]->getRealPath());
-		        $path = storage_path('app/public/upload_pictures/'.$productId.'/'. $fileNameToStore);
-                $water_mark = storage_path('app/public/common_pictures/watermark.png');
-            
-                if(file_exists($water_mark) && $request->input('watermark_checked') == 1)
-                {
-            	  $image->resize(1500, 1000)->insert($water_mark, 'bottom-right', 10, 10)->save($path);
-                }
-                else
-                {
-            	  $image->resize(1500, 1000)->save($path);
-                }
-                
-             $descriptionRequest['gallery'][$i]['upload_picture'] = $fileNameToStore;
-            }
-        }
-
-        $descriptionRequest['price'] = number_format($descriptionRequest['price'], 2);
-        $descriptionRequest['old_price'] = isset($descriptionRequest['old_price']) ? number_format($descriptionRequest['old_price'], 2) : null;
 
         $description = json_encode( $descriptionRequest, JSON_UNESCAPED_UNICODE );
         $subCategoryName = SubCategory::find($request->input('sub_category_id'))->name;

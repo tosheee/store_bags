@@ -37,11 +37,6 @@
                 <br>
 
                 <label>
-                    <span>Каталожен номер:</span>
-                    <input type="text" name="description[article_id]" value="" id="admin_product_description" class="label-values"/>
-                </label>
-
-                <label>
                     <span>Име на продукта:</span>
                     <input type="text" name="description[title_product]" value="" id="admin_product_description" class="label-values" require />
                 </label>

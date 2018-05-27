@@ -76,6 +76,10 @@ class ProductsController extends Controller
             }
         }
 
+
+        $descriptionRequest['price'] = number_format($descriptionRequest['price'],2);
+        $descriptionRequest['article_id'] = mt_rand();
+
         $description = json_encode( $descriptionRequest, JSON_UNESCAPED_UNICODE );
         $subCategoryName = SubCategory::find($request->input('sub_category_id'))->name;
 

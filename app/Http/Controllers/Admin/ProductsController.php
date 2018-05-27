@@ -76,9 +76,17 @@ class ProductsController extends Controller
             }
         }
 
-        $descriptionRequest['delivery_price'] = number_format(str_replace(",", ".", floatval($descriptionRequest['delivery_price'])), 2);
-        $descriptionRequest['price'] = number_format(str_replace(",", ".", floatval($descriptionRequest['price'])), 2);
-        $descriptionRequest['old_price'] = number_format(str_replace(",", ".", floatval($descriptionRequest['old_price'])), 2);
+        if(isset($descriptionRequest['delivery_price'])) {
+            $descriptionRequest['delivery_price'] = number_format(str_replace(",", ".", floatval($descriptionRequest['delivery_price'])), 2);
+        }
+
+        if(isset($descriptionRequest['price'])) {
+            $descriptionRequest['price'] = number_format(str_replace(",", ".", floatval($descriptionRequest['price'])), 2);
+        }
+
+        if(isset($descriptionRequest['old_price'])){
+            $descriptionRequest['old_price'] = number_format(str_replace(",", ".", floatval($descriptionRequest['old_price'])), 2);
+        }
 
         $descriptionRequest['article_id'] = mt_rand();
 

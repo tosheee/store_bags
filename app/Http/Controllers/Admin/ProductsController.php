@@ -76,9 +76,9 @@ class ProductsController extends Controller
             }
         }
 
-        $descriptionRequest['delivery_price'] = number_format(str_replace(",",".",$descriptionRequest['delivery_price']),2);
-        $descriptionRequest['price'] = number_format(str_replace(",",".",$descriptionRequest['price']),2);
-        $descriptionRequest['old_price'] = number_format(str_replace(",",".",$descriptionRequest['old_price']),2);
+        $descriptionRequest['delivery_price'] = number_format(str_replace(",", ".", $descriptionRequest['delivery_price']), 2);
+        $descriptionRequest['price'] = number_format(str_replace(",", ".", $descriptionRequest['price']), 2);
+        $descriptionRequest['old_price'] = number_format(str_replace(",", ".", $descriptionRequest['old_price']), 2);
 
         $descriptionRequest['article_id'] = mt_rand();
 
@@ -147,11 +147,11 @@ class ProductsController extends Controller
             
             if(file_exists($water_mark) && $request->input('watermark_checked') == 1)
             {
-            	$image->resize(1000, 1000)->insert($water_mark, 'bottom-right', 10, 10)->save($path);
+            	$image->resize(1500, 1000)->insert($water_mark, 'bottom-right', 10, 10)->save($path);
             }
             else
             {
-            	$image->resize(1000, 1000)->save($path);
+            	$image->resize(1500, 1000)->save($path);
             }
             
             $descriptionRequest['upload_main_picture'] = $fileNameToStore;
@@ -176,11 +176,11 @@ class ProductsController extends Controller
             
                 if(file_exists($water_mark) && $request->input('watermark_checked') == 1)
                 {
-            	  $image->resize(1000, 1000)->insert($water_mark, 'bottom-right', 10, 10)->save($path);
+            	  $image->resize(1500, 1000)->insert($water_mark, 'bottom-right', 10, 10)->save($path);
                 }
                 else
                 {
-            	  $image->resize(1000, 1000)->save($path);
+            	  $image->resize(1500, 1000)->save($path);
                 }
                 
              $descriptionRequest['gallery'][$i]['upload_picture'] = $fileNameToStore;
@@ -247,11 +247,11 @@ class ProductsController extends Controller
             
             if(file_exists($water_mark) && $request->input('watermark_checked') == 1)
             {
-            	$image->resize(1000, 1000)->insert($water_mark, 'bottom-right', 10, 10)->save($path);
+            	$image->resize(1500, 1000)->insert($water_mark, 'bottom-right', 10, 10)->save($path);
             }
             else
             {
-            	$image->resize(1000, 1000)->save($path);
+            	$image->resize(1500, 1000)->save($path);
             }
             
             

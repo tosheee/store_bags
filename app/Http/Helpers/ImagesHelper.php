@@ -40,14 +40,23 @@ class ImagesHelper{
     {
         $extension = $file_main_pic->getClientOriginalExtension();
         $fileNameToStore = 'basic_'.time().'.'.$extension;
-
         $rootProjectPatchDir = base_path();
         $outsideProjectPatchDir = dirname($rootProjectPatchDir, 2);
 
-        if(!is_dir($outsideProjectPatchDir.'/shared/storage/public/upload_pictures')){
-            File::makeDirectory($outsideProjectPatchDir.'/shared', 0777, true);
-            File::makeDirectory($outsideProjectPatchDir.'/shared/public', 0777, true);
-            File::makeDirectory($outsideProjectPatchDir.'/shared/public/storage', 0777, true);
+
+        if(!is_dir($outsideProjectPatchDir.'/shared')) {
+            File::makeDirectory($outsideProjectPatchDir . '/shared', 0777, true);
+        }
+
+        if(!is_dir($outsideProjectPatchDir.'/shared/public')) {
+            File::makeDirectory($outsideProjectPatchDir . '/shared/public', 0777, true);
+        }
+
+        if(!is_dir($outsideProjectPatchDir.'/shared/public/storage')) {
+            File::makeDirectory($outsideProjectPatchDir . '/shared/public/storage', 0777, true);
+        }
+
+        if(!is_dir($outsideProjectPatchDir.'/shared/public/storage/upload_pictures')){
             File::makeDirectory($outsideProjectPatchDir.'/shared/public/storage/upload_pictures', 0777, true);
         }
 

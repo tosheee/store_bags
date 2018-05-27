@@ -76,8 +76,10 @@ class ProductsController extends Controller
             }
         }
 
+        $descriptionRequest['delivery_price'] = number_format(str_replace(",",".",$descriptionRequest['delivery_price']),2);
+        $descriptionRequest['price'] = number_format(str_replace(",",".",$descriptionRequest['price']),2);
+        $descriptionRequest['old_price'] = number_format(str_replace(",",".",$descriptionRequest['old_price']),2);
 
-        $descriptionRequest['price'] = number_format($descriptionRequest['price'],2);
         $descriptionRequest['article_id'] = mt_rand();
 
         $description = json_encode( $descriptionRequest, JSON_UNESCAPED_UNICODE );

@@ -14,13 +14,12 @@
     width: 250px;
 }
 
-
-
-
 .topBar {
+    color: whitesmoke;
     background-color: #020708;
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
     font-size: 13px;
+    font-family: "Courier New", Times, serif;
 }
 
 .topBar ul {
@@ -28,6 +27,7 @@
 }
 
 .topBar ul li {
+    /*font-family: 'Dancing Script', cursive;*/
     line-height: 42px;
 }
 
@@ -38,14 +38,16 @@ select.input-lg {
 
 .topBar a {
     top: 100px;
-    color: #878c94;text-decoration:none;
+    text-decoration:none;
 }
 
 .text-primary a{
-    color: #5def8a;
+    font-family: "Courier New", Times, serif;
+    color: #030f1a;
 }
 
 .text-primary a:hover{
+    font-family: "Courier New", Times, serif;
     color: #3097D1;
 }
 
@@ -367,24 +369,31 @@ select.input-lg {
 }
 
 #navbar-main-navbar-default.navbar-default{
-    background-color: #fcdcd2;
-    /*padding:1%;*/
+    /*padding: 1%;*/
+    background-color: #da004d;
+    border-radius: 0;
 }
+
+
 
 #navbar-main-navbar-default.navbar-default li:hover{
-    background-color: #ffffff;
-    /*padding:1%;*/
+    background-color: #da004d;
 }
 
+
+.navbar-default .navbar-nav>li>a, .navbar-default .navbar-text {
+    color: #f3f3f3;
+}
 
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
     color: #c8d5de;
     background-color: transparent;
 }
+
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:after {
     border-top:solid 2px #e9f6ff;
-
 }
+
 .navbar-default .dropdown-menu {
     padding: 0;
     font-size: 14px;
@@ -412,7 +421,7 @@ select.input-lg {
     clear: both;
     font-weight: normal;
     line-height: 1.42857143;
-    color: #878c94;
+    color: #dde2eb;
     white-space: nowrap;
 }
 .dropdown-menu > li > a:hover{

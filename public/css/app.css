@@ -23,6 +23,9 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+body{
+    font-family: "Courier New", Times, serif;
+}
 
 #header{
     height:92px;

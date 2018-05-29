@@ -25,6 +25,7 @@
 
         <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
         <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" >
+        <link href="https://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet">
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
 
 

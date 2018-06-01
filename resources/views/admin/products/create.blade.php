@@ -102,15 +102,6 @@
                 <label>
                     <textarea name="description[general_description]" id="editor-create" ></textarea>
                 </label>
-                <br/>
-
-
-                <label>
-                    Ширина:
-                    <input style="width: 50px" type="text" name="resolution_width" value="" id="" class="label-values"/>
-                    Височина:
-                    <input style="width: 50px" type="text" name="resolution_hight" value="" id="" class="label-values"/>
-                </label>
 
                 <br>
                 

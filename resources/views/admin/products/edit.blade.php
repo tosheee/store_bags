@@ -141,15 +141,7 @@
                 </label>
                 <br>
 
-                <label>
-                    Ширина:
-                    <input style="width: 50px" type="text" name="resolution_width" value="" id="" class="label-values"/>
-                    Височина:
-                    <input style="width: 50px" type="text" name="resolution_hight" value="" id="" class="label-values"/>
-                </label>
-                <br/>
-
- 		        <label>
+ 		<label>
                     <span style="margin: 0;">Воден знак на снимките: </span>
                     <input type="radio" name="watermark_checked" value="1" checked> ДА
                     <input type="radio" name="watermark_checked" value="0"> НЕ

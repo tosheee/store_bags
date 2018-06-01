@@ -54,12 +54,26 @@ class ProductsController extends Controller
             'sub_category_id' => 'required',
         ]);
 
+
+
         $productId = ImagesHelper::getLastProductId() + 1;
         $descriptionRequest =  $request->input('description');
 
+        $img_width = $request->input('resolution_width');
+        $img_hight = $request->input('resolution_hight');
+
+        if(isset($img_width) &&  isset($img_hight)){
+            $img_width = intval($img_width);
+            $img_hight = intval($img_hight);
+        }else{
+            $img_width = 1000;
+            $img_hight = 1500;
+        }
+
+
         if($request->hasFile('upload_main_picture'))
         {
-            $descriptionRequest['upload_main_picture'] = ImagesHelper::resizeImages($request->file('upload_main_picture'), $productId, $request->input('watermark_checked'), 1500, 1000);
+            $descriptionRequest['upload_main_picture'] = ImagesHelper::resizeImages($request->file('upload_main_picture'), $productId, $request->input('watermark_checked'), $img_width, $img_hight);
         }
         else
         {
@@ -72,7 +86,7 @@ class ProductsController extends Controller
 
             for($i = 0; $i < count($files_gallery_pic); $i++)
             {
-                $descriptionRequest['gallery'][$i]['upload_picture'] = ImagesHelper::resizeImages($files_gallery_pic[$i], $productId, $request->input('watermark_checked'), 1500, 1000);
+                $descriptionRequest['gallery'][$i]['upload_picture'] = ImagesHelper::resizeImages($files_gallery_pic[$i], $productId, $request->input('watermark_checked'), $img_width, $img_hight);
             }
         }
 
@@ -129,6 +143,17 @@ class ProductsController extends Controller
 
         $old_descriptions = json_decode($product->description, true);
 
+        $img_width = $request->input('resolution_width');
+        $img_hight = $request->input('resolution_hight');
+
+        if(isset($img_width) &&  isset($img_hight)){
+            $img_width = intval($img_width);
+            $img_hight = intval($img_hight);
+        }else{
+            $img_width = 1000;
+            $img_hight = 1500;
+        }
+
         if($request->hasFile('upload_main_picture'))
         {
             $file_main_pic = $request->file('upload_main_picture');
@@ -147,11 +172,11 @@ class ProductsController extends Controller
             
             if(file_exists($water_mark) && $request->input('watermark_checked') == 1)
             {
-            	$image->resize(1500, 1000)->insert($water_mark, 'bottom-right', 10, 10)->save($path);
+            	$image->resize($img_width, $img_hight)->insert($water_mark, 'bottom-right', 10, 10)->save($path);
             }
             else
             {
-            	$image->resize(1500, 1000)->save($path);
+            	$image->resize($img_width, $img_hight)->save($path);
             }
             
             
@@ -189,11 +214,11 @@ class ProductsController extends Controller
             
 	        if(file_exists($water_mark) && $request->input('watermark_checked') == 1)
 	        {
-	           $image->resize(1000, 1000)->insert($water_mark, 'bottom-right', 10, 10)->save($path);
+	           $image->resize($img_width, $img_hight)->insert($water_mark, 'bottom-right', 10, 10)->save($path);
 	        }
 	        else
 	        {
-	           $image->resize(1000, 1000)->save($path);
+	           $image->resize($img_width, $img_hight)->save($path);
 	        }
                 
                 $descriptionRequest['gallery'][$i + $old_pic_num]['upload_picture'] = $fileNameToStore;

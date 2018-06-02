@@ -244,7 +244,8 @@
                         '<input type="hidden" name="x1" value="" />'+
                         '<input type="hidden" name="y1" value="" />'+
                         '<input type="hidden" name="w" value="" />'+
-                        '<input type="hidden" name="h" value="" /><br><br>'+
+                        '<input type="hidden" name="h" value="" />'+
+                        '<p><img id="previewimage" style="display:none; width: 20%;"/></p>'+
                         '<a href="#" class="remove-img-upload-button">' +
                         '<i style="color: red;" aria-hidden="true" id="chang-menu-icon" class="fa fa-times"></i></a>' +
                         '</div>');
@@ -275,7 +276,7 @@
 
                         //$('#previewimage').imgAreaSelect({ maxWidth: 200, maxHeight: 150, handles: true });
 
-                        $('#previewimage').imgAreaSelect({ handles: true, onSelectEnd: someFunction });
+                       // $('#previewimage').imgAreaSelect({ handles: true, onSelectEnd: someFunction });
 
                     });
                 });

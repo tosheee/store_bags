@@ -1,6 +1,45 @@
 @extends('layouts.app')
 
 @section('content')
+    <style>
+        .imgareaselect-border1 {
+            background: url(border-v.gif) repeat-y left top;
+        }
+
+        .imgareaselect-border2 {
+            background: url(border-h.gif) repeat-x left top;
+        }
+
+        .imgareaselect-border3 {
+            background: url(border-v.gif) repeat-y right top;
+        }
+
+        .imgareaselect-border4 {
+            background: url(border-h.gif) repeat-x left bottom;
+        }
+
+        .imgareaselect-border1, .imgareaselect-border2,
+        .imgareaselect-border3, .imgareaselect-border4 {
+            opacity: 0.5;
+            filter: alpha(opacity=50);
+        }
+
+        .imgareaselect-handle {
+            background-color: #fff;
+            border: solid 1px #000;
+            opacity: 0.5;
+            filter: alpha(opacity=50);
+        }
+
+        .imgareaselect-outer {
+            background-color: #000;
+            opacity: 0.5;
+            filter: alpha(opacity=50);
+        }
+
+        .imgareaselect-selection {
+        }
+    </style>
     @include('admin.admin_partials.admin_menu')
         <div class="basic-grey">
             <form action="{{ route('products.store') }}" method="post" enctype="multipart/form-data">
@@ -142,6 +181,10 @@
             </form>
         </div>
 
+
+
+    <p><img id="previewimage" style="display:none;"/></p>
+
         <script>
             $( "#select-category" ).change(function() {
                 var category_val =  $( "#select-category option:selected" ).val();
@@ -196,18 +239,77 @@
                     if(x < max_fields){
                         x++;
                         $(wrapper).append('<div class="upload-basic-img-wrapp">' +
-                        '<input type="file" name="upload_main_picture" class="label-values"/>' +
+                        '<input type="file" name="upload_main_picture" class="label-values" id="image"/>' +
+
+                        '<input type="hidden" name="x1" value="" />'+
+                        '<input type="hidden" name="y1" value="" />'+
+                        '<input type="hidden" name="w" value="" />'+
+                        '<input type="hidden" name="h" value="" /><br><br>'+
                         '<a href="#" class="remove-img-upload-button">' +
                         '<i style="color: red;" aria-hidden="true" id="chang-menu-icon" class="fa fa-times"></i></a>' +
                         '</div>');
                     }
+
+                    $(function($) {
+
+                        var p = $("#previewimage");
+
+                        $(".upload-basic-img-wrapp").on("change", "#image", function(){
+
+                            var imageReader = new FileReader();
+                            imageReader.readAsDataURL(document.getElementById("image").files[0]);
+                            imageReader.onload = function (oFREvent) {
+                                p.attr('src', oFREvent.target.result).fadeIn();
+                            };
+
+                            $('#previewimage').imgAreaSelect({
+                                onSelectEnd: function (img, selection) {
+                                    $('input[name="x1"]').val(selection.x1);
+                                    $('input[name="y1"]').val(selection.y1);
+                                    $('input[name="w"]').val(selection.width);
+                                    $('input[name="h"]').val(selection.height);
+                                }
+                            });
+                        });
+
+
+                        //$('#previewimage').imgAreaSelect({ maxWidth: 200, maxHeight: 150, handles: true });
+
+                        $('#previewimage').imgAreaSelect({ handles: true, onSelectEnd: someFunction });
+
+                    });
                 });
+
+
                 $(wrapper).on("click", ".remove-img-upload-button", function(e){
                     e.preventDefault(); $(this).parent('div.upload-basic-img-wrapp').remove(); x--;
                 });
             });
+/*
+            $(function($) {
 
-            // gallery images
+                var p = $("#previewimage");
+
+                $(".upload-basic-img-wrapp").on("change", "#image", function(){
+
+                    var imageReader = new FileReader();
+                    imageReader.readAsDataURL(document.getElementById("image").files[0]);
+                    imageReader.onload = function (oFREvent) {
+                        p.attr('src', oFREvent.target.result).fadeIn();
+                    };
+                });
+
+                $('#previewimage').imgAreaSelect({
+                    onSelectEnd: function (img, selection) {
+                        $('input[name="x1"]').val(selection.x1);
+                        $('input[name="y1"]').val(selection.y1);
+                        $('input[name="w"]').val(selection.width);
+                        $('input[name="h"]').val(selection.height);
+                    }
+                });
+            });
+*/
+             // gallery images
             $(document).ready(function() {
                 var max_fields = 6;
                 var wrapper    = $(".input_fields_wrap");
@@ -233,7 +335,7 @@
                     if(x < max_fields){
                         x++;
                         $(wrapper).append('<div class="upload-img-gallery-button">' +
-                        '<input type="file" name="upload_gallery_pictures[]" class="label-values"/>' +
+                        '<input type="file" name="upload_gallery_pictures[]" class="label-values" />' +
                         '<a href="#" class="remove-img-gallery-button">' +
                         '<i style="color: red;" aria-hidden="true" id="chang-menu-icon" class="fa fa-times"></i></a>' +
                         '</div>');
@@ -243,6 +345,12 @@
                     e.preventDefault(); $(this).parent('div.upload-img-gallery-button').remove(); x--;
                 });
             });
+
+
+
+
+
+
             // specification
             $(document).ready(function() {
                 var max_fields      = 20; //maximum input boxes allowed

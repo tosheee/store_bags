@@ -104,6 +104,11 @@
                 </label>
 
                 <br>
+
+                <label>
+                    Ширина: <input type="text" style="width: 50px;" name="img_width" value="1000" id="" class="label-values"/>
+                    Височина: <input type="text" style="width: 50px;" name="img_height" value="1500" id="" class="label-values"/>
+                </label>
                 
                  <label>
                     <span style="margin: 0;">Воден знак на снимките: </span>

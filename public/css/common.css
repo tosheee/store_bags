@@ -8,6 +8,9 @@
     visibility: hidden;
 }
 
+.text-primary {
+    color: #000000;
+}
 
 input[type=radio][name="menucolor"] {
     display: none;

@@ -1,8 +1,15 @@
 @import url(common.css);
-
 @import url(footer.css);
 @import url(admin_style.css);
-@import url(horizontal_nav_bar.css);
+
+/*@import url(horizontal_nav_bar.css);*/
+
+@import url(horizontal_nav_top.css);
+
+@import url(horizontal_nav_middle.css);
+@import url(horizontal_nav_bottom.css);
+@import url(horizontal_nav_scroll.css);
+
 @import url(show_product.css);
 @import url(admin_forms.css);
 @import url(checkout.css);

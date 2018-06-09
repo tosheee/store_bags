@@ -52,7 +52,7 @@
     </head>
 
     <body>
-    <!-- <canvas></canvas> -->
+    <canvas></canvas>
         <header>
             @include('partials.horizontal_nav_bar')
         </header>

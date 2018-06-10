@@ -275,7 +275,7 @@ class StoreController extends Controller
     }
 
     public function getTermsOfUse(){
-        $terms_of_use = SupportMessage::where('name_support_messages', 'terms_of_use')->get();
+        $terms_of_use = SupportMessage::where('name_support_messages', 'terms_of_use')->get()->first();
 
         if(isset($terms_of_use)){
             return view('store.terms_of_use')->with('terms_of_use',  $terms_of_use);

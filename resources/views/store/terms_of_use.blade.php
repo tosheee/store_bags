@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                {!!  $personal_data['content_support_messages'] !!}
+                {!!  $terms_of_use['content_support_messages'] !!}
             </div>
         </div>
     </div>

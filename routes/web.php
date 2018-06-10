@@ -73,6 +73,19 @@ Route::get('/checkout', [
 ]);
 
 
+Route::get('/terms_of_use', [
+    'uses' => 'StoreController@getTermsOfUse',
+    'as'  => 'store.terms_of_use'
+]);
+
+
+Route::get('/personal_data', [
+    'uses' => 'StoreController@getPersonalData',
+    'as'  => 'store.personal_data'
+]);
+
+
+
 Route::post('/checkout', 'StoreController@postCheckout');
 
 Route::get('/shopping-cart', [

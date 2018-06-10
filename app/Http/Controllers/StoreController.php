@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use Session;
+
 use App\Cart;
 use App\Like;
-use App\Http\Requests;
-use Illuminate\Support\Facades\Auth;
-use Session;
-use App\Admin\SubCategory;
-use App\Admin\Category;
-use App\Admin\Product;
-use App\Admin\UserMessage;
 use App\Order;
+
 use App\Admin\Page;
+use App\Admin\Product;
+use App\Admin\Category;
+use App\Admin\UserMessage;
+use App\Admin\SubCategory;
+use App\Admin\SupportMessage;
+
+use App\Http\Requests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class StoreController extends Controller
@@ -259,4 +263,24 @@ class StoreController extends Controller
 
         return redirect()->back()->with('success', ['your message,here']);   
    }
+
+    public function getPersonalData(){
+        $personal_data = SupportMessage::where('name_support_messages', 'gdpr')->get()->first();
+
+        if(isset($personal_data)){
+            return view('store.personal_data')->with('personal_data',  $personal_data);
+        }
+
+        return redirect()->back();
+    }
+
+    public function getTermsOfUse(){
+        $terms_of_use = SupportMessage::where('name_support_messages', 'terms_of_use')->get();
+
+        if(isset($terms_of_use)){
+            return view('store.terms_of_use')->with('terms_of_use',  $terms_of_use);
+        }
+
+        return redirect()->back();
+    }
 }

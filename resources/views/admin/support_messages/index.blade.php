@@ -16,7 +16,7 @@
             @foreach($supportMessages as $supportMessage)
                 <tr>
                     <td>{{ $supportMessage->name_support_messages }}</td>
-                    <td>{{ $supportMessage->content_support_messages }}</td>
+                    <td>{!! $supportMessage->content_support_messages !!}</td>
                     <td><a class="btn btn-default" href="/admin/support_messages/{{ $supportMessage->id }}/edit">Промяна</a></td>
                     <td>
                         <form method="POST" action="/admin/support_messages/{{ $supportMessage->id }}" accept-charset="UTF-8" class="pull-right">

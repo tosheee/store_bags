@@ -120,3 +120,5 @@ Route::resource('/admin/slider', 'Admin\SliderController');
 Route::get ('/admin/answer/{id}', 'Admin\UserMessagesController@markAnswer');
 
 Route::resource('/admin/user_messages', 'Admin\UserMessagesController');
+
+Route::resource('/admin/support_messages', 'Admin\SupportMessagesController');

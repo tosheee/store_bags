@@ -187,6 +187,16 @@
                         </ul>
                     </li>
 
+                    <li class="panel">
+                        <a id="panel11" href="javascript:;" data-toggle="collapse" data-target="#support_message">
+                            <i class="fa fa-bar-chart"></i> Support Messages
+                            <i class="fa fa fa-chevron-left pull-right" id="arow11"></i> </a>
+                        <ul class="collapse nav" id="support_message">
+                            <li> <a href="/admin/support_messages/"><i class="fa fa-angle-double-right"></i> Съобщения от подръжката</a></li>
+                            <li> <a href="/admin/support_messages/create"><i class="fa fa-angle-double-right"></i> Добавяне на съобщение</a> </li>
+                        </ul>
+                    </li>
+
                 </ul>
             </div>
             <!-- END SIDE NAV USER PANEL -->

@@ -197,6 +197,26 @@
                         </ul>
                     </li>
 
+                    <li class="panel" style="background-color: #084951;">
+                        <a id="panel12" href="javascript:;" data-toggle="collapse" data-target="#space_bottom_menu">
+                            <i id="arow12"></i>
+                        </a>
+                        <ul class="collapse nav" id="space_bottom_menu">
+                            <li>     </li>
+                            <li>     </li>
+                        </ul>
+                    </li>
+
+                    <li class="panel" style="background-color: #084951;">
+                        <a id="panel13" href="javascript:;" data-toggle="collapse" data-target="#space_bottom_menu_2">
+                            <i id="arow13"></i>
+                        </a>
+                        <ul class="collapse nav" id="space_bottom_menu_2">
+                            <li>     </li>
+                            <li>     </li>
+                        </ul>
+                    </li>
+
                 </ul>
             </div>
             <!-- END SIDE NAV USER PANEL -->

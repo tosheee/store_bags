@@ -1,4 +1,20 @@
-<nav class="topBar">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<nav id="menu-horizontal-top" class="topBar">
     <div class="container">
 
         <ul class="list-inline pull-left">
@@ -40,10 +56,10 @@
 
             <li id="new-view-cart" class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="false">
-                    <i class="fa fa-cart-plus mr-5"></i>
-                    <span class="hidden-xs">Кошница
+                    <i class="fa fa-shopping-bag"></i>
+                    <span class="hidden-xs">Количка
                         <strong>
-                            <sup class="text-primary">{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</sup>
+                            <sup class="">{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</sup>
                         </strong>
                         <i class="fa fa-angle-down ml-5"></i>
                     </span>

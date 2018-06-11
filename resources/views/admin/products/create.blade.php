@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+    <style>
+
+    </style>
     @include('admin.admin_partials.admin_menu')
         <div class="basic-grey">
             <form action="{{ route('products.store') }}" method="post" enctype="multipart/form-data">
@@ -104,6 +107,11 @@
                 </label>
 
                 <br>
+
+                <label>
+                    Ширина: <input type="text" style="width: 50px;" name="img_width" value="1000" id="" class="label-values"/>
+                    Височина: <input type="text" style="width: 50px;" name="img_height" value="1500" id="" class="label-values"/>
+                </label>
                 
                  <label>
                     <span style="margin: 0;">Воден знак на снимките: </span>
@@ -136,6 +144,10 @@
                 </div>
             </form>
         </div>
+
+        <p>
+            <img id="previewimage" style="display:none;"/>
+        </p>
 
         <script>
             $( "#select-category" ).change(function() {
@@ -191,18 +203,46 @@
                     if(x < max_fields){
                         x++;
                         $(wrapper).append('<div class="upload-basic-img-wrapp">' +
-                        '<input type="file" name="upload_main_picture" class="label-values"/>' +
+                        '<input type="file" name="upload_main_picture" class="label-values" id="image"/>' +
+
+                        '<input type="hidden" name="x1" value="" />'+
+                        '<input type="hidden" name="y1" value="" />'+
+                        '<input type="hidden" name="w" value="" />'+
+                        '<input type="hidden" name="h" value="" />'+
+                        '<p><img id="previewimage" style="display:none; width: 20%;"/></p>'+
                         '<a href="#" class="remove-img-upload-button">' +
                         '<i style="color: red;" aria-hidden="true" id="chang-menu-icon" class="fa fa-times"></i></a>' +
                         '</div>');
                     }
+
+                    $(function($) {
+                        var p = $("#previewimage");
+                        $(".upload-basic-img-wrapp").on("change", "#image", function(){
+                            var imageReader = new FileReader();
+                            imageReader.readAsDataURL(document.getElementById("image").files[0]);
+                            imageReader.onload = function (oFREvent) {
+                                p.attr('src', oFREvent.target.result).fadeIn();
+                            };
+
+                            $('#previewimage').imgAreaSelect({
+                                onSelectEnd: function (img, selection) {
+                                    $('input[name="x1"]').val(selection.x1);
+                                    $('input[name="y1"]').val(selection.y1);
+                                    $('input[name="w"]').val(selection.width);
+                                    $('input[name="h"]').val(selection.height);
+                                }
+                            });
+                        });
+                    });
                 });
+
+
                 $(wrapper).on("click", ".remove-img-upload-button", function(e){
                     e.preventDefault(); $(this).parent('div.upload-basic-img-wrapp').remove(); x--;
                 });
             });
 
-            // gallery images
+             // gallery images
             $(document).ready(function() {
                 var max_fields = 6;
                 var wrapper    = $(".input_fields_wrap");
@@ -228,7 +268,7 @@
                     if(x < max_fields){
                         x++;
                         $(wrapper).append('<div class="upload-img-gallery-button">' +
-                        '<input type="file" name="upload_gallery_pictures[]" class="label-values"/>' +
+                        '<input type="file" name="upload_gallery_pictures[]" class="label-values" />' +
                         '<a href="#" class="remove-img-gallery-button">' +
                         '<i style="color: red;" aria-hidden="true" id="chang-menu-icon" class="fa fa-times"></i></a>' +
                         '</div>');
@@ -238,6 +278,7 @@
                     e.preventDefault(); $(this).parent('div.upload-img-gallery-button').remove(); x--;
                 });
             });
+
             // specification
             $(document).ready(function() {
                 var max_fields      = 20; //maximum input boxes allowed

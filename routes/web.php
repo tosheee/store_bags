@@ -73,6 +73,19 @@ Route::get('/checkout', [
 ]);
 
 
+Route::get('/terms_of_use', [
+    'uses' => 'StoreController@getTermsOfUse',
+    'as'  => 'store.terms_of_use'
+]);
+
+
+Route::get('/personal_data', [
+    'uses' => 'StoreController@getPersonalData',
+    'as'  => 'store.personal_data'
+]);
+
+
+
 Route::post('/checkout', 'StoreController@postCheckout');
 
 Route::get('/shopping-cart', [
@@ -120,3 +133,5 @@ Route::resource('/admin/slider', 'Admin\SliderController');
 Route::get ('/admin/answer/{id}', 'Admin\UserMessagesController@markAnswer');
 
 Route::resource('/admin/user_messages', 'Admin\UserMessagesController');
+
+Route::resource('/admin/support_messages', 'Admin\SupportMessagesController');

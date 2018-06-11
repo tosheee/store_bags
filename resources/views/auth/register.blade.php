@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+
+    <br/><br/>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -57,6 +59,23 @@
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="confirm_condition" class="col-md-4 control-label"></label>
+                            <div class="col-md-6">
+                                <input id="confirm_condition" type="checkbox" class="" name="password_confirmation" required="required" oninvalid="this.setCustomValidity('За да продължите, моля кликнете върху отметката')" oninput="setCustomValidity('')">
+                                Ние имаме нужда от Вашето съгласие, за да обработваме личните Ви данни в съответствие с новия Регламент! Моля прочетете нашата
+                                <a href="/personal_data">Политика за защита на лични данни!</a>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="use_condition" class="col-md-4 control-label"></label>
+                            <div class="col-md-6">
+                                <input id="use_condition" type="checkbox" class="" name="password_confirmation" required="required" oninvalid="this.setCustomValidity('За да продължите, моля кликнете върху отметката')" oninput="setCustomValidity('')">
+                                <a href="/terms_of_use">Приемам условията за ползване</a>
                             </div>
                         </div>
 

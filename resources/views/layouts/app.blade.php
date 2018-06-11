@@ -29,6 +29,7 @@
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
 
 
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
             <style>
                 canvas {
@@ -46,11 +47,12 @@
                     };
                 });
             </script>
+            <script src="{{ asset('js/jquery.imgareaselect.js') }}"></script>
 
     </head>
 
     <body>
-    <!-- <canvas></canvas> -->
+    <!--<canvas></canvas>-->
         <header>
             @include('partials.horizontal_nav_bar')
         </header>

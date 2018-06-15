@@ -156,6 +156,7 @@ class ProductsController extends Controller
             $file_main_pic = $request->file('upload_main_picture');
             $extension = $file_main_pic->getClientOriginalExtension();
             $fileNameToStore = 'basic_'.time().'.'.$extension;
+
             Storage::makeDirectory('public/upload_pictures/'.$id);
             
             if (isset($old_descriptions['upload_main_picture']))

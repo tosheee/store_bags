@@ -60,9 +60,6 @@ class ProductsController extends Controller
         $img_width = $request->input('img_width');
         $img_height = $request->input('img_height');
 
-
-        echo $img_width;
-
         if (isset($img_width) && isset($img_height)){
              $img_width = intval($img_width);
             $img_height = intval($img_height);

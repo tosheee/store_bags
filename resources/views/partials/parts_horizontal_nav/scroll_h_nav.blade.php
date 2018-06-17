@@ -1,6 +1,6 @@
 <nav id="menu-scroll" class="navbar navbar-main navbar-default navbar-fixed-top" role="navigation" style="opacity: 1;">
     <div class="container" style="width: 95%" >
-        <!-- Brand and toggle -->
+
         <div class="navbar-header">
             <span ><a href="/"><img style="margin: 5px 2px 0 0" width="100" src="/storage/common_pictures/logo.png" alt=""></a></span>
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-1">
@@ -12,7 +12,8 @@
 
         </div>
 
-        <!-- Collect the nav links,  -->
+        <!-- Products menu -->
+
         <div class="collapse navbar-collapse navbar-1" style="margin-top: 0px;">
             <ul class="nav navbar-nav">
                 <li class="dropdown megaDropMenu">
@@ -47,97 +48,124 @@
                 @endforeach
             </ul>
 
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"></a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="false"> <i class="fa fa-user mr-5"></i><span class="hidden-xs">Профил<i class="fa fa-angle-down ml-5"></i></span> </a>
-                    <ul class="dropdown-menu w-150" role="menu">
-                        @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Вход</a></li>
-                            <li><a href="{{ route('register') }}">Регистрация</a></li>
-                        @else
-                            <li><a href="#">{{ Auth::user()->name }}</a></li>
-                            <li><a href="/store/view_user_orders/{{ Auth::user()->id }}">Моите поръчки</a></li>
-                            <li>
-                                <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Изход</a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
-                            </li>
-                        @endif
-                    </ul>
-                </li>
 
-                <li class="dropdown" id="menu-scroll-cart">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="false"> <i class="fa fa-cart-plus mr-5"></i> <span class="hidden-xs">
-                                Количка <strong><sup class="text-primary">{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</sup></strong>
-                                <i class="fa fa-angle-down ml-5"></i>
-                            </span> </a>
+<!-- right menu -->
 
-                    <?php
-                    if(Session::has('cart'))
-                    {
-                        $oldCart = Session::get('cart');
-                        $cart = new App\Cart($oldCart);
-                        $productsCart = $cart->items;
-                    }
-                    ?>
 
-                    <ul class="dropdown-menu cart w-250" role="menu">
+            <ul class="topBarNav nav navbar-nav navbar-right">
+            <li class="dropdown"></li>
+
+            <li class="dropdown">
+                <ul class="dropdown-menu w-100" role="menu"></ul>
+            </li>
+
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle h-top-nav-dropdown" data-toggle="dropdown" data-hover="dropdown" data-close-others="false"> <i class="fa fa-user mr-5"></i><span class="hidden-xs">Профил<i class="fa fa-angle-down ml-5"></i></span> </a>
+                <ul class="dropdown-menu w-150" role="menu">
+                    @if (Auth::guest())
+                        <li><a class="top-bar-user-buttons"href="{{ route('login') }}">Вход</a></li>
+                        <li><a class="top-bar-user-buttons" href="{{ route('register') }}">Регистрация</a></li>
+                    @else
+                        <li><a href="#">{{ Auth::user()->name }}</a></li>
+                        <li><a href="/store/view_user_orders/{{ Auth::user()->id }}">Моите поръчки</a></li>
                         <li>
-                            <div class="cart-items">
-                                <ol class="items">
-                                    @if(isset($productsCart))
-                                        @foreach($productsCart as $product)
-                                            <?php $descriptions = json_decode($product['item']->description, true); ?>
+                            <a class="top-bar-user-buttons" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                Изход
+                            </a>
 
-                                            <li>
-                                                @if(isset($descriptions['main_picture_url']))
-                                                    <a href="#" class="product-image"> <img src="{{ $descriptions['main_picture_url'] }}" class="img-responsive" alt=""> </a>
-                                                @elseif(isset($descriptions['upload_main_picture']))
-                                                    <a href="#" class="product-image"> <img src="/storage/upload_pictures/{{ $product['item']->id }}/{{ $descriptions['upload_main_picture'] }}" class="img-responsive" alt=""> </a>
-                                                @else
-                                                    <a href="#" class="product-image"> <img src="/storage/common_pictures/noimage.jpg" class="img-responsive" alt=""> </a>
-                                                @endif
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        </li>
+                    @endif
+                </ul>
+            </li>
 
-                                                <div class="product-details">
-                                                    <div class="close-icon">
-                                                        <button type="button" class="remove-item-button" style="background: transparent; border-color: #ffffff; border-style: solid;">
-                                                            <input id="id-product" type="hidden" value="{{ $product['item']->id }}"/>
-                                                            <i class="fa fa-close" style="color: #ff0000"></i>
-                                                        </button>
-                                                    </div>
-                                                    <p class="product-name"> <a href="/store/{{ $product['item']->id }}" target="_blank">{{ $descriptions['title_product'] }}</a> </p>
-                                                    <strong>{{ $product['qty']}}</strong> x <span class="price text-primary">{{ $descriptions['price'] }}  {{ $descriptions['currency'] }}</span>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle h-top-nav-dropdown" data-toggle="dropdown" data-hover="dropdown" data-close-others="false">
+                    <i class="fa fa-cart-plus mr-5"></i>
+                    <span class="hidden-xs">Количка
+                        <strong>
+                            <sup class="">{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</sup>
+                        </strong>
+                        <i class="fa fa-angle-down ml-5"></i>
+                    </span>
+                </a>
+
+                <?php
+                if(Session::has('cart'))
+                {
+                    $oldCart = Session::get('cart');
+                    $cart = new App\Cart($oldCart);
+                    $productsCart = $cart->items;
+                }
+                ?>
+
+                <ul class="dropdown-menu cart w-250" role="menu">
+                    <li>
+                        <div class="cart-items">
+                            <ol class="items">
+                                @if(isset($productsCart))
+                                    @foreach($productsCart as $product)
+                                        <?php $descriptions = json_decode($product['item']->description, true); ?>
+
+                                        <li>
+                                            @if(isset($descriptions['main_picture_url']))
+                                                <a href="#" class="product-image"> <img src="{{ $descriptions['main_picture_url'] }}" class="img-responsive" alt=""> </a>
+                                            @elseif(isset($descriptions['upload_main_picture']))
+                                                <a href="#" class="product-image"> <img src="/storage/upload_pictures/{{ $product['item']->id }}/{{ $descriptions['upload_main_picture'] }}" class="img-responsive" alt=""> </a>
+                                            @else
+                                                <a href="#" class="product-image"> <img src="/storage/common_pictures/noimage.jpg" class="img-responsive" alt=""> </a>
+                                            @endif
+
+                                            <div class="product-details">
+                                                <div class="close-icon">
+                                                    <button type="button" class="remove-item-button" style="background: transparent; border-color: #ffffff; border-style: solid;">
+                                                        <input id="id-product" type="hidden" value="{{ $product['item']->id }}"/>
+                                                        <i class="fa fa-close" style="color: #ff0000"></i>
+                                                    </button>
                                                 </div>
-                                                <!-- end product-details -->
-                                            </li>
-                                        @endforeach
-                                        <p class="text-center"><h5>Общо: <strong> {{ $cart->totalPrice }} {{ $descriptions['currency'] }}</strong></h5></p>
+                                                <p class="product-name">
+                                                    <a href="/store/{{ $product['item']->id }}" target="_blank">{{ $descriptions['title_product'] }}</a>
+                                                </p>
+                                                <p id="cart-content-qty-price">
+                                                    <strong id="product-qty">{{ $product['qty']}}</strong> x <span class="price text-primary">{{ $descriptions['price'] }}  {{ $descriptions['currency'] }}</span>
+                                                </p>
+                                            </div>
+                                            <!-- end product-details -->
+                                        </li>
 
-                                </ol>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="cart-footer">
-                                <a href="{{ route('store.shoppingCart') }}" class="pull-left"><i class="fa fa-cart-plus mr-5"></i> Количка</a>
-                                <a href="{{ route('store.checkout') }}" class="pull-right"><i class="fa fa-money" aria-hidden="true"></i> Поръчка</a>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-                @else
-                    <li style="text-align: center;">
-                        Вашата количката е празна!
+                                    @endforeach
+
+                                    <li>Общо: {{ $cart->totalPrice }} {{ $descriptions['currency'] }}</li>
+
+                                    <!--
+                                           ` <h5 id="cart-content-total-price" style="text-align: center; height: 30px;">Общо: <strong id="nav-total-price"> {{ $cart->totalPrice }}</strong> <strong>{{ $descriptions['currency'] }}</strong></h5>
+                                    -->
+                            </ol>
+                        </div>
                     </li>
-                @endif
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </div>
+
+                    <li>
+                        <div class="cart-footer">
+                            <a href="{{ route('store.shoppingCart') }}" class="pull-left"><i class="fa fa-cart-plus mr-5"></i> Количка</a>
+                            <a href="{{ route('store.checkout') }}" class="pull-right"><i class="fa fa-money" aria-hidden="true"></i> Поръчка</a>
+                        </div>
+
+                    </li>
+
+                    @else
+                        <li style="text-align: center; color: #ff1018; background-color: #ffffff;">
+                            <strong>Вашата количка е празна!</strong>
+                        </li>
+                    @endif
+                </ul>
+            </li>
+        </ul>
+    </div></div>
 </nav>
 
-
-
 <script>
-
     $(window).scroll(function()
     {
         if($(document).scrollTop() > 150)

@@ -8,8 +8,7 @@
             </li>
         </ul>
 
-
-        <ul class="topBarNav pull-right">
+        <ul class="topBarNav  pull-right">
             <li class="dropdown"></li>
 
             <li class="dropdown">
@@ -38,7 +37,7 @@
                 </ul>
             </li>
 
-            <li id="new-view-cart" class="dropdown">
+            <li class="dropdown">
                 <a href="#" class="dropdown-toggle h-top-nav-dropdown" data-toggle="dropdown" data-hover="dropdown" data-close-others="false">
                     <i class="fa fa-cart-plus mr-5"></i>
                     <span class="hidden-xs">Количка
@@ -83,7 +82,7 @@
                                                     </button>
                                                 </div>
                                                 <p class="product-name">
-                                                    <a id="cart-content-product-name" href="/store/{{ $product['item']->id }}" target="_blank">{{ $descriptions['title_product'] }}</a>
+                                                    <a href="/store/{{ $product['item']->id }}" target="_blank">{{ $descriptions['title_product'] }}</a>
                                                 </p>
                                                 <p id="cart-content-qty-price">
                                                     <strong id="product-qty">{{ $product['qty']}}</strong> x <span class="price text-primary">{{ $descriptions['price'] }}  {{ $descriptions['currency'] }}</span>
@@ -93,7 +92,12 @@
                                         </li>
 
                                     @endforeach
-                                    <p class="text-center"><h5 id="cart-content-total-price">Общо: <strong id="nav-total-price"> {{ $cart->totalPrice }}</strong> <strong>{{ $descriptions['currency'] }}</strong></h5></p>
+
+                                        <li>Общо: {{ $cart->totalPrice }} {{ $descriptions['currency'] }}</li>
+
+                                        <!--
+                                           ` <h5 id="cart-content-total-price" style="text-align: center; height: 30px;">Общо: <strong id="nav-total-price"> {{ $cart->totalPrice }}</strong> <strong>{{ $descriptions['currency'] }}</strong></h5>
+                                    -->
                             </ol>
                         </div>
                     </li>
@@ -107,8 +111,8 @@
                     </li>
 
                     @else
-                        <li style="text-align: center;">
-                            Вашата кошница е празна!
+                        <li style="text-align: center; color: #ff1018; background-color: #ffffff;">
+                            <strong>Вашата количка е празна!</strong>
                         </li>
                     @endif
                 </ul>

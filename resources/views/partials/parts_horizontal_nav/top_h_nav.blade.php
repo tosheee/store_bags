@@ -1,19 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <nav id="menu-horizontal-top" class="topBar">
     <div class="container">
 
@@ -33,16 +17,16 @@
             </li>
 
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="false"> <i class="fa fa-user mr-5"></i><span class="hidden-xs">Профил<i class="fa fa-angle-down ml-5"></i></span> </a>
+                <a href="#" class="dropdown-toggle h-top-nav-dropdown" data-toggle="dropdown" data-hover="dropdown" data-close-others="false"> <i class="fa fa-user mr-5"></i><span class="hidden-xs">Профил<i class="fa fa-angle-down ml-5"></i></span> </a>
                 <ul class="dropdown-menu w-150" role="menu">
                     @if (Auth::guest())
-                        <li><a href="{{ route('login') }}">Вход</a></li>
-                        <li><a href="{{ route('register') }}">Регистрация</a></li>
+                        <li><a class="top-bar-user-buttons"href="{{ route('login') }}">Вход</a></li>
+                        <li><a class="top-bar-user-buttons" href="{{ route('register') }}">Регистрация</a></li>
                     @else
                         <li><a href="#">{{ Auth::user()->name }}</a></li>
                         <li><a href="/store/view_user_orders/{{ Auth::user()->id }}">Моите поръчки</a></li>
                         <li>
-                            <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                            <a class="top-bar-user-buttons" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                 Изход
                             </a>
 
@@ -55,8 +39,8 @@
             </li>
 
             <li id="new-view-cart" class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="false">
-                    <i class="fa fa-shopping-bag"></i>
+                <a href="#" class="dropdown-toggle h-top-nav-dropdown" data-toggle="dropdown" data-hover="dropdown" data-close-others="false">
+                    <i class="fa fa-cart-plus mr-5"></i>
                     <span class="hidden-xs">Количка
                         <strong>
                             <sup class="">{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</sup>
@@ -99,15 +83,17 @@
                                                     </button>
                                                 </div>
                                                 <p class="product-name">
-                                                    <a href="/store/{{ $product['item']->id }}" target="_blank">{{ $descriptions['title_product'] }}</a>
+                                                    <a id="cart-content-product-name" href="/store/{{ $product['item']->id }}" target="_blank">{{ $descriptions['title_product'] }}</a>
                                                 </p>
-                                                <strong id="product-qty">{{ $product['qty']}}</strong> x <span class="price text-primary">{{ $descriptions['price'] }}  {{ $descriptions['currency'] }}</span>
+                                                <p id="cart-content-qty-price">
+                                                    <strong id="product-qty">{{ $product['qty']}}</strong> x <span class="price text-primary">{{ $descriptions['price'] }}  {{ $descriptions['currency'] }}</span>
+                                                </p>
                                             </div>
                                             <!-- end product-details -->
                                         </li>
 
                                     @endforeach
-                                    <p class="text-center"><h5>Общо: <strong id="nav-total-price"> {{ $cart->totalPrice }}</strong> <strong>{{ $descriptions['currency'] }}</strong></h5></p>
+                                    <p class="text-center"><h5 id="cart-content-total-price">Общо: <strong id="nav-total-price"> {{ $cart->totalPrice }}</strong> <strong>{{ $descriptions['currency'] }}</strong></h5></p>
                             </ol>
                         </div>
                     </li>

@@ -70,7 +70,7 @@ select.input-lg {
     border-right: none;
 }
 
-.topBar ul.topBarNav li a {
+.topBar ul.topBarNav li a li a {
     display: block;
     padding-left: 12px;
     padding-right: 12px;
@@ -107,11 +107,26 @@ select.input-lg {
     border: none;
 }
 
+.topBar ul.topBarNav li a.h-top-nav-dropdown {
+    color: #f2f7ff;
+}
+
+.topBar ul.topBarNav li a.h-top-nav-dropdown:hover {
+    color: #030f1a;
+}
+
+.topBar #cart-content-qty-price{
+    color: #030f1a;
+}
+
 .topBar ul.topBarNav li a {
+     display: block;
+     padding-left: 12px;
+     padding-right: 12px;
+ }
+
+.topBar h5#cart-content-total-price{
     color: #000000;
-    display: block;
-    padding-left: 12px;
-    padding-right: 12px;
 }
 
 .topBar .dropdown-menu > li > a {
@@ -180,6 +195,20 @@ select.input-lg {
     display: inline;
 }
 
+.topBar a#cart-content-product-name{
+       color: #000000;
+       font-size: 1em;
+   }
+
+.topBar a#cart-content-product-name:hover{
+    color: #148de4;
+    font-size: 1.1em;
+}
+
+.topBar ul.topBarNav li ul.cart .cart-items .items li:hover {
+    background-color: #fbf9f7;
+}
+
 .topBar ul.topBarNav li ul.cart .cart-items .items li .product-details {
     position: relative;
     margin-left: 60px;
@@ -196,12 +225,29 @@ select.input-lg {
 
 .topBar ul.topBarNav li ul.cart .cart-footer {
     overflow: hidden;
-    background-color: rgba(0, 0, 0, 0.02);
+    background-color: rgba(0, 0, 0, 0.07);
 }
 
 .topBar ul.topBarNav li ul.cart .cart-footer a {
+    color: #000000;
+    font-size: 1em;
     text-align: center;
     padding: 10px 20px;
     margin: 0;
     background-color: transparent;
+}
+
+
+.topBar ul.topBarNav li ul.cart .cart-footer a:hover {
+    color: #148de4;
+    font-size: 1.1em;
+}
+
+.topBar ul.topBarNav li a.top-bar-user-buttons{
+    color: #030f1a;
+}
+
+.topBar ul.topBarNav li a.top-bar-user-buttons:hover{
+    color: #148de4;
+    font-size: 1.1em;
 }

@@ -61,11 +61,11 @@
     clear: both;
     font-weight: normal;
     line-height: 1.42857143;
-    color: #dde2eb;
+    color: rgb(250, 90, 127);
     white-space: nowrap;
 }
 .dropdown-menu > li > a:hover{
-    color: rgba(159, 107, 255, 0.33);
+    color: rgb(239, 43, 43);
 }
 
 
@@ -92,13 +92,13 @@
 }
 .navbar-default .navbar-collapse li.dropdown.megaDropMenu .dropdown-menu li ul li a{
     display: block;
-    color: #878c94;
+    color: rgb(250, 90, 127);
     font-size: 14px;
     text-decoration: none;
     padding: 4px 15px;
 }
 .navbar-default .navbar-collapse li.dropdown.megaDropMenu .dropdown-menu li ul li a:hover{
-    color: #04bc0c;
+    color: rgb(250, 90, 127);
     text-decoration: none;
     background-color: rgba(0, 0, 0, 0.02);
 }

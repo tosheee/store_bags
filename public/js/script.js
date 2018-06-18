@@ -68,7 +68,7 @@
                         +'</div></li>');
                      });
 
-                    $('ol.items').append('<h5>Общо: <strong style="text-align: center; height: 30px; id="nav-total-price">'+ new_cart[0] +'</strong> <strong> лв.</strong></h5>');
+                    $('ol.items').append('<h5 class="cart-bottom-total-price">Общо: '+ new_cart[0] +' лв.</h5>').css({'text-align': 'center', 'color': '#000000'});
 
                     if($('div.cart-footer').length < 1){
                         $('ul.dropdown-menu.cart.w-250').append(
@@ -155,7 +155,7 @@ console.log(buttons);
                     + '</div></li>');
                 });
 
-                $('ol.items').append('<h5>Общо: <strong id="nav-total-price">'+ new_cart[0] +'</strong> <strong> лв.</strong></h5>');
+                $('ol.items').append('<h5 class="cart-bottom-total-price">Общо: '+ new_cart[0] +' лв.</h5>').css({'text-align': 'center', 'color': '#000000'});
 
                 if($('div.cart-footer').length < 1){
                     $('ul.dropdown-menu.cart.w-250').append(

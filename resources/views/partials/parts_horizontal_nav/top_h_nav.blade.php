@@ -94,7 +94,7 @@
                                         </li>
 
                                     @endforeach
-                                        <h5 id="cart-content-total-price" style="text-align: center; height: 30px;">Общо: <strong id="nav-total-price"> {{ $cart->totalPrice }}</strong> <strong>{{ $descriptions['currency'] }}</strong></h5>
+                                        <h5 class="cart-bottom-total-price">Общо: {{ $cart->totalPrice }} {{ $descriptions['currency'] }}</h5>
                             </ol>
                         </div>
                     </li>

@@ -52,13 +52,30 @@ ul.topBarNav li ul.cart .cart-items .items li .product-details .close-icon {
     font-size: 10px;
     line-height: normal;
 }
-ul.topBarNav li ul.cart .cart-footer {
+ul li ul.cart .cart-footer {
     overflow: hidden;
-    background-color: rgba(0, 0, 0, 0.02);
+    background-color: rgba(0, 0, 0, 0.09);
 }
-ul.topBarNav li ul.cart .cart-footer a {
+ul li ul.cart .cart-footer a {
     text-align: center;
     padding: 10px 20px;
     margin: 0;
     background-color: transparent;
+}
+
+ul li ul.cart .cart-footer a:hover {
+    color: #8a949d;
+}
+
+.cart-bottom-total-price{
+    text-align: center;
+    color: #000000;
+}
+
+ul li ul.cart .cart-items .items li a:hover{
+    color: #8a949d;
+}
+
+ul li ul.cart .cart-items .items li a {
+    text-decoration: none;
 }

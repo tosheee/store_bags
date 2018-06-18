@@ -86,7 +86,7 @@
                     <i class="fa fa-cart-plus mr-5"></i>
                     <span class="hidden-xs">Количка
                         <strong>
-                            <sup class="">{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</sup>
+                            <sup class="text-primary" style="color: #ffffff;">{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</sup>
                         </strong>
                         <i class="fa fa-angle-down ml-5"></i>
                     </span>
@@ -136,12 +136,7 @@
                                         </li>
 
                                     @endforeach
-
-                                    <li>Общо: {{ $cart->totalPrice }} {{ $descriptions['currency'] }}</li>
-
-                                    <!--
-                                           ` <h5 id="cart-content-total-price" style="text-align: center; height: 30px;">Общо: <strong id="nav-total-price"> {{ $cart->totalPrice }}</strong> <strong>{{ $descriptions['currency'] }}</strong></h5>
-                                    -->
+                                        <h5 id="cart-content-total-price" style="text-align: center; height: 30px;">Общо: <strong id="nav-total-price"> {{ $cart->totalPrice }}</strong> <strong>{{ $descriptions['currency'] }}</strong></h5>
                             </ol>
                         </div>
                     </li>

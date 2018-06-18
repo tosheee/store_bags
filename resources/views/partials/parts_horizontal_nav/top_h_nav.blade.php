@@ -37,25 +37,27 @@
                 </ul>
             </li>
 
+            <?php
+            if(Session::has('cart'))
+            {
+                $oldCart = Session::get('cart');
+                $cart = new App\Cart($oldCart);
+                $productsCart = $cart->items;
+            }
+            ?>
+
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle h-top-nav-dropdown" data-toggle="dropdown" data-hover="dropdown" data-close-others="false">
                     <i class="fa fa-cart-plus mr-5"></i>
                     <span class="hidden-xs">Количка
                         <strong>
-                            <sup class="">{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</sup>
+                            <sup class="text-primary" style="color: #ffffff;">{{ Session::has('cart') ? Session::get('cart')->totalQty : '' }}</sup>
                         </strong>
                         <i class="fa fa-angle-down ml-5"></i>
                     </span>
                 </a>
 
-                <?php
-                if(Session::has('cart'))
-                {
-                    $oldCart = Session::get('cart');
-                    $cart = new App\Cart($oldCart);
-                    $productsCart = $cart->items;
-                }
-                ?>
+
 
                 <ul class="dropdown-menu cart w-250" role="menu">
                     <li>
@@ -92,12 +94,7 @@
                                         </li>
 
                                     @endforeach
-
-                                        <li>Общо: {{ $cart->totalPrice }} {{ $descriptions['currency'] }}</li>
-
-                                        <!--
-                                           ` <h5 id="cart-content-total-price" style="text-align: center; height: 30px;">Общо: <strong id="nav-total-price"> {{ $cart->totalPrice }}</strong> <strong>{{ $descriptions['currency'] }}</strong></h5>
-                                    -->
+                                        <h5 id="cart-content-total-price" style="text-align: center; height: 30px;">Общо: <strong id="nav-total-price"> {{ $cart->totalPrice }}</strong> <strong>{{ $descriptions['currency'] }}</strong></h5>
                             </ol>
                         </div>
                     </li>

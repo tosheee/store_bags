@@ -12,8 +12,12 @@
 
 ul.topBarNav li ul.cart .cart-items{
     padding: 10px;
-    height: 200px;
+    height: 150px;
     overflow: auto;
+}
+
+ul.topBarNav li ul.cart .cart-items h5{
+    min-height: 45px;
 }
 
 ul.topBarNav li ul.cart .cart-items .items {

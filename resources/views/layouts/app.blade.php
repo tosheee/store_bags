@@ -27,6 +27,7 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" >
         <link href="https://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Great+Vibes" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Marck+Script" rel="stylesheet">
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
 
 

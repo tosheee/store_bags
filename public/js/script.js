@@ -34,7 +34,7 @@
                         window.location.href = '/';
                     }
 
-                    $('ol.items').append('<li style="text-align: center;"> Вашата количката е празна! </li>');
+                    $('ol.items').append('<li style="text-align: center; color: #ff1018;"><strong> Вашата количката е празна!<strong> </li>');
                     
                     var buttons = $('.add-product-button.add_to_cart');
 

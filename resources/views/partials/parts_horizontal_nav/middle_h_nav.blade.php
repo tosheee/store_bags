@@ -10,30 +10,26 @@
 
             <div class="col-sm-6 vertical-align text-center">
                 <div id="wrap-search">
-                    <form action="" autocomplete="on">
-                        <input id="search" name="search" type="text" placeholder="Търсене ....................">
-                        <input id="search_submit" value="Rechercher" type="submit">
+                    <form action="">
+                        <input id="search-text" name="search" type="text" placeholder="     Какво търсиш днес?">
+                        <input id="search_submit" value="search" type="submit">
                     </form>
                 </div>
             </div>
 
             <!-- end col -->
             <div class="col-sm-2 vertical-align text-center">
-
                 <div class="header-item mr-5">
-
-
                 </div>
 
                 <div class="">
-
                 </div>
 
 
             </div>
               <span class="text-primary mr-5">
-                        <a id="view-contact-form">За въпроси? </a>
-                 </span>
+                  <a id="view-contact-form">За въпроси? </a>
+              </span>
             <!-- end col -->
         </div>
         <!-- end  row -->

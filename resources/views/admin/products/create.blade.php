@@ -68,9 +68,9 @@
 
                 <label>
                     <span style="margin: 0;">Наличност: </span>
-                    <input type="radio" name="description[product_status]" value="Наличен" checked>Наличен:
-                    <input type="radio" name="description[product_status]" value="По поръчка"> По поръчка:
-                    <input type="radio" name="description[product_status]" value="Не е наличен"> Не е наличен:
+                    <input type="radio" name="description[product_status]" value="Наличен" checked> Наличен
+                    <input type="radio" name="description[product_status]" value="По поръчка"> По поръчка
+                    <input type="radio" name="description[product_status]" value="Не е наличен"> Не е наличен
                 </label>
                 <br>
 

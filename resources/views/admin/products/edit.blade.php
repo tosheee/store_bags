@@ -99,7 +99,89 @@
                     <input type="radio" name="description[product_status]" value="По поръчка"> По поръчка:
                     <input type="radio" name="description[product_status]" value="Не е наличен"> Не е наличен:
                 </label>
+                <br/>
+                <label>
+                    <span style="margin: 0;">Colors: </span>
+                    <div class="custom-radios">
+                        <div>
+                            <input type="radio" id="product-color-green" name="color" value="color-1">
+                            <label for="product-color-green">
+                                <span><i class="fa fa-check-circle"></i></span>
+                            </label>
+                        </div>
 
+                        <div>
+                            <input type="radio" id="product-color-blue" name="color" value="color-2">
+                            <label for="product-color-blue">
+                                <span><i class="fa fa-check-circle"></i></span></span>
+                            </label>
+                        </div>
+
+                        <div>
+                            <input type="radio" id="product-color-yellow" name="color" value="color-3">
+                            <label for="product-color-yellow">
+                                <span><i class="fa fa-check-circle"></i></span></span>
+                            </label>
+                        </div>
+
+                        <div>
+                            <input type="radio" id="product-color-red" name="color" value="color-4">
+                            <label for="product-color-red">
+                                <span><i class="fa fa-check-circle"></i></span></span>
+                            </label>
+                        </div>
+
+                        <div>
+                            <input type="radio" id="product-color-white" name="color" value="color-4">
+                            <label for="product-color-white">
+                                <span><i class="fa fa-check-circle"></i></span></span>
+                            </label>
+                        </div>
+
+                        <div>
+                            <input type="radio" id="product-color-pink" name="color" value="color-4">
+                            <label for="product-color-pink">
+                                <span><i class="fa fa-check-circle"></i></span></span>
+                            </label>
+                        </div>
+
+                        <div>
+                            <input type="radio" id="product-color-orange" name="color" value="color-4">
+                            <label for="product-color-orange">
+                                <span><i class="fa fa-check-circle"></i></span></span>
+                            </label>
+                        </div>
+
+                        <div>
+                            <input type="radio" id="product-color-purple" name="color" value="color-4">
+                            <label for="product-color-purple">
+                                <span><i class="fa fa-check-circle"></i></span></span>
+                            </label>
+                        </div>
+
+                        <div>
+                            <input type="radio" id="product-color-grey" name="color" value="color-4">
+                            <label for="product-color-grey">
+                                <span><i class="fa fa-check-circle"></i></span></span>
+                            </label>
+                        </div>
+
+                        <div>
+                            <input type="radio" id="product-color-brown" name="color" value="color-4">
+                            <label for="product-color-brown">
+                                <span><i class="fa fa-check-circle"></i></span></span>
+                            </label>
+                        </div>
+
+                        <div>
+                            <input type="radio" id="product-color-black" name="color" value="color-4">
+                            <label for="product-color-black">
+                                <span><i class="fa fa-check-circle"></i></span></span>
+                            </label>
+                        </div>
+                    </div>
+                </label>
+                <br/>
                 <label>
                     <span>Доставна цена:</span>
                     <input type="text" name="description[delivery_price]" value="{{ isset($descriptions['delivery_price']) ? $descriptions['delivery_price'] : '' }}" id="admin_product_description" class="label-values"/>

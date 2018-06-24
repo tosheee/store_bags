@@ -49,6 +49,10 @@
                             @if(isset($descriptions['price']))
                                 <p>Цена: <b>{{ $descriptions['price'] }}</b></p>
                             @endif
+
+                            @if(isset($descriptions['old_price']))
+                                <p> Стара цена: <b style="color: red;">{{ $descriptions['old_price'] }}</b></p>
+                            @endif
                             
                             @if(isset($descriptions['delivery_price']))
                                 <p>Доставна цена: <b>{{ $descriptions['delivery_price'] }}</b></p>
@@ -58,11 +62,11 @@
                         <td>
                             <div class="middle">
                                 @if (isset($descriptions['main_picture_url']))
-                                    <img style="margin: 0 auto; width: 120px;height: 100px;" src="{{ $descriptions['main_picture_url'] }}" alt="pic" />
+                                    <img style="margin: 0 auto; width: 80px;height: 100px;" src="{{ $descriptions['main_picture_url'] }}" alt="pic" />
                                 @elseif(isset($descriptions['upload_main_picture']))
-                                    <img style="margin: 0 auto; width: 120px;height: 100px;" src="/storage/upload_pictures/{{ $product->id }}/{{ $descriptions['upload_main_picture'] }}" alt="pic" />
+                                    <img style="margin: 0 auto; width: 80px;height: 100px;" src="/storage/upload_pictures/{{ $product->id }}/{{ $descriptions['upload_main_picture'] }}" alt="pic" />
                                 @else
-                                    <img style="margin: 0 auto; width: 120px;height: 100px;" src="/storage/common_pictures/noimage.jpg" alt="pic" />
+                                    <img style="margin: 0 auto; width: 80px;height: 100px;" src="/storage/common_pictures/noimage.jpg" alt="pic" />
                                 @endif
                             </div>
                         </td>

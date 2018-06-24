@@ -40,6 +40,7 @@ class ImagesHelper{
     public static function resizeImages($file_main_pic, $productId, $water_checked, $width, $height)
     {
         $extension = $file_main_pic->getClientOriginalExtension();
+
         $fileNameToStore = 'basic_'.time().'.'.$extension;
 
         /*

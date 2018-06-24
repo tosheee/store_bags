@@ -44,6 +44,7 @@ class ProductsController extends Controller
     {
         $categories = Category::all();
         $subCategories = SubCategory::all();
+
         return view('admin.products.create')->with('categories', $categories)->with('subCategories', $subCategories)->with('title', 'Създаване на продукт');
     }
 
@@ -88,15 +89,16 @@ class ProductsController extends Controller
         }
 
         if(isset($descriptionRequest['delivery_price'])) {
-            $descriptionRequest['delivery_price'] = number_format(str_replace(",", ".", floatval($descriptionRequest['delivery_price'])), 2);
+            $descriptionRequest['delivery_price'] = $this->price_format($descriptionRequest['delivery_price']);
         }
 
         if(isset($descriptionRequest['price'])) {
-            $descriptionRequest['price'] = number_format(str_replace(",", ".", floatval($descriptionRequest['price'])), 2);
+
+            $descriptionRequest['price'] = $this->price_format($descriptionRequest['price']);
         }
 
         if(isset($descriptionRequest['old_price'])){
-            $descriptionRequest['old_price'] = number_format(str_replace(",", ".", floatval($descriptionRequest['old_price'])), 2);
+            $descriptionRequest['old_price'] = $this->price_format($descriptionRequest['old_price']);
         }
 
         $descriptionRequest['article_id'] = mt_rand();
@@ -223,9 +225,18 @@ class ProductsController extends Controller
             }
         }
 
-        $descriptionRequest['delivery_price'] = number_format(str_replace(",", ".", floatval($descriptionRequest['delivery_price'])), 2);
-        $descriptionRequest['price'] = number_format(str_replace(",", ".", floatval($descriptionRequest['price'])), 2);
-        $descriptionRequest['old_price'] = number_format(str_replace(",", ".", floatval($descriptionRequest['old_price'])), 2);
+        if(isset($descriptionRequest['delivery_price'])) {
+
+            $descriptionRequest['delivery_price'] = $this->price_format($descriptionRequest['delivery_price']);
+        }
+
+        if(isset($descriptionRequest['price'])) {
+            $descriptionRequest['price'] = $this->price_format($descriptionRequest['price']);
+        }
+
+        if(isset($descriptionRequest['old_price'])){
+            $descriptionRequest['old_price'] = $this->price_format($descriptionRequest['old_price']);
+        }
 
         $description = json_encode( $descriptionRequest, JSON_UNESCAPED_UNICODE );
         $subCategoryName = SubCategory::find($request->input('sub_category_id'))->name;
@@ -281,17 +292,7 @@ class ProductsController extends Controller
         return redirect('/admin/products');
     }
 
-    /*
-     *
-    public function search_category(Request $request)
-    {
-        $categories = Category::all();
-        $subCategories = SubCategory::all();
-        $search_category = $request->input('category');
-        $products = Product::where('identifier', $search_category)->get();
-        $subCat = SubCategory::where('identifier', $search_category)->first()->name;
-
-        return view('admin.products.index', ['categories' => $categories, 'subCategories' => $subCategories, 'products' => $products])->with('title', 'Подкатегория >>> '.$subCat);
+    public function price_format($price){
+        return number_format(str_replace(",", ".", floatval($price)), 2);
     }
-    */
 }

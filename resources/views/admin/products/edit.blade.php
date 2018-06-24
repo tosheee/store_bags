@@ -104,77 +104,77 @@
                     <span style="margin: 0;">Colors: </span>
                     <div class="custom-radios">
                         <div>
-                            <input type="radio" id="product-color-green" name="color" value="color-1">
+                            <input type="radio" id="product-color-green" name="product_color" value="green" {{ $product->product_color == 'green' ? 'checked' : '' }}>
                             <label for="product-color-green">
                                 <span><i class="fa fa-check-circle"></i></span>
                             </label>
                         </div>
 
                         <div>
-                            <input type="radio" id="product-color-blue" name="color" value="color-2">
+                            <input type="radio" id="product-color-blue" name="product_color" value="blue" {{ $product->product_color == 'blue' ? 'checked' : '' }}>
                             <label for="product-color-blue">
                                 <span><i class="fa fa-check-circle"></i></span></span>
                             </label>
                         </div>
 
                         <div>
-                            <input type="radio" id="product-color-yellow" name="color" value="color-3">
+                            <input type="radio" id="product-color-yellow" name="product_color" value="yellow" {{ $product->product_color == 'yellow' ? 'checked' : '' }}>
                             <label for="product-color-yellow">
                                 <span><i class="fa fa-check-circle"></i></span></span>
                             </label>
                         </div>
 
                         <div>
-                            <input type="radio" id="product-color-red" name="color" value="color-4">
+                            <input type="radio" id="product-color-red" name="product_color" value="red" {{ $product->product_color == 'red' ? 'checked' : '' }}>
                             <label for="product-color-red">
                                 <span><i class="fa fa-check-circle"></i></span></span>
                             </label>
                         </div>
 
                         <div>
-                            <input type="radio" id="product-color-white" name="color" value="color-4">
+                            <input type="radio" id="product-color-white" name="product_color" value="white" {{ $product->product_color == 'white' ? 'checked' : '' }}>
                             <label for="product-color-white">
                                 <span><i class="fa fa-check-circle"></i></span></span>
                             </label>
                         </div>
 
                         <div>
-                            <input type="radio" id="product-color-pink" name="color" value="color-4">
+                            <input type="radio" id="product-color-pink" name="product_color" value="pink" {{ $product->product_color == 'pink' ? 'checked' : '' }}>
                             <label for="product-color-pink">
                                 <span><i class="fa fa-check-circle"></i></span></span>
                             </label>
                         </div>
 
                         <div>
-                            <input type="radio" id="product-color-orange" name="color" value="color-4">
+                            <input type="radio" id="product-color-orange" name="product_color" value="orange" {{ $product->product_color == 'orange' ? 'checked' : '' }}>
                             <label for="product-color-orange">
                                 <span><i class="fa fa-check-circle"></i></span></span>
                             </label>
                         </div>
 
                         <div>
-                            <input type="radio" id="product-color-purple" name="color" value="color-4">
+                            <input type="radio" id="product-color-purple" name="product_color" value="purple" {{ $product->product_color == 'purple' ? 'checked' : '' }}>
                             <label for="product-color-purple">
                                 <span><i class="fa fa-check-circle"></i></span></span>
                             </label>
                         </div>
 
                         <div>
-                            <input type="radio" id="product-color-grey" name="color" value="color-4">
+                            <input type="radio" id="product-color-grey" name="product_color" value="grey" {{ $product->product_color == 'grey' ? 'checked' : '' }}>
                             <label for="product-color-grey">
                                 <span><i class="fa fa-check-circle"></i></span></span>
                             </label>
                         </div>
 
                         <div>
-                            <input type="radio" id="product-color-brown" name="color" value="color-4">
+                            <input type="radio" id="product-color-brown" name="product_color" value="brown" {{ $product->product_color == 'brown' ? 'checked' : '' }}>
                             <label for="product-color-brown">
                                 <span><i class="fa fa-check-circle"></i></span></span>
                             </label>
                         </div>
 
                         <div>
-                            <input type="radio" id="product-color-black" name="color" value="color-4">
+                            <input type="radio" id="product-color-black" name="product_color" value="black" {{ $product->product_color == 'black' ? 'checked' : '' }}>
                             <label for="product-color-black">
                                 <span><i class="fa fa-check-circle"></i></span></span>
                             </label>

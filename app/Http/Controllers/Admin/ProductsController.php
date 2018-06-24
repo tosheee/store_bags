@@ -114,6 +114,7 @@ class ProductsController extends Controller
         $product->sale            = $request->input('sale');
         $product->recommended     = $request->input('recommended');
         $product->best_sellers    = $request->input('best_sellers');
+        $product->product_color   = $request->input('product_color');
         $product->description     = $description;
         $product->save();
 
@@ -248,6 +249,7 @@ class ProductsController extends Controller
         $product->sale            = $request->input('sale');
         $product->recommended     = $request->input('recommended');
         $product->best_sellers    = $request->input('best_sellers');
+        $product->product_color   = $request->input('product_color');
         $product->description     = $description;
         $product->save();
 

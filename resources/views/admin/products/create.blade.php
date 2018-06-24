@@ -79,77 +79,77 @@
                   <span style="margin: 0;">Colors: </span>
                   <div class="custom-radios">
                         <div>
-                            <input type="radio" id="product-color-green" name="color" value="color-1">
+                            <input type="radio" id="product-color-green" name="product_color" value="green">
                             <label for="product-color-green">
                                 <span><i class="fa fa-check-circle"></i></span>
                             </label>
                         </div>
 
                         <div>
-                            <input type="radio" id="product-color-blue" name="color" value="color-2">
+                            <input type="radio" id="product-color-blue" name="product_color" value="blue">
                             <label for="product-color-blue">
                                 <span><i class="fa fa-check-circle"></i></span></span>
                             </label>
                         </div>
 
                         <div>
-                            <input type="radio" id="product-color-yellow" name="color" value="color-3">
+                            <input type="radio" id="product-color-yellow" name="product_color" value="yellow">
                             <label for="product-color-yellow">
                                 <span><i class="fa fa-check-circle"></i></span></span>
                             </label>
                         </div>
 
                         <div>
-                          <input type="radio" id="product-color-red" name="color" value="color-4">
+                          <input type="radio" id="product-color-red" name="product_color" value="red">
                           <label for="product-color-red">
                               <span><i class="fa fa-check-circle"></i></span></span>
                           </label>
                       </div>
 
                       <div>
-                          <input type="radio" id="product-color-white" name="color" value="color-4">
+                          <input type="radio" id="product-color-white" name="product_color" value="white">
                           <label for="product-color-white">
                               <span><i class="fa fa-check-circle"></i></span></span>
                           </label>
                       </div>
 
                       <div>
-                          <input type="radio" id="product-color-pink" name="color" value="color-4">
+                          <input type="radio" id="product-color-pink" name="product_color" value="pink">
                           <label for="product-color-pink">
                               <span><i class="fa fa-check-circle"></i></span></span>
                           </label>
                       </div>
 
                       <div>
-                          <input type="radio" id="product-color-orange" name="color" value="color-4">
+                          <input type="radio" id="product-color-orange" name="product_color" value="orange">
                           <label for="product-color-orange">
                               <span><i class="fa fa-check-circle"></i></span></span>
                           </label>
                       </div>
 
                       <div>
-                          <input type="radio" id="product-color-purple" name="color" value="color-4">
+                          <input type="radio" id="product-color-purple" name="product_color" value="purple">
                           <label for="product-color-purple">
                               <span><i class="fa fa-check-circle"></i></span></span>
                           </label>
                       </div>
 
                       <div>
-                          <input type="radio" id="product-color-grey" name="color" value="color-4">
+                          <input type="radio" id="product-color-grey" name="product_color" value="grey">
                           <label for="product-color-grey">
                               <span><i class="fa fa-check-circle"></i></span></span>
                           </label>
                       </div>
 
                       <div>
-                          <input type="radio" id="product-color-brown" name="color" value="color-4">
+                          <input type="radio" id="product-color-brown" name="product_color" value="brown">
                           <label for="product-color-brown">
                               <span><i class="fa fa-check-circle"></i></span></span>
                           </label>
                       </div>
 
                       <div>
-                          <input type="radio" id="product-color-black" name="color" value="color-4">
+                          <input type="radio" id="product-color-black" name="product_color" value="black">
                           <label for="product-color-black">
                               <span><i class="fa fa-check-circle"></i></span></span>
                           </label>

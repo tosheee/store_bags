@@ -2,7 +2,8 @@
 #sidebar{
     background:#fff;
     height:1400px;
-    border-right:1px solid #eee;
+    width: 100%;
+
 }
 
 #sidebar h3{

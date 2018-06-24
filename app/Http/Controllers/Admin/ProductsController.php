@@ -169,7 +169,7 @@ class ProductsController extends Controller
 
             $image = Image::make($file_main_pic->getRealPath());
             $path = storage_path('app/public/upload_pictures/'.$id.'/'. $fileNameToStore);
-	    $water_mark = storage_path('app/public/common_pictures/watermark.png');
+	        $water_mark = storage_path('app/public/common_pictures/watermark.png');
             
             if(file_exists($water_mark) && $request->input('watermark_checked') == 1)
             {

@@ -22,6 +22,8 @@ class SearchController extends Controller
         $inputCategory = $request->input('category');
         $inputSubCategory = $request->input('sub_category');
         $inputKeyword = $request->input('keyword');
+        $productColor = $request->input('product_color');
+
         $get_products = Product::where('active', true)->get();
         $product_ids = array();
 
@@ -29,6 +31,10 @@ class SearchController extends Controller
         if (isset($inputCategory))
         {
             $products = Product::where('category_id', $inputCategory)->get();
+        }
+        elseif(isset($productColor))
+        {
+            $products = $get_products->where('product_color', $productColor);
         }
         elseif (isset($lowerPrice) && isset($upperPrice))
         {

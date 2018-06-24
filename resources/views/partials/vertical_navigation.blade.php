@@ -23,19 +23,21 @@
     <h3>Цветове</h3>
     <div class="checklist colors">
         <ul>
-            <li><a href=""><span></span>Beige</a></li>
-            <li><a href=""><span style="background:#222"></span>Black</a></li>
-            <li><a href=""><span style="background:#6e8cd5"></span>Blue</a></li>
-            <li><a href=""><span style="background:#f56060"></span>Brown</a></li>
-            <li><a href=""><span style="background:#44c28d"></span>Green</a></li>
+
+            <li><a href="/store/search?product_color=green"><span style="background: #44c28d"></span>Зелен</a></li>
+            <li><a href="/store/search?product_color=blue"><span style="background: #6e8cd5"></span>Син</a></li>
+            <li><a href="/store/search?product_color=yellow"><span style="background: #f1c40f"></span>Жълт</a></li>
+            <li><a href="/store/search?product_color=red"><span style="background: #e74c3c;"></span>Червен</a></li>
+            <li><a href="/store/search?product_color=white"><span style="background: #fff;border: 1px solid #e8e9eb;width:13px;height:13px;"></span>Бял</a></li>
+            <li><a href="/store/search?product_color=pink"><span style="background: #ffa4bb"></span>Розов</a></li>
         </ul>
 
         <ul>
-            <li><a href=""><span style="background:#999"></span>Grey</a></li>
-            <li><a href=""><span style="background:#f79858"></span>Orange</a></li>
-            <li><a href=""><span style="background:#b27ef8"></span>Purple</a></li>
-            <li><a href=""><span style="background:#f56060"></span>Red</a></li>
-            <li><a href=""><span style="background:#fff;border: 1px solid #e8e9eb;width:13px;height:13px;"></span>White</a></li>
+            <li><a href="/store/search?product_color=orange"><span style="background: #f79858"></span>Оранж</a></li>
+            <li><a href="/store/search?product_color=purple"><span style="background: #b27ef8"></span>Лилав</a></li>
+            <li><a href="/store/search?product_color=grey"><span style="background: #999"></span>Сиж</a></li>
+            <li><a href="/store/search?product_color=brown"><span style="background: #6a1c08"></span>Кафяв</a></li>
+            <li><a href="/store/search?product_color=black"><span style="background: #222"></span>Черен</a></li>
         </ul>
     </div>
 

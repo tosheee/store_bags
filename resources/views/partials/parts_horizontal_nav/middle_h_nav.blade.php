@@ -10,8 +10,9 @@
 
             <div class="col-sm-6 vertical-align text-center">
                 <div id="wrap-search">
-                    <form action="">
-                        <input id="search-text" name="search" type="text" placeholder="     Какво търсиш днес?">
+                    <form action="/store/search" method="get">
+                        <input id="search-text" name="keyword" type="text" placeholder="     Какво търсиш днес?">
+                        <input type="hidden" name="sub_category" value="all"/>
                         <input id="search_submit" value="search" type="submit">
                     </form>
                 </div>

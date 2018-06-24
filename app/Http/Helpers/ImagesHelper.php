@@ -39,40 +39,14 @@ class ImagesHelper{
 
     public static function resizeImages($file_main_pic, $productId, $water_checked, $width, $height)
     {
+
+        //if (is_file($file_main_pic)){
+
+        //}
+
         $extension = $file_main_pic->getClientOriginalExtension();
 
         $fileNameToStore = 'basic_'.time().'.'.$extension;
-
-        /*
-        $rootProjectPatchDir = base_path();
-        $outsideProjectPatchDir = dirname($rootProjectPatchDir, 2);
-
-
-        if(!is_dir($outsideProjectPatchDir.'/shared')) {
-            File::makeDirectory($outsideProjectPatchDir . '/shared', 0777, true);
-        }
-
-        if(!is_dir($outsideProjectPatchDir.'/shared/public')) {
-            File::makeDirectory($outsideProjectPatchDir . '/shared/public', 0777, true);
-        }
-
-        if(!is_dir($outsideProjectPatchDir.'/shared/public/storage')) {
-            File::makeDirectory($outsideProjectPatchDir . '/shared/public/storage', 0777, true);
-        }
-
-        if(!is_dir($outsideProjectPatchDir.'/shared/public/storage/upload_pictures')){
-            File::makeDirectory($outsideProjectPatchDir.'/shared/public/storage/upload_pictures', 0777, true);
-        }
-
-        if(!is_dir($outsideProjectPatchDir.'/shared/public/storage/common_pictures')) {
-            File::makeDirectory($outsideProjectPatchDir . '/shared/public/storage/common_pictures', 0777, true);
-        }
-
-        $upload_pic_path = $outsideProjectPatchDir.'/shared/public/storage/upload_pictures';
-        $common_pic_path = $outsideProjectPatchDir . '/shared/public/storage/common_pictures';
-        */
-
-
 
         /*
         if(!is_dir($upload_pic_path.'/'.$productId)) {
@@ -83,9 +57,6 @@ class ImagesHelper{
 
         Storage::makeDirectory('public/upload_pictures/'.$productId);
         $image = Image::make($file_main_pic->getRealPath());
-
-
-        //$path = $upload_pic_path.'/'.$productId.'/'. $fileNameToStore;
 
         $path = storage_path('app/public/upload_pictures/'.$productId.'/'. $fileNameToStore);
 

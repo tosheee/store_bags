@@ -3,12 +3,12 @@
 @section('content')
 
 <div class="container-fluid">
-        <div class="col-md-2" id="vertical-nav-bar">
+        <div class="col-md-2" id="vertical-nav-bar" style="width: 22%">
             @include('partials.vertical_navigation')
         </div>
 
     <div id="grid">
-        <div class="col-md-10">
+        <div class="col-md-9">
             @if(count($products) > 0 )
             <div id="grid-selector">
                 @if ( count($products) > 9)

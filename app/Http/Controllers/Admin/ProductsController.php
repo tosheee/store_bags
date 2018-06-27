@@ -48,6 +48,18 @@ class ProductsController extends Controller
         return view('admin.products.create')->with('categories', $categories)->with('subCategories', $subCategories)->with('title', 'Създаване на продукт');
     }
 
+    public function resizeImages($file_main_pic, $productId, $width, $height)
+    {
+        $extension = $file_main_pic->getClientOriginalExtension();
+        $fileNameToStore = 'basic_'.time().'.'.$extension;
+        Storage::makeDirectory('public/upload_pictures/'.$productId);
+        $image = Image::make($file_main_pic->getRealPath());
+        $path = storage_path('app/public/upload_pictures/'.$productId.'/'. $fileNameToStore);
+        $image->resize(intval($width), intval($height))->save($path);
+
+        return $fileNameToStore;
+    }
+
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -58,33 +70,20 @@ class ProductsController extends Controller
         $productId = ImagesHelper::getLastProductId() + 1;
         $descriptionRequest =  $request->input('description');
 
-        $img_width = $request->input('img_width');
-        $img_height = $request->input('img_height');
-
-        if (isset($img_width) && isset($img_height)){
-             $img_width = intval($img_width);
-            $img_height = intval($img_height);
-        }else{
-            $img_width = 1000;
-            $img_height = 1500;
-        }
-
-        if($request->hasFile('upload_main_picture'))
-        {
-            $descriptionRequest['upload_main_picture'] = ImagesHelper::resizeImages($request->file('upload_main_picture'), $productId, $request->input('watermark_checked'),  $img_width, $img_height);
-        }
-        else
-        {
-            $descriptionRequest['upload_main_picture'] = 'noimage.jpg';
-        }
-
-        if($request->hasFile('upload_gallery_pictures') && $request->hasFile('upload_main_picture'))
+        if($request->hasFile('upload_gallery_pictures') )
         {
             $files_gallery_pic = $request->file('upload_gallery_pictures');
 
             for($i = 0; $i < count($files_gallery_pic); $i++)
             {
-                $descriptionRequest['gallery'][$i]['upload_picture'] = ImagesHelper::resizeImages($files_gallery_pic[$i], $productId, $request->input('watermark_checked'),  $img_width, $img_height);
+                if ($i == 0)
+                {
+                    $descriptionRequest['upload_main_picture'] = $this->resizeImages($files_gallery_pic[$i], $productId, $request->input('img_width'), $request->input('img_height') );
+                }
+                else
+                {
+                    $descriptionRequest['gallery'][$i]['upload_picture'] = $this->resizeImages($files_gallery_pic[$i], $productId, $request->input('img_width'), $request->input('img_height'));
+                }
             }
         }
 

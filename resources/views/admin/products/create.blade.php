@@ -3,6 +3,12 @@
 @section('content')
     <style>
 
+        #preview{
+            background-color: #ffffff;
+        }
+#preview img{
+    padding: 5px;
+}
 
     </style>
     @include('admin.admin_partials.admin_menu')
@@ -198,26 +204,42 @@
                     Ширина: <input type="text" style="width: 50px;" name="img_width" value="1000" id="" class="label-values"/>
                     Височина: <input type="text" style="width: 50px;" name="img_height" value="1500" id="" class="label-values"/>
                 </label>
-                
-                 <label>
-                    <span style="margin: 0;">Воден знак на снимките: </span>
-                    <input type="radio" name="watermark_checked" value="1" checked> ДА
-                    <input type="radio" name="watermark_checked" value="0"> НЕ
+
+                <br/>
+
+                <label for="">
+                    <input id="file-input" type="file" name="upload_gallery_pictures[]" multiple>
+                    <div id="preview"></div>
                 </label>
 
-                <div class="basic-img-wrap">
-                    <button class="upload-basic-img-butt btn btn-info btn-xs">Добавяне на основна снимка от файл</button>
-                    <button class="field-basic-img-butt btn btn-warning btn-xs">Добавяне на основна снимка от линк</button>
-                    <br>
-                    <br>
-                </div>
+                <br/>
 
-                <div class="input_fields_wrap">
-                    <button class="upload-img-gallery-button btn btn-info btn-xs">Добавяне на снимка в галерия от файл</button>
-                    <button class="field-img-gallery-button btn btn-warning btn-xs">Добавяне на снимка от линк</button>
-                    <br>
-                    <br>
-                </div>
+                <script>
+                    function previewImages() {
+                        var $preview = $('#preview').empty();
+
+                        if (this.files) $.each(this.files, readAndPreview);
+
+                        function readAndPreview(i, file) {
+                            if (!/\.(jpe?g|png|gif)$/i.test(file.name)){
+                                return alert(file.name +" is not an image");
+                            } // else...
+
+                            var reader = new FileReader();
+
+                            $(reader).on("load", function() {
+                              $preview.append($("<img/>", {src:this.result, height:100}));
+                            });
+
+                            reader.readAsDataURL(file);
+                        }
+                    }
+
+                    $('#file-input').on("change", previewImages);
+
+                </script>
+
+                <br/><br/>
 
                 <div class="specification_fields_wrap">
                     <button class="add_spec_field_button btn-primary btn-xs">Добавяна на спецификация</button>
@@ -231,9 +253,6 @@
             </form>
         </div>
 
-        <p>
-            <img id="previewimage" style="display:none;"/>
-        </p>
 
         <script>
             $( "#select-category" ).change(function() {
@@ -264,7 +283,7 @@
                     }
                 });
             });
-
+/*
             $(document).ready(function() {
                 var max_fields = 2;
                 var wrapper    = $(".basic-img-wrap");
@@ -364,7 +383,7 @@
                     e.preventDefault(); $(this).parent('div.upload-img-gallery-button').remove(); x--;
                 });
             });
-
+*/
             // specification
             $(document).ready(function() {
                 var max_fields      = 20; //maximum input boxes allowed

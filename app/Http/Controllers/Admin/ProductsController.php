@@ -54,14 +54,23 @@ class ProductsController extends Controller
         $fileNameToStore = 'basic_'.time().'.'.$extension;
 
 
-        Storage::makeDirectory('public/upload_pictures/'.$productId);
+        Storage::makeDirectory('public/upload_pictures/'.$productId, 0775, true);
 
+        if (is_dir(storage_path('app/public/upload_pictures/'.$productId)))
+        {
 
         $image = Image::make($file_main_pic->getRealPath());
         $path = storage_path('app/public/upload_pictures/'.$productId.'/'. $fileNameToStore);
         $image->resize(intval($width), intval($height))->save($path);
 
         return $fileNameToStore;
+        }
+        else
+        {
+            $categories = Category::all();
+            $subCategories = SubCategory::all();
+            return view('admin.products.create')->with('categories', $categories)->with('subCategories', $subCategories)->with('title', 'Директорията на файла не беше създадена');
+        }
     }
 
     public function store(Request $request)

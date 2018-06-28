@@ -52,7 +52,11 @@ class ProductsController extends Controller
     {
         $extension = $file_main_pic->getClientOriginalExtension();
         $fileNameToStore = 'basic_'.time().'.'.$extension;
+
+
         Storage::makeDirectory('public/upload_pictures/'.$productId);
+
+
         $image = Image::make($file_main_pic->getRealPath());
         $path = storage_path('app/public/upload_pictures/'.$productId.'/'. $fileNameToStore);
         $image->resize(intval($width), intval($height))->save($path);
@@ -65,6 +69,7 @@ class ProductsController extends Controller
         $this->validate($request, [
             'category_id'     => 'required',
             'sub_category_id' => 'required',
+            'upload_gallery_pictures' => 'required'
         ]);
 
         $productId = ImagesHelper::getLastProductId() + 1;

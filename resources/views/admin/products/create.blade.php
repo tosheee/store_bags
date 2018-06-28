@@ -208,7 +208,7 @@
                 <br/>
 
                 <label for="">
-                    <input id="file-input" type="file" name="upload_gallery_pictures[]" multiple>
+                    <input id="file-input" type="file" name="upload_gallery_pictures[]" multiple required>
                     <div id="preview"></div>
                 </label>
 

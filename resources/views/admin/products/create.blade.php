@@ -3,14 +3,20 @@
 @section('content')
     <style>
 
-        #preview{
-            background-color: #ffffff;
-        }
-#preview img{
-    padding: 5px;
-}
+    #preview img{
+        padding: 5px;
+    }
 
+    ::-webkit-file-upload-button {
+     background: #2acb77;
+     width: 200px;
+     color: #ffffff;
+     font-size: 16px;
+     border-radius: 5px;
+     padding: 1em;
+     }
     </style>
+
     @include('admin.admin_partials.admin_menu')
         <div class="basic-grey">
             <form action="{{ route('products.store') }}" method="post" enctype="multipart/form-data">
@@ -207,12 +213,12 @@
 
                 <br/>
 
-                <label for="">
+                <label for="" >
                     <input id="file-input" type="file" name="upload_gallery_pictures[]" multiple required>
+                    <br>
                     <div id="preview"></div>
                 </label>
 
-                <br/>
 
                 <script>
                     function previewImages() {
@@ -228,7 +234,7 @@
                             var reader = new FileReader();
 
                             $(reader).on("load", function() {
-                              $preview.append($("<img/>", {src:this.result, height:100}));
+                              $preview.append($("<img/>", {src:this.result, height:200}).css({'border': 'solid 1px', 'padding': '10px', 'margin': '5px', 'background-color': 'white', 'border-radios':'3px'}));
                             });
 
                             reader.readAsDataURL(file);

@@ -1,6 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
+    <style>
+
+        ::-webkit-file-upload-button {
+            background: #f18c22;
+            color: #ffffff;
+            font-size: 12px;
+            border-radius: 5px;
+            padding: 1em;
+        }
+        .image-wrapper{
+            padding: 3px;
+        }
+
+    </style>
 
     @include('admin.admin_partials.admin_menu')
         <div class="basic-grey">
@@ -228,209 +242,99 @@
                     Височина: <input type="text" style="width: 50px;" name="img_height" value="1500" id="" class="label-values"/>
                 </label>
 
-
-                <label>
-                    <span style="margin: 0;">Воден знак на снимките: </span>
-                    <input type="radio" name="watermark_checked" value="1" checked> ДА
-                    <input type="radio" name="watermark_checked" value="0"> НЕ
-                </label>
-                
-                
                 <div class="basic-img-wrap">
-                    <button class="upload-basic-img-butt btn btn-info btn-xs">Добавяне на основна сминка от файл</button>
-                    <button class="field-basic-img-butt btn btn-warning btn-xs">Добавяне на основна снимка от линк</button>
+                    <button class="upload-basic-img-butt btn btn-info btn-xs">Добавяне сминка от файл</button>
+                    <button class="field-basic-img-butt btn btn-warning btn-xs">Добавяне снимка от линк</button>
                     <br>
                     <br>
 
                     @if (isset($descriptions['main_picture_url']))
-                        <div class="url-basic-image-field" >
+                        <div class="image-wrapper" >
                             <label>
-                                <span>Линк на основна снимка:</span>
+                                <span>Линк:</span>
                                 <input type="text" name="description[main_picture_url]" value="{{ isset($descriptions['main_picture_url']) ? $descriptions['main_picture_url'] : '' }}" id="admin_product_description" class="label-values"/>
-                                <a href="#" class="remove-url-basic-image"><i style="color: red;" aria-hidden="true" id="chang-menu-icon" class="fa fa-times"></i></a>
+                                <a href="#" class="remove-image-button"><i style="color: red;" aria-hidden="true" id="chang-menu-icon" class="fa fa-times"></i></a>
                             </label>
                         </div>
                     @endif
-
-                    <script>
-                        $(document).ready(function() {
-                            var wrapper    = $(".basic-img-wrap");
-                            var button_upload_basic_img = $(".upload-basic-img-butt");
-                            var button_url_basic_img    = $(".field-basic-img-butt");
-
-                            $(button_url_basic_img).click(function(e){
-                                e.preventDefault();
-                                var change_picture =  confirm("Do you want to change the main picture?");
-
-                                if (change_picture == true){
-                                    $('.upload-basic-img-wrapp').remove();
-                                    $('.url-basic-image-field').remove();
-                                    $(wrapper).append('<div class="url-basic-image-field" ><label><span>Линк на основна снимка:</span>' +
-                                        '<input type="text" name="description[main_picture_url]" value="" id="admin_product_description" class="label-values"/>' +
-                                        '<a href="#" class="remove-url-basic-image">' +
-                                        '<i style="color: red;" aria-hidden="true" id="chang-menu-icon" class="fa fa-times"></i></a>' +
-                                        '</label></div>');
-                                }
-                            });
-
-                            $(wrapper).on("click", ".remove-url-basic-image", function(e){
-                                e.preventDefault();
-                                var r = confirm("Do you want to remove the main picture");
-                                if(r == true) { $(this).parent('div.url-basic-image-field label').remove(); }
-                            });
-                        });
-                    </script>
 
                     @if (isset($descriptions['upload_main_picture']))
-                        <div class="upload-basic-img-wrapp" >
-                            <label>
-                                <span>Добавяне на снимка от файл:</span>
-                                <input type="text" name="description[upload_main_picture]" value="{{ $descriptions['upload_main_picture'] }}" id="admin_product_description" class="label-values"/>
-                                <a href="#" class="remove-img-upload-button"><i style="color: red;" aria-hidden="true" id="chang-menu-icon" class="fa fa-times"></i></a>
-                            </label>
+                        <div class="image-wrapper" >
+                            <img src="/storage/upload_pictures/{{ $product->id }}/{{ $descriptions['upload_main_picture'] }}" alt="" height="100px"/>
+                            <span>Файл:</span>
+                            <input type="text" name="description[upload_main_picture]" value="{{ $descriptions['upload_main_picture'] }}" id="admin_product_description" class="label-values"/>
+                            <input type="hidden" name="old_uploaded_picture[]" value="{{ $descriptions['upload_main_picture'] }}" id="admin_product_description" class="label-values"/>
+                            <a href="#" class="remove-image-button"><i style="color: red;" aria-hidden="true" id="chang-menu-icon" class="fa fa-times"></i></a>
                         </div>
                     @endif
 
-                    <script>
-                        $(document).ready(function() {
-                            var wrapper    = $(".basic-img-wrap");
-                            var button_upload_basic_img = $(".upload-basic-img-butt");
-                            var button_url_basic_img    = $(".field-basic-img-butt");
-
-                            $(button_upload_basic_img).click(function(e){
-                                e.preventDefault();
-                                var change_picture = confirm("Do you want to change the main picture?")
-                                if (change_picture == true) {
-                                    $('.upload-basic-img-wrapp').remove();
-                                    $('.url-basic-image-field').remove();
-
-                                    $(wrapper).append('<div class="upload-basic-img-wrapp">' +
-                                        '<input type="file" name="upload_main_picture" class="label-values"/>' +
-                                        '<a href="#" class="remove-img-upload-button">' +
-                                        '<i style="color: red;" aria-hidden="true" id="chang-menu-icon" class="fa fa-times"></i></a>' +
-                                        '</div>');
-                                }
-                            });
-
-                            $(wrapper).on("click", ".remove-img-upload-button", function(e){
-                                var r =  confirm("Do you want to remove the main picture?");
-                                e.preventDefault();
-                                if(r == true) { $('div.upload-basic-img-wrapp').remove(); }
-                            });
-                        });
-                    </script>
-
-                </div>
-
-                <div class="input_fields_wrap">
-                    <button class="upload-img-gallery-button btn btn-info btn-xs">Добавяне на снимка в галерия от файл </button>
-                    <button class="field-img-gallery-button btn btn-warning btn-xs">Добавяне на снимка от линк</button>
-                    <br>
-
-                    <br>
-                    <?php ?>
                     @if(isset($descriptions['gallery']))
                         @foreach ($descriptions['gallery'] as $description)
                             @if(isset($description["picture_url"]))
-                                <div class="gallery-fields">
-                                    <label>
-                                        <span>Линкове на снимки в галерията:</span>
-                                        <input type="text" name="description[gallery][][picture_url]" value="{{ $description["picture_url"] }}">
-                                        <a href="#" class="remove_field"><i style="color: red;" aria-hidden="true" id="chang-menu-icon" class="fa fa-times"></i></a>
-                                    </label>
+                                <div class="image-wrapper">
+                                    <img src="{{ $description["picture_url"] }}" alt="" height="100px"/>
+                                    <span>Линк:</span>
+                                    <input type="text" name="description[gallery][][picture_url]" value="{{ $description["picture_url"] }}">
+                                    <a href="#" class="remove-image-button"><i style="color: red;" aria-hidden="true" id="chang-menu-icon" class="fa fa-times"></i></a>
                                 </div>
                             @endif
 
                             @if(isset($description["upload_picture"]))
-                                <div class="gallery-fields">
-                                    <label>
-                                        <span>Добавяне на снимка то  :</span>
-                                        <input type="text" name="description[gallery][][upload_picture]" value="{{ $description["upload_picture"] }}">
-                                        <a href="#" class="remove_field"><i style="color: red;" aria-hidden="true" id="chang-menu-icon" class="fa fa-times"></i></a>
-                                    </label>
+                                <div class="image-wrapper">
+                                    <img src="/storage/upload_pictures/{{ $product->id }}/{{ $description["upload_picture"] }}" alt="" height="100px"/>
+                                    <span>Файл:</span>
+                                    <input type="text" name="description[gallery][][upload_picture]" value="{{ $description["upload_picture"] }}">
+                                    <a href="#" class="remove-image-button"><i style="color: red;" aria-hidden="true" id="" class="fa fa-times"></i></a>
                                 </div>
                             @endif
                         @endforeach
                     @endif
+
+                    <script>
+                        $(document).ready(function() {
+                            var wrapper = $(".image-wrapper");
+
+                            var button_upload_basic_img = $(".upload-basic-img-butt");
+                            var button_url_basic_img    = $(".field-basic-img-butt");
+
+                            var max_fields = 5;
+                            var x = wrapper.length;
+
+                            $(button_upload_basic_img).click(function(e){
+                                e.preventDefault();
+                                if(x < max_fields) {
+                                    x++;
+                                    $('.basic-img-wrap').append('<div class="image-wrapper">' +
+                                    '<input type="file" name="upload_gallery_pictures[]" class="label-values" multiple />' +
+                                    '<a href="#" class="remove-image-button">' +
+                                    '<i style="color: red;" aria-hidden="true" id="chang-menu-icon" class="fa fa-times"></i></a>' +
+                                    '</div>');
+                                }
+                            });
+
+                            $(button_url_basic_img).click(function(e){
+                                e.preventDefault();
+                                if(x < max_fields) {
+                                    x++;
+                                    $('.basic-img-wrap').append('<div class="image-wrapper" >' +
+                                    '<span>Линк:</span>' +
+                                    '<input type="text" name="description[gallery][][picture_url]" value="" id="admin_product_description" class="label-values"/>' +
+                                    '<a href="#" class="remove-image-button">' +
+                                    '<i style="color: red;" aria-hidden="true" id="chang-menu-icon" class="fa fa-times"></i></a>' +
+                                    '</div>');
+                                }
+                            });
+
+                            $('.basic-img-wrap').on("click", ".remove-image-button", function(e){
+                                e.preventDefault();
+                                $(this).parent('div.image-wrapper').remove();
+                                x--;
+                            });
+                        });
+                    </script>
                 </div>
 
 
-                <script>
-
-                    $(document).ready(function() {
-                    $( "#select-category" ).change(function() {
-                        var category_val =  $( "#select-category option:selected" ).val();
-                        $("#select-sub-category").children().remove();
-
-                        $.ajax({
-                            method: "POST",
-                            url: "/admin/products/create/" + category_val,
-                            data: { "_token": "{{ csrf_token() }}" },
-                            success: function( msg ) {
-                                $("#select-sub-category").append("<option value=''>Избери подкатегория</option>");
-                                for(var i = 0; i < msg.length; i++ ){
-                                    $("#select-sub-category").append("<option value=" + msg[i][0] + ">" + msg[i][1] + "</option>");
-                                }
-
-                                $( "#select-sub-category" ).change(function() {
-                                    var sub_category_val =  $( "#select-sub-category option:selected" ).val();
-                                    console.log(sub_category_val);
-                                    $("#select-identifier").children().remove();
-
-
-                                    for(var j = 0; j < msg.length; j++){
-                                        if(sub_category_val == msg[j][0]){
-                                            $("#select-identifier").append("<option value=" + msg[j][2] +">" + msg[j][2] + "</option>");
-                                        }
-                                    }
-                                });
-                            }
-                        });
-                    });
-                    });
-*
-                    $(document).ready(function() {
-                        var max_fields = 5;
-                        var wrapper    = $(".input_fields_wrap");
-                        var upload_img_gallery_button = $(".upload-img-gallery-button");
-                        var field_img_gallery_button  = $(".field-img-gallery-button");
-                        var x = $('.gallery-fields').length;
-
-                        $(field_img_gallery_button).click(function(e){
-                            e.preventDefault();
-                            if(x < max_fields){
-                                x++;
-                                $(wrapper).append(
-                                        '<div class="gallery-fields" ><label><span>Линкове на снимки в галерията:</span>' +
-                                        '<input type="text" name="description[gallery][][picture_url]"/>' +
-                                        '<a href="#" class="remove_field"><i style="color: red;" aria-hidden="true" id="chang-menu-icon" class="fa fa-times"></i></a>' +
-                                        '</label></div>');
-                            }
-                        });
-                        $(wrapper).on("click",".remove_field", function(e){
-                            e.preventDefault(); $(this).parent('div.gallery-fields label').remove(); x--;
-                        });
-
-
-                        $(upload_img_gallery_button).click(function(e){
-                            e.preventDefault();
-                            if(x < max_fields){
-                                x++;
-                                $(wrapper).append('<div class="upload-img-gallery-button">' +
-                                '<input type="file" name="upload_gallery_pictures[]" class="label-values"/>' +
-                                '<a href="#" class="remove-img-gallery-button">' +
-                                '<i style="color: red;" aria-hidden="true" id="chang-menu-icon" class="fa fa-times"></i></a>' +
-                                '</div>');
-                            }
-                        });
-
-                        $(wrapper).on("click",".remove-img-gallery-button", function(e){
-                            e.preventDefault();
-                            $(this).parent('div.upload-img-gallery-button').remove();
-                            x--;
-                        });
-                    });
-                </script>
 
                 <div class="specification_fields_wrap">
                     <button class="add_spec_field_button btn-primary btn-xs">Добавяне на спецификация</button>
@@ -441,15 +345,13 @@
                      
                     
                         @foreach($table_data as $row )
-                        
-                                <div class="fields">
+                            <div class="fields">
                                     <label>
                                        <input style="width: 200px" type="text" name="description[properties][][name]" id="admin_product_description" class="label-names" value="{{ isset($row[0]['name']) ?  $row[0]['name'] : '' }}">
                                        <input type="text" name="description[properties][][text]" id="admin_product_description" class="label-values" value="{{ isset($row[1]['text']) ?  $row[1]['text'] : '' }}">
                                         <a href="#" class="remove_field"><i style="color: red;" aria-hidden="true" id="chang-menu-icon" class="fa fa-times"></i></a>
                                     </label>
-                                </div>
-                            
+                            </div>
                         @endforeach
                     @endif
       
@@ -522,6 +424,44 @@
                 }
             }
         </script>
+
+
+
+    <script>
+
+        $(document).ready(function() {
+            $( "#select-category" ).change(function() {
+                var category_val =  $( "#select-category option:selected" ).val();
+                $("#select-sub-category").children().remove();
+
+                $.ajax({
+                    method: "POST",
+                    url: "/admin/products/create/" + category_val,
+                    data: { "_token": "{{ csrf_token() }}" },
+                    success: function( msg ) {
+                        $("#select-sub-category").append("<option value=''>Избери подкатегория</option>");
+                        for(var i = 0; i < msg.length; i++ ){
+                            $("#select-sub-category").append("<option value=" + msg[i][0] + ">" + msg[i][1] + "</option>");
+                        }
+
+                        $( "#select-sub-category" ).change(function() {
+                            var sub_category_val =  $( "#select-sub-category option:selected" ).val();
+                            console.log(sub_category_val);
+                            $("#select-identifier").children().remove();
+
+
+                            for(var j = 0; j < msg.length; j++){
+                                if(sub_category_val == msg[j][0]){
+                                    $("#select-identifier").append("<option value=" + msg[j][2] +">" + msg[j][2] + "</option>");
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+        });
+
+    </script>
 
         <script src="{{ URL::to('/') }}/vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
 

@@ -77,8 +77,7 @@ class ProductsController extends Controller
     {
         $this->validate($request, [
             'category_id'     => 'required',
-            'sub_category_id' => 'required',
-            'upload_gallery_pictures' => 'required'
+            'sub_category_id' => 'required'
         ]);
 
         $productId = ImagesHelper::getLastProductId() + 1;
@@ -149,98 +148,32 @@ class ProductsController extends Controller
     {
         $product = Product::find($id);
         $descriptionRequest =  $request->input('description');
+
         $this->validate($request, [
             'category_id'     => 'required',
             'sub_category_id' => 'required',
         ]);
 
-        $old_descriptions = json_decode($product->description, true);
-
-        $img_width = $request->input('img_wight');
-        $img_height = $request->input('img_height');
-
-        if (isset( $img_width) && isset($img_height)){
-            $img_width = intval( $img_width);
-            $img_height = intval($img_height);
-        }else{
-            $img_width = 1000;
-            $img_height = 1500;
-        }
-
-        if($request->hasFile('upload_main_picture'))
+        if($request->hasFile('upload_gallery_pictures') )
         {
-            $file_main_pic = $request->file('upload_main_picture');
-            $extension = $file_main_pic->getClientOriginalExtension();
-            $fileNameToStore = 'basic_'.time().'.'.$extension;
+            $files_gallery_pic = $request->file('upload_gallery_pictures');
 
-            Storage::makeDirectory('public/upload_pictures/'.$id);
-            
-            if (isset($old_descriptions['upload_main_picture']))
+            for($i = 0; $i < count($files_gallery_pic); $i++)
             {
-                Storage::delete('public/upload_pictures/'.$id.'/'.$old_descriptions['upload_main_picture']);
-            }
-
-            $image = Image::make($file_main_pic->getRealPath());
-            $path = storage_path('app/public/upload_pictures/'.$id.'/'. $fileNameToStore);
-	        $water_mark = storage_path('app/public/common_pictures/watermark.png');
-            
-            if(file_exists($water_mark) && $request->input('watermark_checked') == 1)
-            {
-            	$image->resize( $img_width, $img_height)->insert($water_mark, 'bottom-right', 10, 10)->save($path);
-            }
-            else
-            {
-            	$image->resize( $img_width, $img_height)->save($path);
-            }
-            
-            
-            
-            $descriptionRequest['upload_main_picture'] = $fileNameToStore;
-        }
-        else
-        {
-            $fileNameToStore = 'noimage.jpg';
-        }
-
-        // gallery
-        if($request->hasFile('upload_gallery_pictures'))
-        {
-            $files_gallery_pic =$request->file('upload_gallery_pictures');
-
-            if(isset($old_descriptions['gallery']))
-            {
-                $old_pic_num = count($old_descriptions['gallery']);
-            }
-            else
-            {
-                $old_pic_num = 0;
-            }
-
-            $new_pic_num = count($files_gallery_pic);
-
-            for($i = 0; $i < $new_pic_num; $i++)
-            {
-                $extension = $files_gallery_pic[$i]->getClientOriginalExtension();
-                $fileNameToStore = 'gallery_'.$i.'_'.time().'.'.$extension;
-                $image = Image::make($files_gallery_pic[$i]->getRealPath());
-                $path = storage_path('app/public/upload_pictures/'.$id.'/'. $fileNameToStore);
-		        $water_mark = storage_path('app/public/common_pictures/watermark.png');
-            
-	        if(file_exists($water_mark) && $request->input('watermark_checked') == 1)
-	        {
-	           $image->resize( $img_width, $img_height)->insert($water_mark, 'bottom-right', 10, 10)->save($path);
-	        }
-	        else
-	        {
-	           $image->resize( $img_width, $img_height)->save($path);
-	        }
-                
-                $descriptionRequest['gallery'][$i + $old_pic_num]['upload_picture'] = $fileNameToStore;
+                if ($i == 0)
+                {
+                    $descriptionRequest['upload_main_picture'] = $this->resizeImages($files_gallery_pic[$i], $id, $request->input('img_width'), $request->input('img_height') );
+                }
+                else
+                {
+                    $descriptionRequest['gallery'][$i]['upload_picture'] = $this->resizeImages($files_gallery_pic[$i], $id, $request->input('img_width'), $request->input('img_height'));
+                }
             }
         }
+
+        //$old_descriptions = json_decode($product->description, true);
 
         if(isset($descriptionRequest['delivery_price'])) {
-
             $descriptionRequest['delivery_price'] = $this->price_format($descriptionRequest['delivery_price']);
         }
 
@@ -253,6 +186,7 @@ class ProductsController extends Controller
         }
 
         $description = json_encode( $descriptionRequest, JSON_UNESCAPED_UNICODE );
+
         $subCategoryName = SubCategory::find($request->input('sub_category_id'))->name;
 
         $product->category_id     = $request->input('category_id');
@@ -295,6 +229,7 @@ class ProductsController extends Controller
         }
 
         session()->flash('notif', 'Продукта е обновен');
+
         return redirect('/admin/products')->with('title', 'Обновяване на продукта');
     }
 

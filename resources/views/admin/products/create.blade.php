@@ -213,11 +213,17 @@
 
                 <br/>
 
-                <label for="" >
-                    <input id="file-input" type="file" name="upload_gallery_pictures[]" multiple required>
+                <label>
+                    <input id="file-input" type="file" name="upload_gallery_pictures[]" multiple />
                     <br>
                     <div id="preview"></div>
                 </label>
+
+                <div class="input_fields_wrap">
+                    <button class="field-img-gallery-button btn btn-warning btn-xs">Добавяне на снимка от линк</button>
+                    <br>
+                    <br>
+                </div>
 
 
                 <script>
@@ -244,8 +250,6 @@
                     $('#file-input').on("change", previewImages);
 
                 </script>
-
-                <br/><br/>
 
                 <div class="specification_fields_wrap">
                     <button class="add_spec_field_button btn-primary btn-xs">Добавяна на спецификация</button>
@@ -352,7 +356,7 @@
                     e.preventDefault(); $(this).parent('div.upload-basic-img-wrapp').remove(); x--;
                 });
             });
-
+*/
              // gallery images
             $(document).ready(function() {
                 var max_fields = 6;
@@ -365,7 +369,7 @@
                     if(x < max_fields){
                         x++;
                         $(wrapper).append(
-                                '<div class="fields" ><label><span>Снимка в галерията от линк:</span>' +
+                                '<div class="fields" ><label><span>Снимка от линк:</span>' +
                                 '<input type="text" name="description[gallery][][picture_url]"/>' +
                                 '<a href="#" class="remove_field"><i style="color: red;" aria-hidden="true" id="chang-menu-icon" class="fa fa-times"></i></a>' +
                                 '</label></div>');
@@ -389,7 +393,7 @@
                     e.preventDefault(); $(this).parent('div.upload-img-gallery-button').remove(); x--;
                 });
             });
-*/
+
             // specification
             $(document).ready(function() {
                 var max_fields      = 20; //maximum input boxes allowed

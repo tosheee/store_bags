@@ -15,8 +15,6 @@ class SearchController extends Controller
         $categories = Category::all();
         $subCategories = SubCategory::all();
 
-        
-        
         $lowerPrice = $request->input('lower_price');
         $upperPrice = $request->input('upper_price');
         $inputCategory = $request->input('category');

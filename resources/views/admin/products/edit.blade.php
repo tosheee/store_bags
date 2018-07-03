@@ -237,9 +237,8 @@
                 </label>
                 <br>
 
-                <label>
-                    Ширина: <input type="text" style="width: 50px;" name="img_width" value="1000" id="" class="label-values"/>
-                    Височина: <input type="text" style="width: 50px;" name="img_height" value="1500" id="" class="label-values"/>
+                </label>
+                    Оразмеряване в % <input style="width: 50px;" type="number" class="label-values" name="resize_percent" min="10" max="50" value="25" />
                 </label>
 
                 <div class="basic-img-wrap">
@@ -251,7 +250,7 @@
                     @if (isset($descriptions['main_picture_url']))
                         <div class="image-wrapper" >
                             <label>
-                                <span>Линк:</span>
+                                <span>Линк: </span>
                                 <input type="text" name="description[main_picture_url]" value="{{ isset($descriptions['main_picture_url']) ? $descriptions['main_picture_url'] : '' }}" id="admin_product_description" class="label-values"/>
                                 <a href="#" class="remove-image-button"><i style="color: red;" aria-hidden="true" id="chang-menu-icon" class="fa fa-times"></i></a>
                             </label>
@@ -261,7 +260,7 @@
                     @if (isset($descriptions['upload_main_picture']))
                         <div class="image-wrapper" >
                             <img src="/storage/upload_pictures/{{ $product->id }}/{{ $descriptions['upload_main_picture'] }}" alt="" height="100px"/>
-                            <span>Файл:</span>
+                            <span>Файл: </span>
                             <input type="text" name="description[upload_main_picture]" value="{{ $descriptions['upload_main_picture'] }}" id="admin_product_description" class="label-values"/>
                             <input type="hidden" name="old_uploaded_picture[]" value="{{ $descriptions['upload_main_picture'] }}" id="admin_product_description" class="label-values"/>
                             <a href="#" class="remove-image-button"><i style="color: red;" aria-hidden="true" id="chang-menu-icon" class="fa fa-times"></i></a>
@@ -317,7 +316,7 @@
                                 if(x < max_fields) {
                                     x++;
                                     $('.basic-img-wrap').append('<div class="image-wrapper" >' +
-                                    '<span>Линк:</span>' +
+                                    '<span>Линк: </span>' +
                                     '<input type="text" name="description[gallery][][picture_url]" value="" id="admin_product_description" class="label-values"/>' +
                                     '<a href="#" class="remove-image-button">' +
                                     '<i style="color: red;" aria-hidden="true" id="chang-menu-icon" class="fa fa-times"></i></a>' +

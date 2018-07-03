@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use Image;
+use Intervention\Image\ImageManagerStatic as Image;
 use ImagesHelper;
 
 class ProductsController extends Controller
@@ -48,29 +48,24 @@ class ProductsController extends Controller
         return view('admin.products.create')->with('categories', $categories)->with('subCategories', $subCategories)->with('title', 'Създаване на продукт');
     }
 
-    public function resizeImages($file_main_pic, $productId, $width, $height)
+    public function resizeImages($picture, $productId, $resize_percent)
     {
-        $extension = $file_main_pic->getClientOriginalExtension();
+        $extension = $picture->getClientOriginalExtension();
         $fileNameToStore = 'basic_'.time().'.'.$extension;
+        $pathToStore = storage_path('app/public/upload_pictures/'.$productId);
 
+        if(!is_dir($pathToStore)){
+            Storage::makeDirectory('public/upload_pictures/'.$productId, 0775, true);
+        }
 
-        Storage::makeDirectory('public/upload_pictures/'.$productId, 0775, true);
+        list($width, $height) = getimagesize($picture->getRealPath());
 
-        if (is_dir(storage_path('app/public/upload_pictures/'.$productId)))
-        {
+        $newWidth  = intval(($resize_percent / 100) * $width);
+        $newHeight = intval(($resize_percent / 100) * $height);
 
-        $image = Image::make($file_main_pic->getRealPath());
-        $path = storage_path('app/public/upload_pictures/'.$productId.'/'. $fileNameToStore);
-        $image->resize(intval($width), intval($height))->save($path);
+        Image::make($picture->getRealPath())->resize($newWidth, $newHeight)->save($pathToStore.'/'.$fileNameToStore);
 
         return $fileNameToStore;
-        }
-        else
-        {
-            $categories = Category::all();
-            $subCategories = SubCategory::all();
-            return view('admin.products.create')->with('categories', $categories)->with('subCategories', $subCategories)->with('title', 'Директорията на файла не беше създадена');
-        }
     }
 
     public function store(Request $request)
@@ -91,13 +86,19 @@ class ProductsController extends Controller
             {
                 if ($i == 0)
                 {
-                    $descriptionRequest['upload_main_picture'] = $this->resizeImages($files_gallery_pic[$i], $productId, $request->input('img_width'), $request->input('img_height') );
+                    $descriptionRequest['upload_main_picture'] = $this->resizeImages($files_gallery_pic[$i], $productId, $request->input('resize_percent') );
                 }
                 else
                 {
-                    $descriptionRequest['gallery'][$i]['upload_picture'] = $this->resizeImages($files_gallery_pic[$i], $productId, $request->input('img_width'), $request->input('img_height'));
+                    $descriptionRequest['gallery'][$i]['upload_picture'] = $this->resizeImages($files_gallery_pic[$i], $productId, $request->input('resize_percent'));
                 }
             }
+        }
+
+        if(!is_dir(storage_path('app/public/upload_pictures/'.$productId))){
+            session()->flash('notif', 'Проблем със създаването на директорията на снимката');
+
+            return redirect('admin/products/create');
         }
 
         if(isset($descriptionRequest['delivery_price'])) {
@@ -146,13 +147,14 @@ class ProductsController extends Controller
 
     public function update(Request $request, $id)
     {
-        $product = Product::find($id);
-        $descriptionRequest =  $request->input('description');
-
         $this->validate($request, [
             'category_id'     => 'required',
             'sub_category_id' => 'required',
         ]);
+
+        $product = Product::find($id);
+        $descriptionRequest =  $request->input('description');
+        $old_descriptions = json_decode($product->description, true);
 
         if($request->hasFile('upload_gallery_pictures') )
         {
@@ -162,16 +164,14 @@ class ProductsController extends Controller
             {
                 if ($i == 0)
                 {
-                    $descriptionRequest['upload_main_picture'] = $this->resizeImages($files_gallery_pic[$i], $id, $request->input('img_width'), $request->input('img_height') );
+                    $descriptionRequest['upload_main_picture'] = $this->resizeImages($files_gallery_pic[$i], $id, $request->input('resize_percent') );
                 }
                 else
                 {
-                    $descriptionRequest['gallery'][$i]['upload_picture'] = $this->resizeImages($files_gallery_pic[$i], $id, $request->input('img_width'), $request->input('img_height'));
+                    $descriptionRequest['gallery'][$i]['upload_picture'] = $this->resizeImages($files_gallery_pic[$i], $id, $request->input('resize_percent'));
                 }
             }
         }
-
-        //$old_descriptions = json_decode($product->description, true);
 
         if(isset($descriptionRequest['delivery_price'])) {
             $descriptionRequest['delivery_price'] = $this->price_format($descriptionRequest['delivery_price']);
@@ -242,7 +242,13 @@ class ProductsController extends Controller
         return redirect('/admin/products');
     }
 
-    public function price_format($price){
+    public function deleteOldImages()
+    {
+
+    }
+
+    public function price_format($price)
+    {
         return number_format(str_replace(",", ".", floatval($price)), 2);
     }
 }

@@ -206,12 +206,11 @@
 
                 <br>
 
-                <label>
-                    Ширина: <input type="text" style="width: 50px;" name="img_width" value="1000" id="" class="label-values"/>
-                    Височина: <input type="text" style="width: 50px;" name="img_height" value="1500" id="" class="label-values"/>
                 </label>
+                    Оразмеряване в % <input style="width: 50px;" type="number" class="label-values" name="resize_percent" min="10" max="50" value="25" />
+                 </label>
 
-                <br/>
+                <br/><br/>
 
                 <label>
                     <input id="file-input" type="file" name="upload_gallery_pictures[]" multiple />

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use Image;
+use Intervention\Image\ImageManagerStatic as Image;
 use ImagesHelper;
 
 class ProductsController extends Controller
@@ -48,37 +48,11 @@ class ProductsController extends Controller
         return view('admin.products.create')->with('categories', $categories)->with('subCategories', $subCategories)->with('title', 'Създаване на продукт');
     }
 
-    public function resizeImages($file_main_pic, $productId, $width, $height)
-    {
-        $extension = $file_main_pic->getClientOriginalExtension();
-        $fileNameToStore = 'basic_'.time().'.'.$extension;
-
-
-        Storage::makeDirectory('public/upload_pictures/'.$productId, 0775, true);
-
-        if (is_dir(storage_path('app/public/upload_pictures/'.$productId)))
-        {
-
-        $image = Image::make($file_main_pic->getRealPath());
-        $path = storage_path('app/public/upload_pictures/'.$productId.'/'. $fileNameToStore);
-        $image->resize(intval($width), intval($height))->save($path);
-
-        return $fileNameToStore;
-        }
-        else
-        {
-            $categories = Category::all();
-            $subCategories = SubCategory::all();
-            return view('admin.products.create')->with('categories', $categories)->with('subCategories', $subCategories)->with('title', 'Директорията на файла не беше създадена');
-        }
-    }
-
     public function store(Request $request)
     {
         $this->validate($request, [
             'category_id'     => 'required',
             'sub_category_id' => 'required',
-            'upload_gallery_pictures' => 'required'
         ]);
 
         $productId = ImagesHelper::getLastProductId() + 1;
@@ -92,14 +66,21 @@ class ProductsController extends Controller
             {
                 if ($i == 0)
                 {
-                    $descriptionRequest['upload_main_picture'] = $this->resizeImages($files_gallery_pic[$i], $productId, $request->input('img_width'), $request->input('img_height') );
+                    $descriptionRequest['upload_main_picture'] = $this->resizeImages($files_gallery_pic[$i], $productId, $request->input('resize_percent'));
                 }
                 else
                 {
-                    $descriptionRequest['gallery'][$i]['upload_picture'] = $this->resizeImages($files_gallery_pic[$i], $productId, $request->input('img_width'), $request->input('img_height'));
+                    $descriptionRequest['gallery'][$i]['upload_picture'] = $this->resizeImages($files_gallery_pic[$i], $productId, $request->input('resize_percent'));
                 }
             }
         }
+
+        if(!is_dir(storage_path('app/public/upload_pictures/'.$productId))){
+            session()->flash('notif', 'Проблем със създаването на директорията на снимката');
+
+            return redirect('admin/products/create');
+        }
+
 
         if(isset($descriptionRequest['delivery_price'])) {
             $descriptionRequest['delivery_price'] = $this->price_format($descriptionRequest['delivery_price']);
@@ -145,99 +126,56 @@ class ProductsController extends Controller
         return view('admin.products.edit')->with('categories', $categories)->with('subCategories', $subCategories)->with('product', $product)->with('title', 'Обновяване информацията за продукта');
     }
 
+    public function resizeImages($picture, $productId, $resize_percent)
+    {
+        $extension = $picture->getClientOriginalExtension();
+        $fileNameToStore = 'basic_'.time().'.'.$extension;
+        $pathToStore = storage_path('app/public/upload_pictures/'.$productId);
+
+        if(!is_dir($pathToStore)){
+            Storage::makeDirectory('public/upload_pictures/'.$productId, 0775, true);
+        }
+
+        list($width, $height) = getimagesize($picture->getRealPath());
+
+        $newWidth  = intval(($resize_percent / 100) * $width);
+        $newHeight = intval(($resize_percent / 100) * $height);
+
+        Image::make($picture->getRealPath())->resize($newWidth, $newHeight)->save($pathToStore.'/'.$fileNameToStore);
+
+        return $fileNameToStore;
+    }
+
+
     public function update(Request $request, $id)
     {
-        $product = Product::find($id);
-        $descriptionRequest =  $request->input('description');
         $this->validate($request, [
             'category_id'     => 'required',
             'sub_category_id' => 'required',
         ]);
 
+        $product = Product::find($id);
+        $descriptionRequest =  $request->input('description');
+
         $old_descriptions = json_decode($product->description, true);
 
-        $img_width = $request->input('img_wight');
-        $img_height = $request->input('img_height');
-
-        if (isset( $img_width) && isset($img_height)){
-            $img_width = intval( $img_width);
-            $img_height = intval($img_height);
-        }else{
-            $img_width = 1000;
-            $img_height = 1500;
-        }
-
-        if($request->hasFile('upload_main_picture'))
+        if($request->hasFile('upload_gallery_pictures') )
         {
-            $file_main_pic = $request->file('upload_main_picture');
-            $extension = $file_main_pic->getClientOriginalExtension();
-            $fileNameToStore = 'basic_'.time().'.'.$extension;
+            $files_gallery_pic = $request->file('upload_gallery_pictures');
 
-            Storage::makeDirectory('public/upload_pictures/'.$id);
-            
-            if (isset($old_descriptions['upload_main_picture']))
+            for($i = 0; $i < count($files_gallery_pic); $i++)
             {
-                Storage::delete('public/upload_pictures/'.$id.'/'.$old_descriptions['upload_main_picture']);
-            }
-
-            $image = Image::make($file_main_pic->getRealPath());
-            $path = storage_path('app/public/upload_pictures/'.$id.'/'. $fileNameToStore);
-	        $water_mark = storage_path('app/public/common_pictures/watermark.png');
-            
-            if(file_exists($water_mark) && $request->input('watermark_checked') == 1)
-            {
-            	$image->resize( $img_width, $img_height)->insert($water_mark, 'bottom-right', 10, 10)->save($path);
-            }
-            else
-            {
-            	$image->resize( $img_width, $img_height)->save($path);
-            }
-            
-            
-            
-            $descriptionRequest['upload_main_picture'] = $fileNameToStore;
-        }
-        else
-        {
-            $fileNameToStore = 'noimage.jpg';
-        }
-
-        // gallery
-        if($request->hasFile('upload_gallery_pictures'))
-        {
-            $files_gallery_pic =$request->file('upload_gallery_pictures');
-
-            if(isset($old_descriptions['gallery']))
-            {
-                $old_pic_num = count($old_descriptions['gallery']);
-            }
-            else
-            {
-                $old_pic_num = 0;
-            }
-
-            $new_pic_num = count($files_gallery_pic);
-
-            for($i = 0; $i < $new_pic_num; $i++)
-            {
-                $extension = $files_gallery_pic[$i]->getClientOriginalExtension();
-                $fileNameToStore = 'gallery_'.$i.'_'.time().'.'.$extension;
-                $image = Image::make($files_gallery_pic[$i]->getRealPath());
-                $path = storage_path('app/public/upload_pictures/'.$id.'/'. $fileNameToStore);
-		        $water_mark = storage_path('app/public/common_pictures/watermark.png');
-            
-	        if(file_exists($water_mark) && $request->input('watermark_checked') == 1)
-	        {
-	           $image->resize( $img_width, $img_height)->insert($water_mark, 'bottom-right', 10, 10)->save($path);
-	        }
-	        else
-	        {
-	           $image->resize( $img_width, $img_height)->save($path);
-	        }
-                
-                $descriptionRequest['gallery'][$i + $old_pic_num]['upload_picture'] = $fileNameToStore;
+                if ($i == 0)
+                {
+                    $descriptionRequest['upload_main_picture'] = $this->resizeImages($files_gallery_pic[$i], $productId, $request->input('resize_percent'));
+                }
+                else
+                {
+                    $descriptionRequest['gallery'][$i]['upload_picture'] = $this->resizeImages($files_gallery_pic[$i], $productId, $request->input('resize_percent'));
+                }
             }
         }
+
 
         if(isset($descriptionRequest['delivery_price'])) {
 

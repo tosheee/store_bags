@@ -82,7 +82,7 @@ class ProductsController extends Controller
             }
         }
 
-        if(isset($picturesOfUrl['gallery'])){
+        if(isset($picturesOfUrl['gallery']) && !$request->hasFile('upload_gallery_pictures')){
             array_shift($descriptionRequest['gallery']);
             $descriptionRequest['main_picture_url'] = array_values($picturesOfUrl['gallery'][0])[0];
         }

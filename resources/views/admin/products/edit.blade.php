@@ -246,7 +246,6 @@
                     <button class="upload-basic-img-butt btn btn-info btn-xs">Добавяне сминка от файл</button>
                     <button class="field-basic-img-butt btn btn-warning btn-xs">Добавяне снимка от линк</button>
                     <br/>
-                    <br/>
                     @if (isset($descriptions['upload_main_picture']))
                         <div class="image-wrapper-basic" >
                             <img src="/storage/upload_pictures/{{ $product->id }}/{{ $descriptions['upload_main_picture'] }}" alt="" height="100px"/>
@@ -308,7 +307,6 @@
                 <div class="gallery-wrapper">
                     <button class="upload-img-butt btn btn-info btn-xs">Добавяне сминка от файл</button>
                     <button class="field-img-butt btn btn-warning btn-xs">Добавяне снимка от линк</button>
-
                     <br/>
                     <br/>
                     @if(isset($descriptions['gallery']))
@@ -335,7 +333,7 @@
                             <br/>
                         @endforeach
                     @endif
-                    <br/>
+
                     <script>
                         $(document).ready(function() {
                             var wrapper = $(".gallery-wrapper");

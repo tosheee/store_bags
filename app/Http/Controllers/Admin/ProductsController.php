@@ -267,4 +267,15 @@ class ProductsController extends Controller
             Storage::delete('public/upload_pictures/'.$id.'/'.$old_picture);
         }
     }
+
+    public function search_category(Request $request)
+    {
+        $categories = Category::all();
+        $subCategories = SubCategory::all();
+        $search_category = $request->input('category');
+        $products = Product::where('identifier', $search_category)->get();
+        $subCat = SubCategory::where('identifier', $search_category)->first()->name;
+
+        return view('admin.products.index', ['categories' => $categories, 'subCategories' => $subCategories, 'products' => $products])->with('title', 'Подкатегория >>> '.$subCat);
+    }
 }

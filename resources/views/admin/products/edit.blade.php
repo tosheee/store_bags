@@ -240,97 +240,141 @@
                 </label>
                     Оразмеряване в % <input style="width: 50px;" type="number" class="label-values" name="resize_percent" min="10" max="50" value="25" />
                 </label>
+                <br/><br/>
 
-                <div class="basic-img-wrap">
+                <div class="basic-image-wrapper">
                     <button class="upload-basic-img-butt btn btn-info btn-xs">Добавяне сминка от файл</button>
                     <button class="field-basic-img-butt btn btn-warning btn-xs">Добавяне снимка от линк</button>
-                    <br>
-                    <br>
-
-                    @if (isset($descriptions['main_picture_url']))
-                        <div class="image-wrapper" >
-                            <label>
-                                <span>Линк: </span>
-                                <input type="text" name="description[main_picture_url]" value="{{ isset($descriptions['main_picture_url']) ? $descriptions['main_picture_url'] : '' }}" id="admin_product_description" class="label-values"/>
-                                <a href="#" class="remove-image-button"><i style="color: red;" aria-hidden="true" id="chang-menu-icon" class="fa fa-times"></i></a>
-                            </label>
-                        </div>
-                    @endif
-
+                    <br/>
+                    <br/>
                     @if (isset($descriptions['upload_main_picture']))
-                        <div class="image-wrapper" >
-                            <img src="/storage/upload_pictures/{{ $product->id }}/{{ $descriptions['upload_main_picture'] }}" alt="" height="100px"/>
+                        <div class="image-wrapper-basic" >
+                            @if(preg_match('/http|https/', $descriptions['upload_main_picture']))
+                                <img src="{{ $descriptions['upload_main_picture'] }}" alt="" height="100px"/>
+                            @else
+                                <img src="/storage/upload_pictures/{{ $product->id }}/{{ $descriptions['upload_main_picture'] }}" alt="" height="100px"/>
+                            @endif
+
                             <span>Файл: </span>
-                            <input type="text" name="description[upload_main_picture]" value="{{ $descriptions['upload_main_picture'] }}" id="admin_product_description" class="label-values"/>
+                            <input type="text" name="description[upload_main_picture]" value="{{ $descriptions['upload_main_picture'] }}" id="admin_product_description" class="label-values" />
                             <input type="hidden" name="old_uploaded_picture[]" value="{{ $descriptions['upload_main_picture'] }}" id="admin_product_description" class="label-values"/>
-                            <a href="#" class="remove-image-button"><i style="color: red;" aria-hidden="true" id="chang-menu-icon" class="fa fa-times"></i></a>
+                            <a href="#" class="remove-image-button-basic"><i style="color: red;" aria-hidden="true" id="chang-menu-icon" class="fa fa-times"></i></a>
                         </div>
                     @endif
 
-                    @if(isset($descriptions['gallery']))
-                        @foreach ($descriptions['gallery'] as $description)
-                            @if(isset($description["picture_url"]))
-                                <div class="image-wrapper">
-                                    <img src="{{ $description["picture_url"] }}" alt="" height="100px"/>
-                                    <span>Линк:</span>
-                                    <input type="text" name="description[gallery][][picture_url]" value="{{ $description["picture_url"] }}">
-                                    <a href="#" class="remove-image-button"><i style="color: red;" aria-hidden="true" id="chang-menu-icon" class="fa fa-times"></i></a>
-                                </div>
-                            @endif
+                </div>
 
-                            @if(isset($description["upload_picture"]))
-                                <div class="image-wrapper">
-                                    <img src="/storage/upload_pictures/{{ $product->id }}/{{ $description["upload_picture"] }}" alt="" height="100px"/>
-                                    <span>Файл:</span>
-                                    <input type="text" name="description[gallery][][upload_picture]" value="{{ $description["upload_picture"] }}">
-                                    <a href="#" class="remove-image-button"><i style="color: red;" aria-hidden="true" id="" class="fa fa-times"></i></a>
-                                </div>
-                            @endif
-                        @endforeach
-                    @endif
 
                     <script>
                         $(document).ready(function() {
-                            var wrapper = $(".image-wrapper");
+                            var wrapper = $(".basic-image-wrapper");
 
                             var button_upload_basic_img = $(".upload-basic-img-butt");
                             var button_url_basic_img    = $(".field-basic-img-butt");
 
-                            var max_fields = 5;
-                            var x = wrapper.length;
-
                             $(button_upload_basic_img).click(function(e){
                                 e.preventDefault();
-                                if(x < max_fields) {
-                                    x++;
-                                    $('.basic-img-wrap').append('<div class="image-wrapper">' +
-                                    '<input type="file" name="upload_gallery_pictures[]" class="label-values" multiple />' +
-                                    '<a href="#" class="remove-image-button">' +
-                                    '<i style="color: red;" aria-hidden="true" id="chang-menu-icon" class="fa fa-times"></i></a>' +
-                                    '</div>');
-                                }
+                                $('.image-wrapper-basic').remove();
+                                wrapper.append('<div class="image-wrapper-basic">' +
+                                '<input type="file" name="upload_basic_picture" class="label-values" />' +
+                                '<a href="#" class="remove-image-button-basic">' +
+                                '<i style="color: red;" aria-hidden="true" class="fa fa-times"></i></a>' +
+                                '</div>');
+
                             });
 
                             $(button_url_basic_img).click(function(e){
                                 e.preventDefault();
+                                $('.image-wrapper-basic').remove();
+                                wrapper.append('<div class="image-wrapper-basic" >' +
+                                '<span>Линк: </span>' +
+                                '<input type="text" name="description[upload_main_picture]" value="" id="file-input" class="label-values" />' +
+                                '<a href="#" class="remove-image-button-basic">' +
+                                '<i style="color: red;" aria-hidden="true"  class="fa fa-times"></i></a>' +
+                                '</div>');
+                            });
+
+                            $('.basic-image-wrapper').on("click", ".remove-image-button-basic", function(e){
+                                e.preventDefault();
+                                $(this).parent('div.image-wrapper-basic').remove();
+                            });
+                        });
+                    </script>
+
+                <div class="gallery-wrapper">
+                    <button class="upload-img-butt btn btn-info btn-xs">Добавяне сминка от файл</button>
+                    <button class="field-img-butt btn btn-warning btn-xs">Добавяне снимка от линк</button>
+
+                    <br/>
+                    <br/>
+                    @if(isset($descriptions['gallery']))
+                        @foreach ($descriptions['gallery'] as $description)
+
+                            @if(isset($description["upload_picture"]))
+                                <div class="gallery-image-wrapper">
+                                    <img src="/storage/upload_pictures/{{ $product->id }}/{{ $description["upload_picture"] }}" alt="" height="100px"/>
+                                    <span>Файл:</span>
+                                    <input type="text" name="description[gallery][][upload_picture]" value="{{ $description["upload_picture"] }}" />
+                                    <a href="#" class="remove-image-button"><i style="color: red;" aria-hidden="true"  class="fa fa-times"></i></a>
+                                </div>
+                            @endif
+
+                            @if(isset($description["picture_url"]))
+                                <div class="gallery-image-wrapper">
+                                    <img src="{{ $description["picture_url"] }}" alt="" height="100px"/>
+                                    <span>Линк:</span>
+                                    <input type="text" name="description[gallery][][picture_url]" value="{{ $description["picture_url"] }}" />
+                                    <a href="#" class="remove-image-button"><i style="color: red;" aria-hidden="true" class="fa fa-times"></i></a>
+                                </div>
+                            @endif
+
+                            <br/>
+                        @endforeach
+                    @endif
+                    <br/>
+                    <script>
+                        $(document).ready(function() {
+                            var wrapper = $(".gallery-wrapper");
+
+                            var button_upload_img = $(".upload-img-butt");
+                            var button_url_img    = $(".field-img-butt");
+
+                            var max_fields = 5;
+                            var x = $('.gallery-image-wrapper').length;
+
+                            $(button_upload_img).click(function(e){
+                                e.preventDefault();
                                 if(x < max_fields) {
                                     x++;
-                                    $('.basic-img-wrap').append('<div class="image-wrapper" >' +
-                                    '<span>Линк: </span>' +
-                                    '<input type="text" name="description[gallery][][picture_url]" value="" id="admin_product_description" class="label-values"/>' +
+                                    wrapper.append('<div class="gallery-image-wrapper">' +
+                                    '<input type="file" name="upload_gallery_pictures[]" class="label-values" />' +
                                     '<a href="#" class="remove-image-button">' +
-                                    '<i style="color: red;" aria-hidden="true" id="chang-menu-icon" class="fa fa-times"></i></a>' +
+                                    '<i style="color: red;" aria-hidden="true" class="fa fa-times"></i></a>' +
                                     '</div>');
                                 }
                             });
 
-                            $('.basic-img-wrap').on("click", ".remove-image-button", function(e){
+                            $(button_url_img).click(function(e){
                                 e.preventDefault();
-                                $(this).parent('div.image-wrapper').remove();
+                                if(x < max_fields) {
+                                    x++;
+                                    wrapper.append('<div class="gallery-image-wrapper" >' +
+                                    '<span>Линк: </span>' +
+                                    '<input type="text" name="description[gallery][][picture_url]" value="" id="file-input" class="label-values"/>' +
+                                    '<a href="#" class="remove-image-button">' +
+                                    '<i style="color: red;" aria-hidden="true" class="fa fa-times"></i></a>' +
+                                    '</div>');
+                                }
+                            });
+
+                            $('.gallery-wrapper').on("click", ".remove-image-button", function(e){
+                                e.preventDefault();
+                                $(this).parent('div.gallery-image-wrapper').remove();
                                 x--;
                             });
                         });
                     </script>
+
                 </div>
 
 
@@ -348,7 +392,7 @@
                                     <label>
                                        <input style="width: 200px" type="text" name="description[properties][][name]" id="admin_product_description" class="label-names" value="{{ isset($row[0]['name']) ?  $row[0]['name'] : '' }}">
                                        <input type="text" name="description[properties][][text]" id="admin_product_description" class="label-values" value="{{ isset($row[1]['text']) ?  $row[1]['text'] : '' }}">
-                                        <a href="#" class="remove_field"><i style="color: red;" aria-hidden="true" id="chang-menu-icon" class="fa fa-times"></i></a>
+                                        <a href="#" class="remove_field"><i style="color: red;" aria-hidden="true" class="fa fa-times"></i></a>
                                     </label>
                             </div>
                         @endforeach

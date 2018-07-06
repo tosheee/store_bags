@@ -156,20 +156,18 @@ class ProductsController extends Controller
         $descriptionRequest =  $request->input('description');
         $old_descriptions = json_decode($product->description, true);
 
+        if($request->hasFile('upload_basic_picture') ){
+            $files_main_pic = $request->file('upload_basic_picture');
+            $descriptionRequest['upload_main_picture'] = $this->resizeImages($files_main_pic, $id, $request->input('resize_percent') );
+        }
+
         if($request->hasFile('upload_gallery_pictures') )
         {
             $files_gallery_pic = $request->file('upload_gallery_pictures');
 
             for($i = 0; $i < count($files_gallery_pic); $i++)
             {
-                if ($i == 0)
-                {
-                    $descriptionRequest['upload_main_picture'] = $this->resizeImages($files_gallery_pic[$i], $id, $request->input('resize_percent') );
-                }
-                else
-                {
-                    $descriptionRequest['gallery'][$i]['upload_picture'] = $this->resizeImages($files_gallery_pic[$i], $id, $request->input('resize_percent'));
-                }
+                $descriptionRequest['gallery'][$i]['upload_picture'] = $this->resizeImages($files_gallery_pic[$i], $id, $request->input('resize_percent'));
             }
         }
 

@@ -165,9 +165,20 @@ class ProductsController extends Controller
         {
             $files_gallery_pic = $request->file('upload_gallery_pictures');
 
-            for($i = 0; $i < count($files_gallery_pic); $i++)
+            if(isset($old_descriptions['gallery']))
             {
-                $descriptionRequest['gallery'][$i]['upload_picture'] = $this->resizeImages($files_gallery_pic[$i], $id, $request->input('resize_percent'));
+                $old_pic_num = count($old_descriptions['gallery']);
+            }
+            else
+            {
+                $old_pic_num = 0;
+            }
+
+            $new_pic_num = count($files_gallery_pic);
+
+            for($i = 0; $i <  $new_pic_num; $i++)
+            {
+                $descriptionRequest['gallery'][$i + $old_pic_num]['upload_picture'] = $this->resizeImages($files_gallery_pic[$i], $id, $request->input('resize_percent'));
             }
         }
 

@@ -249,12 +249,7 @@
                     <br/>
                     @if (isset($descriptions['upload_main_picture']))
                         <div class="image-wrapper-basic" >
-                            @if(preg_match('/http|https/', $descriptions['upload_main_picture']))
-                                <img src="{{ $descriptions['upload_main_picture'] }}" alt="" height="100px"/>
-                            @else
-                                <img src="/storage/upload_pictures/{{ $product->id }}/{{ $descriptions['upload_main_picture'] }}" alt="" height="100px"/>
-                            @endif
-
+                            <img src="/storage/upload_pictures/{{ $product->id }}/{{ $descriptions['upload_main_picture'] }}" alt="" height="100px"/>
                             <span>Файл: </span>
                             <input type="text" name="description[upload_main_picture]" value="{{ $descriptions['upload_main_picture'] }}" id="admin_product_description" class="label-values" />
                             <input type="hidden" name="old_uploaded_picture[]" value="{{ $descriptions['upload_main_picture'] }}" id="admin_product_description" class="label-values"/>
@@ -262,6 +257,15 @@
                         </div>
                     @endif
 
+                    @if (isset($descriptions['main_picture_url']))
+                        <div class="image-wrapper-basic" >
+                            <span>Линк: </span>
+                            <img src="{{ $descriptions['main_picture_url'] }}" alt="" height="100px"/>
+                            <input type="text" name="description[main_picture_url]" value="{{ isset($descriptions['main_picture_url']) ? $descriptions['main_picture_url'] : '' }}" id="admin_product_description" class="label-values"/>
+                            <a href="#" class="remove-image-button-basic"><i style="color: red;" aria-hidden="true" id="chang-menu-icon" class="fa fa-times"></i></a>
+                        </div>
+                    @endif
+                    <br/>
                 </div>
 
 
@@ -288,7 +292,7 @@
                                 $('.image-wrapper-basic').remove();
                                 wrapper.append('<div class="image-wrapper-basic" >' +
                                 '<span>Линк: </span>' +
-                                '<input type="text" name="description[upload_main_picture]" value="" id="file-input" class="label-values" />' +
+                                '<input type="text" name="description[main_picture_url]" value="" id="file-input" class="label-values" />' +
                                 '<a href="#" class="remove-image-button-basic">' +
                                 '<i style="color: red;" aria-hidden="true"  class="fa fa-times"></i></a>' +
                                 '</div>');

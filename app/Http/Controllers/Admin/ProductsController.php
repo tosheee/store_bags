@@ -48,26 +48,6 @@ class ProductsController extends Controller
         return view('admin.products.create')->with('categories', $categories)->with('subCategories', $subCategories)->with('title', 'Създаване на продукт');
     }
 
-    public function resizeImages($picture, $productId, $resize_percent)
-    {
-        $extension = $picture->getClientOriginalExtension();
-        $fileNameToStore = 'basic_'.time().'.'.$extension;
-        $pathToStore = storage_path('app/public/upload_pictures/'.$productId);
-
-        if(!is_dir($pathToStore)){
-            Storage::makeDirectory('public/upload_pictures/'.$productId, 0775, true);
-        }
-
-        list($width, $height) = getimagesize($picture->getRealPath());
-
-        $newWidth  = intval(($resize_percent / 100) * $width);
-        $newHeight = intval(($resize_percent / 100) * $height);
-
-        Image::make($picture->getRealPath())->resize($newWidth, $newHeight)->save($pathToStore.'/'.$fileNameToStore);
-
-        return $fileNameToStore;
-    }
-
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -77,8 +57,9 @@ class ProductsController extends Controller
 
         $productId = ImagesHelper::getLastProductId() + 1;
         $descriptionRequest =  $request->input('description');
+        $picturesOfUrl = $request->input('description');
 
-        if($request->hasFile('upload_gallery_pictures') )
+        if($request->hasFile('upload_gallery_pictures'))
         {
             $files_gallery_pic = $request->file('upload_gallery_pictures');
 
@@ -86,19 +67,24 @@ class ProductsController extends Controller
             {
                 if ($i == 0)
                 {
-                    $descriptionRequest['upload_main_picture'] = $this->resizeImages($files_gallery_pic[$i], $productId, $request->input('resize_percent') );
+                    $descriptionRequest['upload_main_picture'] = $this->resizeImages($files_gallery_pic[$i], $productId, $request->input('resize_percent'), 'basic' );
                 }
                 else
                 {
-                    $descriptionRequest['gallery'][$i]['upload_picture'] = $this->resizeImages($files_gallery_pic[$i], $productId, $request->input('resize_percent'));
+                    $descriptionRequest['gallery'][$i]['upload_picture'] = $this->resizeImages($files_gallery_pic[$i], $productId, $request->input('resize_percent'), 'gallery');
                 }
+            }
+
+            if(!is_dir(storage_path('app/public/upload_pictures/'.$productId))){
+                session()->flash('notif', 'Проблем със създаването на директорията на снимката');
+
+                return redirect('admin/products/create');
             }
         }
 
-        if(!is_dir(storage_path('app/public/upload_pictures/'.$productId))){
-            session()->flash('notif', 'Проблем със създаването на директорията на снимката');
-
-            return redirect('admin/products/create');
+        if(isset($picturesOfUrl['gallery'])){
+            array_shift($descriptionRequest['gallery']);
+            $descriptionRequest['main_picture_url'] = array_values($picturesOfUrl['gallery'][0])[0];
         }
 
         if(isset($descriptionRequest['delivery_price'])) {
@@ -115,7 +101,6 @@ class ProductsController extends Controller
         }
 
         $descriptionRequest['article_id'] = mt_rand();
-
         $description = json_encode( $descriptionRequest, JSON_UNESCAPED_UNICODE );
         $subCategoryName = SubCategory::find($request->input('sub_category_id'))->name;
 
@@ -158,7 +143,11 @@ class ProductsController extends Controller
 
         if($request->hasFile('upload_basic_picture') ){
             $files_main_pic = $request->file('upload_basic_picture');
-            $descriptionRequest['upload_main_picture'] = $this->resizeImages($files_main_pic, $id, $request->input('resize_percent') );
+            if (isset($old_descriptions['upload_main_picture']))
+            {
+                Storage::delete('public/upload_pictures/'.$id.'/'.$old_descriptions['upload_main_picture']);
+            }
+            $descriptionRequest['upload_main_picture'] = $this->resizeImages($files_main_pic, $id, $request->input('resize_percent'), 'basic' );
         }
 
         if($request->hasFile('upload_gallery_pictures') )
@@ -178,7 +167,7 @@ class ProductsController extends Controller
 
             for($i = 0; $i <  $new_pic_num; $i++)
             {
-                $descriptionRequest['gallery'][$i + $old_pic_num]['upload_picture'] = $this->resizeImages($files_gallery_pic[$i], $id, $request->input('resize_percent'));
+                $descriptionRequest['gallery'][$i + $old_pic_num]['upload_picture'] = $this->resizeImages($files_gallery_pic[$i], $id, $request->input('resize_percent'), 'gallery');
             }
         }
 
@@ -195,7 +184,6 @@ class ProductsController extends Controller
         }
 
         $description = json_encode( $descriptionRequest, JSON_UNESCAPED_UNICODE );
-
         $subCategoryName = SubCategory::find($request->input('sub_category_id'))->name;
 
         $product->category_id     = $request->input('category_id');
@@ -214,27 +202,7 @@ class ProductsController extends Controller
 
         if (isset($new_descriptions['gallery']))
         {
-            $pic_files = Storage::allFiles('public/upload_pictures/'.$id.'/');
-            $pic_name = array();
-
-            for($i = 0; $i< count($pic_files); $i++)
-             {
-                 $file_name = pathinfo($pic_files[$i], PATHINFO_FILENAME);
-                 if(mb_substr($file_name, 0, 5) != 'basic')
-                 {
-                     $file_exn = pathinfo($pic_files[$i],  PATHINFO_EXTENSION);
-                     $file_name = pathinfo($pic_files[$i], PATHINFO_FILENAME);
-                     $pic_name[$i] = $file_name.'.'.$file_exn;
-                 }
-             }
-
-            $new_pictures = array_column($new_descriptions['gallery'], 'upload_picture');
-            $diff_pic = array_diff($pic_name, $new_pictures);
-
-            foreach($diff_pic as $old_picture)
-            {
-                Storage::delete('public/upload_pictures/'.$id.'/'.$old_picture);
-            }
+           $this->deleteOldPictures($new_descriptions, $id);
         }
 
         session()->flash('notif', 'Продукта е обновен');
@@ -251,13 +219,52 @@ class ProductsController extends Controller
         return redirect('/admin/products');
     }
 
-    public function deleteOldImages()
-    {
-
-    }
-
     public function price_format($price)
     {
         return number_format(str_replace(",", ".", floatval($price)), 2);
+    }
+
+    public function resizeImages($picture, $productId, $resize_percent, $type_pic)
+    {
+        $extension = $picture->getClientOriginalExtension();
+        $fileNameToStore = $type_pic.'_'.time().'.'.$extension;
+        $pathToStore = storage_path('app/public/upload_pictures/'.$productId);
+
+        if(!is_dir($pathToStore)){
+            Storage::makeDirectory('public/upload_pictures/'.$productId, 0775, true);
+        }
+
+        list($width, $height) = getimagesize($picture->getRealPath());
+
+        $newWidth  = intval(($resize_percent / 100) * $width);
+        $newHeight = intval(($resize_percent / 100) * $height);
+
+        Image::make($picture->getRealPath())->resize($newWidth, $newHeight)->save($pathToStore.'/'.$fileNameToStore);
+
+        return $fileNameToStore;
+    }
+
+    public function deleteOldPictures($new_descriptions, $id){
+        $pic_files = Storage::allFiles('public/upload_pictures/'.$id.'/');
+        $pic_name = array();
+
+        for($i = 0; $i< count($pic_files); $i++)
+        {
+            $file_name = pathinfo($pic_files[$i], PATHINFO_FILENAME);
+            if(mb_substr($file_name, 0, 5) != 'basic')
+            {
+                $file_exn = pathinfo($pic_files[$i],  PATHINFO_EXTENSION);
+                $file_name = pathinfo($pic_files[$i], PATHINFO_FILENAME);
+                $pic_name[$i] = $file_name.'.'.$file_exn;
+            }
+        }
+
+        $new_pictures = array_column($new_descriptions['gallery'], 'upload_picture');
+        $diff_pic = array_diff($pic_name, $new_pictures);
+
+        foreach($diff_pic as $old_picture)
+        {
+            Storage::delete('public/upload_pictures/'.$id.'/'.$old_picture);
+        }
     }
 }

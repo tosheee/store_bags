@@ -259,8 +259,8 @@
 
                     @if (isset($descriptions['main_picture_url']))
                         <div class="image-wrapper-basic" >
-                            <span>Линк: </span>
                             <img src="{{ $descriptions['main_picture_url'] }}" alt="" height="100px"/>
+                            <span>Линк: </span>
                             <input type="text" name="description[main_picture_url]" value="{{ isset($descriptions['main_picture_url']) ? $descriptions['main_picture_url'] : '' }}" id="admin_product_description" class="label-values"/>
                             <a href="#" class="remove-image-button-basic"><i style="color: red;" aria-hidden="true" id="chang-menu-icon" class="fa fa-times"></i></a>
                         </div>

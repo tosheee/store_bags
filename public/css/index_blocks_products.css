@@ -131,9 +131,10 @@ div.large .make3D{
 .stats-container{
     background: rgba(255, 255, 255, 0);
     left:0;
+    text-align: center;
     width: 100%;
     max-height: 100%;
-    padding: 0 0 0 15px;
+    padding: 0 0 0 2px;
     -webkit-transition: all 200ms ease-out;
     -moz-transition: all 200ms ease-out;
     -o-transition: all 200ms ease-out;

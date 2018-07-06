@@ -101,9 +101,9 @@
                                     <div class="shadow"></div>
 
                                     @if (isset($descriptions['main_picture_url']))
-                                        <img style="max-width: 400px; max-height: 450px;" src="{{ $descriptions['main_picture_url'] }}"  />
+                                        <img style="max-width: 270px; max-height: 320px;" src="{{ $descriptions['main_picture_url'] }}"  />
                                     @elseif(isset($descriptions['upload_main_picture']))
-                                        <img style="max-width: 270px; max-height: 340px;" src="/storage/upload_pictures/{{ $product->id }}/{{ $descriptions['upload_main_picture'] }}" alt="pic" />
+                                        <img style="max-width: 270px; max-height: 320px;" src="/storage/upload_pictures/{{ $product->id }}/{{ $descriptions['upload_main_picture'] }}" alt="pic" />
                                     @else
                                         <img style="max-width: 400px; max-height: 450px;" src="/storage/common_pictures/noimage.jpg" alt="pic" />
                                     @endif

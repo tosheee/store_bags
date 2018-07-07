@@ -91,11 +91,6 @@
             margin-bottom: 0.3125rem;
         }
 
-
-
-
-
-
         .basket .basket-labels {
             border-top: 1px solid #ccc;
             border-bottom: 1px solid #ccc;
@@ -359,75 +354,73 @@
 
     <br/><br/><br/>
     <div class="col-sm-10">
+        @if(count($products) > 0)
+            <div class="basket">
 
-
-        <div class="basket">
-
-            <div class="basket-module">
-                <h3>Количка за пазаруване</h3>
-            </div>
-
-            <div class="basket-labels">
-                <ul>
-                    <li class="item item-heading">Продукт</li>
-                    <li class="price">Цена</li>
-                    <li class="quantity">Количество</li>
-                    <li class="subtotal">Общо</li>
-                </ul>
-            </div>
-
-            @foreach($products as $product)
-                <?php $descriptions = json_decode($product['item']->description, true); ?>
-
-                <div class="basket-product">
-                    <div class="item">
-                        <div class="product-image">
-                            @if (isset($descriptions['main_picture_url']))
-                                <a class="thumbnail pull-left" href="/store/{{ $product['item']->id}}">
-                                    <img   src="{{ $descriptions['main_picture_url'] }}" alt="pic" />
-                                </a>
-                            @elseif(isset($descriptions['upload_main_picture']))
-                                <a class="thumbnail pull-left" href="/store/{{ $product['item']->id }}">
-                                    <img  src="/storage/upload_pictures/{{ $product['item']->id }}/{{ $descriptions['upload_main_picture'] }}" alt="pic" />
-                                </a>
-                            @else
-                                <a class="thumbnail pull-left" href="/store/{{ $product['item']->id }}">
-                                    <img  src="/storage/common_pictures/noimage.jpg" alt="pic" />
-                                </a>
-                            @endif
-                        </div>
-
-                        <div class="product-details">
-                            <h4><a href="/store/{{ $product['item']->id }}" target="_blank">{{ $descriptions['title_product'] }}</a></h4>
-                            <p><strong></strong></p>
-                            <p>Продуктов код: {{ $descriptions['article_id'] }}</p>
-                        </div>
-
-                    </div>
-
-                    <div class="price"><strong>{{ number_format($descriptions['price'], 2) }}</strong> {{ $descriptions['currency'] }}</div>
-
-                    <div class="quantity">
-                        <input type="number" value="{{ $product['qty'] }}" min="1" class="quantity-field">
-                        <input id="id-product" type="hidden" name="q" value="{{ $product['item']['id'] }}"/>
-                    </div>
-
-                    <div class="subtotal">{{ number_format($product['qty'] * $descriptions['price'], 2) }}  {{ $descriptions['currency'] }}</div>
-
-                    <div class="remove">
-                        <button type="button" class="remove-item-button" style="width:40%; background-color: #ff4208; border-color:#ff4208; " title="Премахване на продукт">
-                            <i class="fa fa-close" style="color: #ffffff"></i>
-                            <input id="id-product" type="hidden" value="{{ $product['item']->id }}"/>
-                        </button>
-
-                    </div>
-
+                <div class="basket-module">
+                    <h3>Количка за пазаруване</h3>
                 </div>
-            @endforeach
 
-        </div>
+                <div class="basket-labels">
+                    <ul>
+                        <li class="item item-heading">Продукт</li>
+                        <li class="price">Цена</li>
+                        <li class="quantity">Количество</li>
+                        <li class="subtotal">Общо</li>
+                    </ul>
+                </div>
 
-        <aside>
+                @foreach($products as $product)
+                    <?php $descriptions = json_decode($product['item']->description, true); ?>
+
+                    <div class="basket-product">
+                        <div class="item">
+                            <div class="product-image">
+                                @if (isset($descriptions['main_picture_url']))
+                                    <a class="thumbnail pull-left" href="/store/{{ $product['item']->id}}">
+                                        <img   src="{{ $descriptions['main_picture_url'] }}" alt="pic" />
+                                    </a>
+                                @elseif(isset($descriptions['upload_main_picture']))
+                                    <a class="thumbnail pull-left" href="/store/{{ $product['item']->id }}">
+                                        <img  src="/storage/upload_pictures/{{ $product['item']->id }}/{{ $descriptions['upload_main_picture'] }}" alt="pic" />
+                                    </a>
+                                @else
+                                    <a class="thumbnail pull-left" href="/store/{{ $product['item']->id }}">
+                                        <img  src="/storage/common_pictures/noimage.jpg" alt="pic" />
+                                    </a>
+                                @endif
+                            </div>
+
+                            <div class="product-details">
+                                <h4><a href="/store/{{ $product['item']->id }}" target="_blank">{{ $descriptions['title_product'] }}</a></h4>
+                                <p><strong></strong></p>
+                                <p>Продуктов код: {{ $descriptions['article_id'] }}</p>
+                            </div>
+
+                        </div>
+
+                        <div class="price"><strong>{{ number_format($descriptions['price'], 2) }}</strong> {{ $descriptions['currency'] }}</div>
+
+                        <div class="quantity">
+                            <input type="number" value="{{ $product['qty'] }}" min="1" class="quantity-field">
+                            <input id="id-product" type="hidden" name="q" value="{{ $product['item']['id'] }}"/>
+                        </div>
+
+                        <div class="subtotal">{{ number_format($product['qty'] * $descriptions['price'], 2) }}  {{ $descriptions['currency'] }}</div>
+
+                        <div class="remove">
+                            <button type="button" class="remove-item-button" style="width:40%; background-color: #ff4208; border-color:#ff4208; " title="Премахване на продукт">
+                                <i class="fa fa-close" style="color: #ffffff"></i>
+                                <input id="id-product" type="hidden" value="{{ $product['item']->id }}"/>
+                            </button>
+
+                        </div>
+
+                    </div>
+                @endforeach
+
+            </div>
+            <aside>
             <div class="summary">
                 <div class="summary-total-items" style="font-size: 1.2em;">Информация за поръчката<span class="total-items"></span></div>
 
@@ -454,6 +447,12 @@
                 </div>
             </div>
         </aside>
+        @else
+            @include('partials.empty_cart')
+            <h3>Количка за пазаруване е празна!</h3>
+            </div>
+
+        @endif
     </div>
 
     <script>

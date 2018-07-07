@@ -19,7 +19,6 @@
             </ul>
         </div>
     @endforeach
-
     <h3>Цветове</h3>
     <div class="checklist colors">
         <ul>
@@ -40,20 +39,4 @@
             <li><a href="/store/search?product_color=black"><span style="background: #222"></span>Черен</a></li>
         </ul>
     </div>
-
-    <h3>Размер</h3>
-    <div class="checklist sizes">
-        <ul>
-            <li><a href=""><span></span>XS</a></li>
-            <li><a href=""><span></span>S</a></li>
-            <li><a href=""><span></span>M</a></li>
-        </ul>
-
-        <ul>
-            <li><a href=""><span></span>L</a></li>
-            <li><a href=""><span></span>XL</a></li>
-            <li><a href=""><span></span>XXL</a></li>
-        </ul>
-    </div>
-
 </div>

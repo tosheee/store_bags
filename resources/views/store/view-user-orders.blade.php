@@ -18,9 +18,8 @@
                     <div class="row order_sorter">
                         <ul id="toggle-orders">
                             <li class="first"></li>
-                            <li class="fo selected"> <a href="/store">Обратно в магазина</a></></li>
+                            <li class="fo selected"> <a href="/store">Обратно в магазина</a></li>
             			    <li class="oh "><a>История на поръчките</a></li>
-            			    <li class="ed selected"><a href="/checkout">Продължи поръчката</a></></li>
                         </ul>
                     </div>
 
@@ -97,11 +96,11 @@
                     </div>
                 @endforeach
             </div>
-
-             {{ $user_orders->links() }}
-
+                {{ $user_orders->links() }}
             @else
-                <p>No Orders</p>
+                @include('partials.empty_cart')
+                <h3>Количка за пазаруване е празна!</h3>
+                </div>
             @endif
        </div>
    </div>

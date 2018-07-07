@@ -20,9 +20,9 @@
                     <div class="row order_sorter">
                         <ul id="toggle-orders">
                             <li class="first"></li>
-                            <li class="fo selected"> <a href="/store">Обратно в магазина</a></></li>
+                            <li class="fo selected"> <a href="/store">Обратно в магазина</a></li>
                             <li class="oh selected"><a href="/shopping-cart">Количка</a></li>
-                            <li class="ed "><a href="">Продължи поръчката</a></li>
+                            <li class="ed "><a href="#">Продължи поръчката</a></li>
                         </ul>
                     </div>
                 </div>

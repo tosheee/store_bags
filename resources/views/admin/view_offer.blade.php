@@ -11,7 +11,7 @@
         <div id="printableArea" style="font-size: 16px;">
 
             <div style="text-align: center">
-                <h4>ОНЛАЙН МАГАЗИН ЗА ЦВЕТЯ И РАСТЕНИЯ</h4>
+                <h4>ОНЛАЙН МАГАЗИН за</h4>
                 
                 <h1><img width="280" src="/storage/common_pictures/logo.png" alt=""></h1>
                 <i class="fa fa-phone" aria-hidden="true"></i>  {{ isset($siteViewInformation->phone_com) ? $siteViewInformation->phone_com : '0888 888 888'}}   |

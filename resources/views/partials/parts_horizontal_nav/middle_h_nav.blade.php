@@ -4,7 +4,7 @@
         <div class="row display-table">
 
             <div class="col-sm-3 vertical-align text-left hidden-xs">
-                <a href="/"><img  style="margin: 0px 50px 0px 0" width="220" src="https://ebags.bg/image/data/124567789.png" alt=""></a>
+                <a href="/"><img style="margin: 5px 2px 0 0"  width="200" src="/storage/common_pictures/logo.png" alt=""></a></span>
             </div>
             <!-- end col -->
 

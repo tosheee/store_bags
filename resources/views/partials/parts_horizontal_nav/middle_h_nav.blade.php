@@ -24,13 +24,12 @@
                 </div>
 
                 <div class="">
+                   <span ><a style="font-size: 1.2em; color: #000000; font-family: 'Marck Script', cursive;" id="view-contact-form"> За въпроси? <i style="font-size: 2.5em;" class="fa fa-envelope"></i></a></span>
                 </div>
 
 
             </div>
-              <span class="text-primary mr-5">
-                  <a id="view-contact-form">За въпроси? </a>
-              </span>
+
             <!-- end col -->
         </div>
         <!-- end  row -->

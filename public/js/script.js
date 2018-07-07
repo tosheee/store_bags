@@ -83,8 +83,6 @@
 
                     var buttons = $('.add-product-button.add_to_cart');
 
-console.log(buttons);
-
                     buttons.each(function(){
 
                         if($(this).find('#id-product').val() == idProduct)
@@ -121,8 +119,8 @@ console.log(buttons);
 	
 	if(typeof idProductShowPage != "undefined")
 	{
-	     idProduct = idProductShowPage
-             quantityProduct = $('.show-page#quantity-product').val();
+	    idProduct = idProductShowPage
+        quantityProduct = $('.show-page#quantity-product').html();
 	}
 	
 

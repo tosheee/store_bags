@@ -115,8 +115,7 @@
                                          <button class="add-product-button add_to_cart" title="Добави в количката" >
                                             Добави
                                             <i class="fa fa-shopping-cart" ></i>
-
-                                            <?php if(Session::has('cart'))
+                                             <?php if(Session::has('cart'))
                                             {
                                                 $oldCart = Session::get('cart');
                                                 if(isset($oldCart->items[$product->id]['qty']))

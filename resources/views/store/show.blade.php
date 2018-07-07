@@ -4,8 +4,6 @@
     <div class="col-md-2" id="vertical-nav-bar">
         @include('partials.vertical_navigation')
     </div>
-
-
     <?php $descriptions = json_decode($product->description, true); ?>
 
     <div class="col-md-10">
@@ -133,26 +131,56 @@
             <div class="color" style="background-color: #08F" title="Light Blue"></div>
         </div>
 
+        <?php if(Session::has('cart'))
+        {
+            $oldCart = Session::get('cart');
+            if(isset($oldCart->items[$product->id]['qty']))
+            {
+                $product_qty = $oldCart->items[$product->id]['qty'];
+            }
+        }
+        ?>
+
         <div class="addToCart">
             <div class="qntySection">
-                <span class="btn" data-type="remove">-</span>
-                <span id="qnty">1</span>
-                <span class="btn" data-type="add">+</span>
+                <span class="btn minus-button" data-type="remove">-</span>
+                <span class="show-page" id="quantity-product">{{ isset($product_qty) ? $product_qty : '1' }}</span>
+                <input id="id-product-show-page" type="hidden" name="q" value="{{ $product->id }}"/>
+                <span class="btn plus-button" data-type="add">+</span>
             </div>
+
+
+            <script>
+                $(document).ready(function() {
+                    $(".plus-button").on('click', function() {
+                        var $quantityProduct = $('#quantity-product');
+                        var plusValue = parseInt($quantityProduct.html());
+
+                        if (!isNaN(plusValue)) {
+                            $quantityProduct.html(plusValue + 1);
+                        } else {
+                            $quantityProduct.html(1);
+                        }
+                    });
+
+                    $(".minus-button").on('click', function() {
+                        var $quantityProduct = $('#quantity-product');
+                        var minusValue = parseInt($quantityProduct.html());
+                        if (!isNaN(minusValue) && minusValue > 1) {
+                            $quantityProduct.html(minusValue - 1);
+                        } else {
+                            $quantityProduct.html(1);
+                        }
+                    });
+                });
+            </script>
+
+
             <button class="add-cart-large add-product-button">
                 Добави
                 <i class="fa fa-shopping-cart" ></i>
 
-                <?php if(Session::has('cart'))
-                {
-                    $oldCart = Session::get('cart');
-                    if(isset($oldCart->items[$product->id]['qty']))
-                    {
-                        $product_qty = $oldCart->items[$product->id]['qty'];
-                    }
 
-                }
-                ?>
                 @if(!empty($oldCart->items[$product->id]) )
                     <sup id="sup-product-qty"> {{ isset($product_qty) ? $product_qty : '' }}</sup>
                     <input id="quantity-product" type="hidden" value="{{ isset($product_qty) ? $product_qty + 1 : '1' }}"  >
@@ -163,6 +191,7 @@
 
                 <input id="id-product" type="hidden" value="{{ $product->id }}"/>
             </button>
+
 
         </div>
 

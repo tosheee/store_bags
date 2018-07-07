@@ -233,6 +233,7 @@
         }
 
         aside {
+            top: 80px;
             float: right;
             position: relative;
             width: 30%;

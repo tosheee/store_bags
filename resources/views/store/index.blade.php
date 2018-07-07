@@ -61,12 +61,7 @@
 
                                     <h3>SIZE</h3>
                                     <div class="sizes-large">
-                                        <span>XS</span>
-                                        <span>S</span>
-                                        <span>M</span>
-                                        <span>L</span>
-                                        <span>XL</span>
-                                        <span>XXL</span>
+                                       <p> {{ isset($descriptions['short_description']) ? $descriptions['short_description'] : '' }}</p>
                                     </div>
 -->
                                 <button class="add-cart-large add-product-button">
@@ -228,6 +223,7 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                 @endforeach
             </div>

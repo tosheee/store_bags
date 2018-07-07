@@ -1,15 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
+
     <div class="col-md-2" id="vertical-nav-bar">
         @include('partials.vertical_navigation')
     </div>
+
     <?php $descriptions = json_decode($product->description, true); ?>
 
     <div class="col-md-10">
         <div class="row">
-
-    <ul style="padding: 20px 20px 20px 20px; ">
+            <ul style="padding: 20px 20px 20px 20px; ">
         <li>
             <div class="order-breadcrumb">
                 <a href="/" class="">Начало</a>
@@ -24,183 +25,177 @@
                         › <a href="/store/search?sub_category={{ $subCategory->identifier }}" class="active">{{ $subCategory->name }}</a>
                     @endif
                 @endforeach
-
             </div>
         </li>
-
     </ul>
+            <div class="show-page-product">
+        <div id="showPageProductImages">
+            <div class="container-fluid">
 
-
-<div class="show-page-product">
-    <div id="showPageProductImages">
-        <div class="container-fluid">
-
-            <div class="product-slider" id="product-slider-id">
-                <div id="carousel" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <div class="item active">
-                            @if (isset($descriptions['main_picture_url']))
-                                <img width="40" height="40" src="{{ $descriptions['main_picture_url'] }}" alt="pic" />
-                            @elseif(isset($descriptions['upload_main_picture']))
-                                <img width="40" height="40" src="/storage/upload_pictures/{{ $product->id }}/{{ $descriptions['upload_main_picture'] }}" alt="pic" />
-                            @else
-                                <img width="40" height="40" src="/storage/common_pictures/noimage.jpg" alt="pic" />
-                            @endif
-                        </div>
-
-                        @if (isset($descriptions['gallery']))
-                            @foreach( $descriptions['gallery'] as $key => $type_pictures)
-                                @foreach($type_pictures as $key_picture => $picture)
-                                    <div class="item">
-                                        @if($key_picture == 'upload_picture')
-                                            <img width="40" height="40" src="/storage/upload_pictures/{{ $product->id }}/{{ $type_pictures[$key_picture] }}" class="img-responsive">
-                                        @else
-                                            <img width="40" height="40" src="{{ $type_pictures[$key_picture] }}" class="img-responsive">
-                                        @endif
-                                    </div>
-                                @endforeach
-                            @endforeach
-                        @endif
-                    </div>
-                </div>
-
-
-                <div class="clearfix">
-                    <div id="thumbcarousel" class="carousel slide" data-interval="false">
+                <div class="product-slider" id="product-slider-id">
+                    <div id="carousel" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
                             <div class="item active">
-
-                                <div data-target="#carousel" data-slide-to="0" class="thumb">
-                                    @if (isset($descriptions['main_picture_url']))
-                                        <img width="40" height="40" src="{{ $descriptions['main_picture_url'] }}" alt="pic" />
-                                    @else
-                                        <img width="40" height="40" src="/storage/upload_pictures/{{ $product->id }}/{{ $descriptions['upload_main_picture'] }}" alt="pic" />
-                                    @endif
-                                </div>
-
-                                @if (isset($descriptions['gallery']))
-                                    @foreach( $descriptions['gallery'] as $key => $type_pictures)
-                                        @foreach($type_pictures as $key_picture => $picture)
-                                            <div data-target="#carousel" data-slide-to="{{ $key+1 }}" class="thumb">
-                                                @if($key_picture == 'upload_picture')
-                                                    <img width="40" height="40" src="/storage/upload_pictures/{{ $product->id }}/{{ $type_pictures[$key_picture] }}" class="img-responsive">
-                                                @else
-                                                    <img width="40" height="40" src="{{ $type_pictures[$key_picture] }}" class="img-responsive">
-                                                @endif
-                                            </div>
-                                        @endforeach
-                                    @endforeach
+                                @if (isset($descriptions['main_picture_url']))
+                                    <img width="40" height="40" src="{{ $descriptions['main_picture_url'] }}" alt="pic" />
+                                @elseif(isset($descriptions['upload_main_picture']))
+                                    <img width="40" height="40" src="/storage/upload_pictures/{{ $product->id }}/{{ $descriptions['upload_main_picture'] }}" alt="pic" />
+                                @else
+                                    <img width="40" height="40" src="/storage/common_pictures/noimage.jpg" alt="pic" />
                                 @endif
-
                             </div>
+
+                            @if (isset($descriptions['gallery']))
+                                @foreach( $descriptions['gallery'] as $key => $type_pictures)
+                                    @foreach($type_pictures as $key_picture => $picture)
+                                        <div class="item">
+                                            @if($key_picture == 'upload_picture')
+                                                <img width="40" height="40" src="/storage/upload_pictures/{{ $product->id }}/{{ $type_pictures[$key_picture] }}" class="img-responsive">
+                                            @else
+                                                <img width="40" height="40" src="{{ $type_pictures[$key_picture] }}" class="img-responsive">
+                                            @endif
+                                        </div>
+                                    @endforeach
+                                @endforeach
+                            @endif
                         </div>
-                        <!-- /carousel-inner -->
-                        <a class="left carousel-control" href="#thumbcarousel" role="button" data-slide="prev"> <i class="fa fa-angle-left" aria-hidden="true"></i> </a> <a class="right carousel-control" href="#thumbcarousel" role="button" data-slide="next"><i class="fa fa-angle-right" aria-hidden="true"></i> </a> </div>
-                    <!-- /thumbcarousel -->
+                    </div>
+
+
+                    <div class="clearfix">
+                        <div id="thumbcarousel" class="carousel slide" data-interval="false">
+                            <div class="carousel-inner">
+                                <div class="item active">
+
+                                    <div data-target="#carousel" data-slide-to="0" class="thumb">
+                                        @if (isset($descriptions['main_picture_url']))
+                                            <img width="40" height="40" src="{{ $descriptions['main_picture_url'] }}" alt="pic" />
+                                        @else
+                                            <img width="40" height="40" src="/storage/upload_pictures/{{ $product->id }}/{{ $descriptions['upload_main_picture'] }}" alt="pic" />
+                                        @endif
+                                    </div>
+
+                                    @if (isset($descriptions['gallery']))
+                                        @foreach( $descriptions['gallery'] as $key => $type_pictures)
+                                            @foreach($type_pictures as $key_picture => $picture)
+                                                <div data-target="#carousel" data-slide-to="{{ $key+1 }}" class="thumb">
+                                                    @if($key_picture == 'upload_picture')
+                                                        <img width="40" height="40" src="/storage/upload_pictures/{{ $product->id }}/{{ $type_pictures[$key_picture] }}" class="img-responsive">
+                                                    @else
+                                                        <img width="40" height="40" src="{{ $type_pictures[$key_picture] }}" class="img-responsive">
+                                                    @endif
+                                                </div>
+                                            @endforeach
+                                        @endforeach
+                                    @endif
+
+                                </div>
+                            </div>
+                            <!-- /carousel-inner -->
+                            <a class="left carousel-control" href="#thumbcarousel" role="button" data-slide="prev"> <i class="fa fa-angle-left" aria-hidden="true"></i> </a> <a class="right carousel-control" href="#thumbcarousel" role="button" data-slide="next"><i class="fa fa-angle-right" aria-hidden="true"></i> </a> </div>
+                        <!-- /thumbcarousel -->
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
-    <div class="productInfo">
-        <h1 class="title">{{ $descriptions['title_product'] }}</h1>
-        <span class="productId">Продуктов код: {{ $descriptions['article_id'] }}</span>
-        <div class="subProdInfo">
-            <span class="price">
-                Цена: {{ number_format($descriptions['price'], 2) }} {{ $descriptions['currency'] }}
-                @if (isset($descriptions['old_price']))
-                    <span class="old-price">   {{ number_format($descriptions['old_price'], 2) }} {{ $descriptions['currency'] }}</span>
-                @endif
-            </span>
-            <span class="stock"></span>
-        </div>
+        <div class="productInfo">
+            <h1 class="title">{{ $descriptions['title_product'] }}</h1>
+            <span class="productId">Продуктов код: {{ $descriptions['article_id'] }}</span>
+            <div class="subProdInfo">
+                <span class="price">
+                    Цена: {{ number_format($descriptions['price'], 2) }} {{ $descriptions['currency'] }}
+                    @if (isset($descriptions['old_price']))
+                        <span class="old-price">   {{ number_format($descriptions['old_price'], 2) }} {{ $descriptions['currency'] }}</span>
+                    @endif
+                </span>
+                <span class="stock"></span>
+            </div>
 
-        <p> {{ isset($descriptions['short_description']) ? $descriptions['short_description'] : '' }}</p>
+            <p> {{ isset($descriptions['short_description']) ? $descriptions['short_description'] : '' }}</p>
 
-        <label><a href="#"></a></label>
-        <div class="select-wrapper">
-            <span class="stock">Статус: {{ isset($descriptions['product_status'])  ? $descriptions['product_status'] : '' }}</span>
+            <label><a href="#"></a></label>
+            <div class="select-wrapper">
+                <span class="stock">Статус: {{ isset($descriptions['product_status'])  ? $descriptions['product_status'] : '' }}</span>
 
-        </div>
+            </div>
 
-        <div class="colors">
-            <div class="color selected" style="background-color: #222" title="Black"></div>
-            <div class="color" style="background-color: #FFF" title="White"></div>
-            <div class="color" style="background-color: #00F" title="Dark Blue"></div>
-            <div class="color" style="background-color: #08F" title="Light Blue"></div>
-        </div>
+            <div class="colors">
+                <div class="color selected" style="background-color: #222" title="Black"></div>
+                <div class="color" style="background-color: #FFF" title="White"></div>
+                <div class="color" style="background-color: #00F" title="Dark Blue"></div>
+                <div class="color" style="background-color: #08F" title="Light Blue"></div>
+            </div>
 
-        <?php if(Session::has('cart'))
-        {
-            $oldCart = Session::get('cart');
-            if(isset($oldCart->items[$product->id]['qty']))
+            <?php if(Session::has('cart'))
             {
-                $product_qty = $oldCart->items[$product->id]['qty'];
+                $oldCart = Session::get('cart');
+                if(isset($oldCart->items[$product->id]['qty']))
+                {
+                    $product_qty = $oldCart->items[$product->id]['qty'];
+                }
             }
-        }
-        ?>
+            ?>
 
-        <div class="addToCart">
-            <div class="qntySection">
-                <span class="btn minus-button" data-type="remove">-</span>
-                <span class="show-page" id="quantity-product">{{ isset($product_qty) ? $product_qty : '1' }}</span>
-                <input id="id-product-show-page" type="hidden" name="q" value="{{ $product->id }}"/>
-                <span class="btn plus-button" data-type="add">+</span>
+            <div class="addToCart">
+                <div class="qntySection">
+                    <span class="btn minus-button" data-type="remove">-</span>
+                    <span class="show-page" id="quantity-product">{{ isset($product_qty) ? $product_qty : '1' }}</span>
+                    <input id="id-product-show-page" type="hidden" name="q" value="{{ $product->id }}"/>
+                    <span class="btn plus-button" data-type="add">+</span>
+                </div>
+
+
+                <script>
+                    $(document).ready(function() {
+                        $(".plus-button").on('click', function() {
+                            var $quantityProduct = $('#quantity-product');
+                            var plusValue = parseInt($quantityProduct.html());
+
+                            if (!isNaN(plusValue)) {
+                                $quantityProduct.html(plusValue + 1);
+                            } else {
+                                $quantityProduct.html(1);
+                            }
+                        });
+
+                        $(".minus-button").on('click', function() {
+                            var $quantityProduct = $('#quantity-product');
+                            var minusValue = parseInt($quantityProduct.html());
+                            if (!isNaN(minusValue) && minusValue > 1) {
+                                $quantityProduct.html(minusValue - 1);
+                            } else {
+                                $quantityProduct.html(1);
+                            }
+                        });
+                    });
+                </script>
+
+
+                <button class="add-cart-large add-product-button">
+                    Добави
+                    <i class="fa fa-shopping-cart" ></i>
+
+
+                    @if(!empty($oldCart->items[$product->id]) )
+                        <sup id="sup-product-qty"> {{ isset($product_qty) ? $product_qty : '' }}</sup>
+                        <input id="quantity-product" type="hidden" value="{{ isset($product_qty) ? $product_qty + 1 : '1' }}"  >
+                    @else
+                        <sup id="sup-product-qty"></sup>
+                        <input id="quantity-product" type="hidden" value="1"  >
+                    @endif
+
+                    <input id="id-product" type="hidden" value="{{ $product->id }}"/>
+                </button>
+
+
             </div>
 
 
-            <script>
-                $(document).ready(function() {
-                    $(".plus-button").on('click', function() {
-                        var $quantityProduct = $('#quantity-product');
-                        var plusValue = parseInt($quantityProduct.html());
-
-                        if (!isNaN(plusValue)) {
-                            $quantityProduct.html(plusValue + 1);
-                        } else {
-                            $quantityProduct.html(1);
-                        }
-                    });
-
-                    $(".minus-button").on('click', function() {
-                        var $quantityProduct = $('#quantity-product');
-                        var minusValue = parseInt($quantityProduct.html());
-                        if (!isNaN(minusValue) && minusValue > 1) {
-                            $quantityProduct.html(minusValue - 1);
-                        } else {
-                            $quantityProduct.html(1);
-                        }
-                    });
-                });
-            </script>
-
-
-            <button class="add-cart-large add-product-button">
-                Добави
-                <i class="fa fa-shopping-cart" ></i>
-
-
-                @if(!empty($oldCart->items[$product->id]) )
-                    <sup id="sup-product-qty"> {{ isset($product_qty) ? $product_qty : '' }}</sup>
-                    <input id="quantity-product" type="hidden" value="{{ isset($product_qty) ? $product_qty + 1 : '1' }}"  >
-                @else
-                    <sup id="sup-product-qty"></sup>
-                    <input id="quantity-product" type="hidden" value="1"  >
-                @endif
-
-                <input id="id-product" type="hidden" value="{{ $product->id }}"/>
-            </button>
-
-
         </div>
-
-
     </div>
-</div>
         </div>
-
-
         <div class="col-md-9">
             <div>
                 @if(isset($descriptions['general_description']))
@@ -238,7 +233,7 @@
                 @endif
             </div>
         </div>
-
+    </div>
 
     <script>
         var slider = document.getElementById("sliderImages");
@@ -271,8 +266,6 @@
 
 
     <script>
-
-
         /*
         $('.add-cart-large').each(function(i, el){
             $(el).click(function(){

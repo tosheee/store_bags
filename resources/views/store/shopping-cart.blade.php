@@ -4,49 +4,41 @@
     <style>
         @charset "utf-8";
 
-
-
-        a {
-            border: 0 none;
-            outline: 0;
-            text-decoration: none;
-        }
-
-        strong {
+        .basket strong {
             font-weight: bold;
         }
 
-        p {
+        .basket p {
             margin: 0.75rem 0 0;
         }
 
-        h1 {
+        .basket h1 {
             font-size: 0.75rem;
             font-weight: normal;
             margin: 0;
             padding: 0;
         }
 
-        input,
-        button {
+        .basket input,
+        .basket button {
             border: 0 none;
             outline: 0 none;
         }
 
-        button {
+        .basket button {
             background-color: #666;
-            color: #fff;
+
         }
 
-        button:hover,
-        button:focus {
+        .basket button:hover,
+        .basket button:focus {
             background-color: #555;
         }
 
-        img,
-        .basket-module,
-        .basket-labels,
-        .basket-product {
+        .basket img,
+        .basket .basket-module,
+        .basket .basket-labels,
+        .basket .basket-product {
             width: 100%;
         }
 
@@ -64,20 +56,12 @@
         .product-details {
             float: left;
         }
-        /*
-        .price:before,
-        .subtotal:before,
-        .subtotal-value:before,
-        .total-value:before,
-        .promo-value:before {
-            content: '£';
-        }
-        */
-        .hide {
+
+        .basket .hide {
             display: none;
         }
 
-        main {
+        .basket main {
             clear: both;
             font-size: 0.75rem;
             margin: 0 auto;
@@ -102,63 +86,34 @@
             color: #111;
         }
 
-        label {
+        .basket label {
             display: block;
             margin-bottom: 0.3125rem;
         }
 
-        .promo-code-field {
-            border: 1px solid #ccc;
-            padding: 0.5rem;
-            text-transform: uppercase;
-            transition: all 0.2s linear;
-            width: 48%;
-            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-            -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-            -o-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-            box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-        }
 
-        .promo-code-field:hover,
-        .promo-code-field:focus {
-            border: 1px solid #999;
-        }
 
-        .promo-code-cta {
-            border-radius: 4px;
-            font-size: 0.625rem;
-            margin-left: 0.625rem;
-            padding: 0.6875rem 1.25rem 0.625rem;
-        }
 
-        .basket-labels {
+
+
+        .basket .basket-labels {
             border-top: 1px solid #ccc;
             border-bottom: 1px solid #ccc;
             margin-top: 1.625rem;
         }
 
-        ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
 
-        li {
-            color: #111;
-            display: inline-block;
-            padding: 0.625rem 0;
-        }
 
-        li.price:before,
-        li.subtotal:before {
+        .basket li.price:before,
+        .basket li.subtotal:before {
             content: '';
         }
 
-        .item {
+        .basket .item {
             width: 55%;
         }
 
-        .price,
+        .basket .price,
         .quantity,
         .subtotal {
             width: 15%;
@@ -324,15 +279,6 @@
             width: 100%;
         }
 
-        .summary-delivery-selection {
-            background-color: #ccc;
-            border: 1px solid #aaa;
-            border-radius: 4px;
-            display: block;
-            font-size: 0.625rem;
-            height: 34px;
-            width: 100%;
-        }
 
         @media screen and (max-width: 640px) {
             aside,
@@ -418,7 +364,7 @@
         <div class="basket">
 
             <div class="basket-module">
-                <h2>Количка за пазаруване</h2>
+                <h3>Количка за пазаруване</h3>
             </div>
 
             <div class="basket-labels">
@@ -452,18 +398,18 @@
                         </div>
 
                         <div class="product-details">
-                            <h4>{{ $descriptions['title_product'] }}</h4>
-
-                            <p><strong>Navy, Size 10</strong></p>
-                            <p>Продуктов код: </p>
+                            <h4><a href="/store/{{ $product['item']->id }}" target="_blank">{{ $descriptions['title_product'] }}</a></h4>
+                            <p><strong></strong></p>
+                            <p>Продуктов код: {{ $descriptions['article_id'] }}</p>
                         </div>
 
                     </div>
 
-                    <div class="price">{{ number_format($descriptions['price'], 2) }} {{ $descriptions['currency'] }}</div>
+                    <div class="price"><strong>{{ number_format($descriptions['price'], 2) }}</strong> {{ $descriptions['currency'] }}</div>
 
                     <div class="quantity">
                         <input type="number" value="{{ $product['qty'] }}" min="1" class="quantity-field">
+                        <input id="id-product" type="hidden" name="q" value="{{ $product['item']['id'] }}"/>
                     </div>
 
                     <div class="subtotal">{{ number_format($product['qty'] * $descriptions['price'], 2) }}  {{ $descriptions['currency'] }}</div>
@@ -510,134 +456,89 @@
         </aside>
     </div>
 
-
     <script>
+        $( ".quantity-field" ).click(function() {
+            var quantity_wrapper = $(this).parent();
+            var idProduct = quantity_wrapper.find('#id-product').val();
+            var  quantityProduct = $(this).val();
+            var priceProduct = quantity_wrapper.parent().find('.price strong').html();
 
-        /* Set values + misc */
-        var promoCode;
-        var promoPrice;
-        var fadeTime = 300;
+            quantity_wrapper.parent().find('.subtotal').html(parseFloat(priceProduct * quantityProduct).toFixed(2) + ' лв.');
 
-        /* Assign actions */
-        $('.quantity input').change(function() {
-            updateQuantity(this);
-        });
-
-        $('.remove button').click(function() {
-            removeItem(this);
-        });
-
-        $(document).ready(function() {
-            updateSumItems();
-        });
-
-        $('.promo-code-cta').click(function() {
-
-            promoCode = $('#promo-code').val();
-
-            if (promoCode == '10off' || promoCode == '10OFF') {
-                //If promoPrice has no value, set it as 10 for the 10OFF promocode
-                if (!promoPrice) {
-                    promoPrice = 10;
-                } else if (promoCode) {
-                    promoPrice = promoPrice * 1;
+            $.ajax({
+                method: "POST",
+                url: "/add-to-cart?product_id=" + idProduct + "&product_quantity=" + quantityProduct,
+                data: { "_token": $('meta[name="_token"]').attr('content') },
+                success: function( new_cart ) {
+                    updateCart(new_cart);
                 }
-            } else if (promoCode != '') {
-                alert("Invalid Promo Code");
-                promoPrice = 0;
-            }
-            //If there is a promoPrice that has been set (it means there is a valid promoCode input) show promo
-            if (promoPrice) {
-                $('.summary-promo').removeClass('hide');
-                $('.promo-value').text(promoPrice.toFixed(2));
-                recalculateCart(true);
-            }
-        });
-
-        /* Recalculate cart */
-        function recalculateCart(onlyTotal) {
-            var subtotal = 0;
-
-            /* Sum up row totals */
-            $('.basket-product').each(function() {
-                subtotal += parseFloat($(this).children('.subtotal').text());
             });
+        });
 
-            /* Calculate totals */
-            var total = subtotal;
+        $('.remove').on('click','.remove-item-button', function() {
+            var remove_item_button = $(this);
+            var idProduct = $(this).find('#id-product').val();
 
-            //If there is a valid promoCode, and subtotal < 10 subtract from total
-            var promoPrice = parseFloat($('.promo-value').text());
-            if (promoPrice) {
-                if (subtotal >= 10) {
-                    total -= promoPrice;
-                } else {
-                    alert('Order must be more than £10 for Promo code to apply.');
-                    $('.summary-promo').addClass('hide');
-                }
-            }
+            $.ajax({
+                method: "post",
+                url: "/remove/" + idProduct,
+                data: { "_token": $('meta[name="_token"]').attr('content') },
+                success: function( new_cart ) {
 
-            /*If switch for update only total, update only total display*/
-            if (onlyTotal) {
-                /* Update total display */
-                $('.total-value').fadeOut(fadeTime, function() {
-                    $('#basket-total').html(total.toFixed(2));
-                    $('.total-value').fadeIn(fadeTime);
-                });
-            } else {
-                /* Update summary display. */
-                $('.final-value').fadeOut(fadeTime, function() {
-                    $('#basket-subtotal').html(subtotal.toFixed(2));
-                    $('#basket-total').html(total.toFixed(2));
-                    if (total == 0) {
-                        $('.checkout-cta').fadeOut(fadeTime);
-                    } else {
-                        $('.checkout-cta').fadeIn(fadeTime);
+                    if(new_cart[0] == 0)
+                    {
+                        window.location.href = '/';
                     }
-                    $('.final-value').fadeIn(fadeTime);
-                });
-            }
-        }
+                    else
+                    {
+                        updateCart(new_cart)
+                    }
 
-        /* Update quantity */
-        function updateQuantity(quantityInput) {
-            /* Calculate line price */
-            var productRow = $(quantityInput).parent().parent();
-            var price = parseFloat(productRow.children('.price').text());
-            var quantity = $(quantityInput).val();
-            var linePrice = price * quantity;
-
-            /* Update line price display and recalc cart totals */
-            productRow.children('.subtotal').each(function() {
-                $(this).fadeOut(fadeTime, function() {
-                    $(this).text(linePrice.toFixed(2));
-                    recalculateCart();
-                    $(this).fadeIn(fadeTime);
-                });
+                    var row_tr = remove_item_button.parent().parent();
+                    row_tr.remove();
+                }
             });
+        });
 
-            productRow.find('.item-quantity').text(quantity);
-            updateSumItems();
-        }
 
-        //function updateSumItems() {
-            //var sumItems = 0;
-            //$('.quantity input').each(function() {
-             //   sumItems += parseInt($(this).val());
-            //});
-           // $('.total-items').text(sumItems);
-        //}
 
-        /* Remove item from cart */
-        function removeItem(removeButton) {
-            /* Remove row from DOM and recalc cart total */
-            var productRow = $(removeButton).parent().parent();
-            productRow.slideUp(fadeTime, function() {
-                productRow.remove();
-                recalculateCart();
-                updateSumItems();
-            });
-        }
+       function updateCart(new_cart){
+           $('#nav-total-price').html(new_cart[0]);
+           $('ol.items').children().remove();
+           $('sup.text-primary').html(new_cart[1]);
+           var items_obj = $.each( new_cart[2], function( _, value ){ value });
+
+           $.each(items_obj, function(product_id, value){
+               $('ol.items').append('<li><a href="#" class="product-image"><img src=" '+ value['item_pic'] +' "class="img-responsive"></a>'
+               + '<div class="product-details">'
+               + '<div class="close-icon">'
+               + '<button type="button" class="remove-item-button btn-danger" style="background: transparent; border-color: #ffffff; border-style: solid;" >'
+               + '<input id="id-product" type="hidden" value="'+ product_id +'"/>'
+               + '<i class="fa fa-close" style="color: #ff0000"></i>'
+               + '</button>'
+               + ' </div>'
+               + '<p class="product-name"> <a href="/store/'+ product_id +'" target="_blank">'+ value['item_title'] +'</a></p>'
+               + '<strong id="product-qty">'+ value['qty'] +'</strong> x <span class="price text-primary">'+ value['item_price'] +' лв.</span>'
+               + '</div></li>');
+           });
+
+           $('ol.items').append('<h5 class="cart-bottom-total-price">Общо: '+ parseFloat(new_cart[0]).toFixed(2) +' лв.</h5>').css({'text-align': 'center', 'color': '#000000'});
+
+           if($('div.cart-footer').length < 1){
+               $('ul.dropdown-menu.cart.w-250').append(
+                       '<li>'
+                       + '<div class="cart-footer">'
+                       + '<a href="/shopping-cart" class="pull-left"><i class="fa fa-cart-plus mr-5"></i> Количка</a>'
+                       + '<a href="/checkout" class="pull-right"><i class="fa fa-money" aria-hidden="true"></i> Плащане</a>'
+                       + '</div>'
+                       + '</li>'
+               );
+           }
+
+           $('#basket-total').html(parseFloat(new_cart[0]).toFixed(2) + ' лв.')
+           $('#basket-subtotal').html(new_cart[1] + ' бр.')
+       }
     </script>
+
 
 @endsection

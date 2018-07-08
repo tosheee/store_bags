@@ -24,7 +24,11 @@
                 </div>
 
                 <div class="">
-                   <span ><a style="font-size: 1.2em; color: #000000; font-family: 'Marck Script', cursive;" id="view-contact-form"> За въпроси? <i style="font-size: 2.5em;" class="fa fa-envelope"></i></a></span>
+                   <span>
+                       <a style="cursor: pointer; font-size: 1.2em; color: #000000; font-family: 'Marck Script', cursive;" id="view-contact-form" title="Директно съобщение">
+                           За въпроси? <i style="font-size: 2.5em;" class="fa fa-envelope"></i>
+                       </a>
+                   </span>
                 </div>
 
 

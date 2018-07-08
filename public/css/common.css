@@ -20,8 +20,7 @@ input[type=radio][name="menucolor"] {
 }
 
 
-nav a:hover,
-nav#small a:hover {
+nav a.h-top-nav-dropdown:hover, nav#small a:hover {
     color: #C18055;
     background: #fff;
 }

@@ -45,11 +45,11 @@ button,
 .basket-module,
 .basket-labels,
 .item-shopping-cart,
-.price,
-.quantity,
+.price-shopping-cart,
+.quantity-shopping-cart,
 .subtotal,
 .basket-product,
-.product-image,
+.product-image-shopping-cart,
 .product-details-shopping-cart {
     float: left;
 }
@@ -59,7 +59,7 @@ button,
 }
 
 
-.basket main {
+.basket main{
     clear: both;
     font-size: 0.75rem;
     margin: 0 auto;
@@ -96,7 +96,7 @@ button,
 
 
 
-.basket li.price:before,
+.basket li.price-shopping-cart:before,
 .basket li.subtotal:before {
     content: '';
 }
@@ -105,10 +105,10 @@ button,
     width: 55%;
 }
 
-.basket .price,
-.quantity,
+.basket .price-shopping-cart,
+.quantity-shopping-cart,
 .subtotal {
-    width: 15%;
+    width: 13%;
 }
 
 .subtotal {
@@ -121,10 +121,11 @@ button,
     position: absolute;
     right: 0;
     text-align: right;
-    width: 45%;
+    width: 40%;
 }
 
 .remove button {
+    margin-right: 15px;
     background-color: transparent;
     color: #777;
     float: none;
@@ -152,11 +153,16 @@ button,
 }
 
 .product-image {
+    margin: 15px 5px 5px 5px;
     width: 35%;
 }
 
 .product-details {
-    width: 65%;
+    width: 60%;
+}
+
+.product-details-shopping-cart h5{
+    margin: 5px;
 }
 
 .product-frame {
@@ -164,6 +170,7 @@ button,
 }
 
 .product-details {
+    margin: 5px;
     padding: 0 1.5rem;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -295,11 +302,11 @@ aside {
     .product-details {
         width: 60%;
     }
-    .price,
+    .price-shopping-cart,
     .subtotal {
         width: 33%;
     }
-    .quantity {
+    .quantity-shopping-cart {
         text-align: center;
         width: 34%;
     }

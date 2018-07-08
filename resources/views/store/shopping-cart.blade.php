@@ -23,8 +23,8 @@
                 <div class="basket-labels">
                     <ul>
                         <li class="item-shopping-cart item-heading">Продукт</li>
-                        <li class="price">Цена</li>
-                        <li class="quantity">Количество</li>
+                        <li class="price-shopping-cart">Цена</li>
+                        <li class="quantity-shopping-cart">Количество</li>
                         <li class="subtotal">Общо</li>
                     </ul>
                 </div>
@@ -51,16 +51,16 @@
                             </div>
 
                             <div class="product-details-shopping-cart">
-                                <h4><a href="/store/{{ $product['item']->id }}" target="_blank">{{ $descriptions['title_product'] }}</a></h4>
+                                <h5><a href="/store/{{ $product['item']->id }}" target="_blank">{{ $descriptions['title_product'] }}</a></h5>
                                 <p><strong></strong></p>
                                 <p>Продуктов код: {{ $descriptions['article_id'] }}</p>
                             </div>
 
                         </div>
 
-                        <div class="price"><strong>{{ number_format($descriptions['price'], 2) }}</strong> {{ $descriptions['currency'] }}</div>
+                        <div class="price-shopping-cart"><strong>{{ number_format($descriptions['price'], 2) }}</strong> {{ $descriptions['currency'] }}</div>
 
-                        <div class="quantity">
+                        <div class="quantity-shopping-cart">
                             <input type="number" value="{{ $product['qty'] }}" min="1" class="quantity-field">
                             <input id="id-product" type="hidden" name="q" value="{{ $product['item']['id'] }}"/>
                         </div>

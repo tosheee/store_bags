@@ -80,9 +80,9 @@
 
 #wrap-search input[type="text"]{
     outline: none;
-
     font-size: 2em;
     margin-top: 5px;
+    margin-left: 15%;
     border: none;
     border-bottom:solid 1px ;
     width: 70%;
@@ -90,10 +90,12 @@
 #wrap-search input[type="text"]:focus:hover {
     outline: none;
     margin-top: 5px;
+    margin-left: 15%;
     border: none;
     border-bottom:solid 1px ;
     width: 70%;
     z-index: 0;
+
 }
 
 #wrap-search input[type="submit"] {
@@ -106,7 +108,7 @@
     background-size: 30px 30px;
     text-indent: -10000px;
     border: none;
-    position: absolute;
+
     top: 0;
     z-index: 2;
     cursor: pointer;

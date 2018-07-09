@@ -48,7 +48,7 @@
         var quantity_wrapper = $(this).parent();
         var idProduct = quantity_wrapper.find('#id-product').val();
         var  quantityProduct = $(this).val();
-        var priceProduct = quantity_wrapper.parent().find('.price strong').html();
+        var priceProduct = quantity_wrapper.parent().find('.price-shopping-cart strong').html();
 
         quantity_wrapper.parent().find('.subtotal').html(parseFloat(priceProduct * quantityProduct).toFixed(2) + ' лв.');
 

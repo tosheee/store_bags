@@ -107,10 +107,13 @@
             </div>
         </aside>
         @else
-            @include('partials.empty_cart')
-            <h3>Количка за пазаруване е празна!</h3>
+            <div class="page-empty-cart">
+                @include('partials.empty_cart')
+                <div>
+                    <a class="btn btn-info" href="/">Към началната страница </a>
+                </div>
+                <h3>Количка за пазаруване е празна!</h3>
             </div>
-
         @endif
     </div>
 

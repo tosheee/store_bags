@@ -1,28 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="col-md-2" id="vertical-nav-bar">
-        @include('partials.vertical_navigation')
+    <div class="col-md-1" id="vertical-nav-bar">
+
     </div>
-    
-     <div id="modalOfficeLocate" class="modal-search-office">
+    @if (count($cart) > 0)
+        <div id="modalOfficeLocate" class="modal-search-office">
         <div class="modal-content-search-office">
              <span class="close">&times;</span>
             <span>Моля, попълнете полето за населеното място и натиснете бутона "Търсене", след това изберете най - удобния офис на Еконт за Вас.</span>
             <iframe frameborder="0" id="officeLocator" scrolling="no" frameborder="0" style="border: medium none; width: 800px; height: 450px;" src="https://www.bgmaps.com/templates/econt?office_type=to_office_courier&shop_url={{ Request::fullUrl() }}&address= --- Изберете ---" class="cboxIframe"></iframe>
         </div>
     </div>
-
-    <div class="container">
+        <div  class="container">
         <div class="row">
-            <div class="col-sm-10"> 
-                <div id="user-orders" class="container">
+            <div class="col-sm-11">
+                <div id="user-orders" class="container" style="margin: 10px;">
                     <div class="row order_sorter">
                         <ul id="toggle-orders">
                             <li class="first"></li>
                             <li class="fo selected"> <a href="/store">Обратно в магазина</a></li>
                             <li class="oh selected"><a href="/shopping-cart">Количка</a></li>
-                            <li class="ed "><a href="#">Продължи поръчката</a></li>
                         </ul>
                     </div>
                 </div>
@@ -506,5 +504,13 @@
             </div>
         </div>
     </div>
-
+    @else
+        <div class="page-empty-cart">
+            @include('partials.empty_cart')
+            <div>
+                <a class="btn btn-info" href="/">Към началната страница </a>
+            </div>
+            <h3>Количка за пазаруване е празна!</h3>
+        </div>
+    @endif
 @endsection

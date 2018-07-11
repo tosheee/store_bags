@@ -40,7 +40,7 @@
 }
 
 input[type="number"],
-button,
+button.checkout-cta,
 .basket,
 .basket-module,
 .basket-labels,

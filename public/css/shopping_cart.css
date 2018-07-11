@@ -39,7 +39,7 @@
     width: 100%;
 }
 
-input,
+input[type="number"],
 button,
 .basket,
 .basket-module,

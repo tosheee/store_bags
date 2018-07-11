@@ -146,7 +146,6 @@ button.checkout-cta,
     position: relative;
 }
 .basket-product:hover {
-    background-color: #e0f5e9;
     border-bottom: 1px solid #ccc;
     padding: 1rem 0;
     position: relative;
@@ -194,7 +193,8 @@ aside {
 }
 
 .summary {
-    background-color: #eee;
+    border-radius: 5px;
+    background-color: #ffffff;
     border: 1px solid #aaa;
     padding: 1rem;
     position: fixed;
@@ -269,9 +269,11 @@ aside {
 }
 
 .checkout-cta {
+    color: #ffffff;
+    background-color: #1ebeff;
     display: block;
     float: none;
-    font-size: 0.75rem;
+    font-size: 1.3rem;
     text-align: center;
     text-transform: uppercase;
     padding: 0.625rem 0;

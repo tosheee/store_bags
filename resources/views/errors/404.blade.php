@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="col-md-2">
-        @include('partials.v_nav_bar')
+        @include('partials.vertical_navigation')
     </div>
 
     <div class="container">

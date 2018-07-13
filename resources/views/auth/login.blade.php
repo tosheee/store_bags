@@ -1,71 +1,44 @@
 @extends('layouts.app')
 
 @section('content')
-    <br/><br/>
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Влез</div>
-                <div class="panel-body">
+    <div class="wrapper-login-form fadeInDown">
+        <div id="formContent">
+            <!-- Tabs Titles -->
+            <h2 class="active"> Влез </h2>
 
-
-                    <form class="form-horizontal" method="POST" action="{{ route('login') }}">
-                        {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">Е-мейл</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Парола</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Запомни ме
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Влез
-                                </button>
-
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Забравена парола?
-                                </a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+            <!-- Icon -->
+            <div class="fadeIn first">
+                <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
             </div>
+
+            <!-- Login Form -->
+            <form method="POST" action="{{ route('login') }}">
+                {{ csrf_field() }}
+                <input type="email" id="login" class="fadeIn second" name="email" placeholder="Е-мейл" value="{{ old('email') }}" required autofocus>
+                @if ($errors->has('email'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('email') }}</strong>
+                    </span>
+                @endif
+
+                <input type="password" id="password" class="fadeIn third" name="password" placeholder="Парола">
+                @if ($errors->has('password'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('password') }}</strong>
+                    </span>
+                @endif
+                <input type="submit" class="fadeIn fourth" value="Влез">
+            </form>
+
+            <!-- Remind Passowrd -->
+            <div id="formFooter">
+                <a class="underlineHover" href="{{ route('password.request') }}">Забравена парола?</a>
+            </div>
+
+            <div id="formFooter">
+                <a class="underlineHover" href="{{ route('register') }}">Нямате регистрация?</a>
+            </div>
+
         </div>
     </div>
-</div>
 @endsection

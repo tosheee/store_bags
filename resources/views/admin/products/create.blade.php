@@ -207,7 +207,7 @@
                 <br>
 
                 </label>
-                    Оразмеряване в % <input style="width: 50px;" type="number" class="label-values" name="resize_percent" min="10" max="50" value="25" />
+                    Оразмеряване в % <input style="width: 50px;" type="number" class="label-values" name="resize_percent" min="1" max="100" value="25" />
                  </label>
 
                 <br/><br/>

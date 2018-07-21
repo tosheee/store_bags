@@ -19,12 +19,13 @@ class WelcomeController extends Controller
 {
     public function welcome()
     {
-        $categories = Category::all();
-        $subCategories = SubCategory::all();
-        $products = Product::where('active', true)->where('category_id', 21)->orderBy('created_at', 'desc')->paginate(9);
-        $product_count = count($products);
+        //$categories = Category::all();
+        //$subCategories = SubCategory::all();
 
-        return view('welcome')->with('categories', $categories)->with('subCategories', $subCategories)->with('products', $products)->with('product_count', $product_count);
+        $productsSale =        Product::where('active', true)->where('sale',         true)->orderBy('created_at', 'desc')->take(10)->get();
+        $productsRecommended = Product::where('active', true)->where('recommended',  true)->orderBy('created_at', 'desc')->take(10)->get();
+        $productsBestSeller =  Product::where('active', true)->where('best_sellers', true)->orderBy('created_at', 'desc')->take(10)->get();
 
+        return view('welcome')->with('productsSale', $productsSale)->with('productsRecommended', $productsRecommended)->with('productsBestSeller', $productsBestSeller);
     }
 }

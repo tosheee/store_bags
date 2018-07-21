@@ -28,6 +28,9 @@
 @import url(admin_style.css);
 @import url(admin_forms.css);
 
+@import url(owl.theme.default.css);
+@import url(owl.carousel.css);
+@import url(style_slider.css);
 
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,300);
 @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);

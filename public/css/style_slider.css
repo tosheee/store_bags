@@ -24,7 +24,16 @@
     background-repeat: no-repeat;
 }
 
+.owl-item-title{
+    top: 50%;
+    font-size: 0.5em;
+}
 
+.owl-item .price{
+    bottom: 1%;
+    color: red;
+    font-size: 0.7em;
+}
 
 .owl-next, .owl-prev{
     display: block;
@@ -34,4 +43,3 @@
     width: auto;
     font-size: 20px;
 }
-

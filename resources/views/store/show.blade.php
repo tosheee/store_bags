@@ -265,54 +265,27 @@
     </script>
 
 
-    <script>
-        /*
-        $('.add-cart-large').each(function(i, el){
-            $(el).click(function(){
-                var carousel = $(this).parent().parent().find(".carousel-container");
-                var img = carousel.find('img').eq(carousel.attr("rel"))[0];
-                var position = $(img).offset();
-                console.log(position);
 
-                var productName = $(this).parent().find('h4').get(0).innerHTML;
+    @include('partials.items_slider')
 
-                $("body").append('<div class="floating-cart"></div>');
-                var cart = $('div.floating-cart');
-                $("<img width='20' height='20' src='"+img.src+"' class='floating-image-large' />").appendTo(cart);
+    <script type="text/javascript"
+            src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript"
+            src="js/owl.carousel.js"></script>
 
-                $(cart).css({'top' : position.top + 'px', "right" : position.right + 'px'}).fadeIn("slow").addClass('moveToCart');
-                setTimeout(function(){$("body").addClass("MakeFloatingCart");}, 800);
-
-                setTimeout(function(){
-                    $('div.floating-cart').remove();
-                    $("body").removeClass("MakeFloatingCart");
-
-
-                    var cartItem = "<div class='cart-item'><div class='img-wrap'><img src='"+img.src+"' alt='' /></div><span>"+productName+"</span><strong>$39</strong><div class='cart-item-border'></div><div class='delete-item'></div></div>";
-
-                    $("#cart .empty").hide();
-                    $("#cart").append(cartItem);
-                    $("#checkout").fadeIn(500);
-
-                    $("#cart .cart-item").last()
-                            .addClass("flash")
-                            .find(".delete-item").click(function(){
-                                $(this).parent().fadeOut(300, function(){
-                                    $(this).remove();
-                                    if($("#cart .cart-item").size() == 0){
-                                        $("#cart .empty").fadeIn(500);
-                                        $("#checkout").fadeOut(500);
-                                    }
-                                })
-                            });
-                    setTimeout(function(){
-                        $("#cart .cart-item").last().removeClass("flash");
-                    }, 10 );
-
-                }, 1000);
-
-
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#slider_product_sale, #slider_product_recommended, #slider_best_seller').owlCarousel({
+                autoplay: true,
+                autoplayTimeout: 2000,
+                autoplayHoverPause: true,
+                margin: 30,
+                items: 5,
+                nav: true
             });
-        });*/
+        });
     </script>
+
+    <script type="text/javascript"
+            src="js/owl.carousel.js"></script>
     @endsection

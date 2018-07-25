@@ -51,8 +51,19 @@ class StoreController extends Controller
         
         if(isset($product))
         {
+            $productsSale =        Product::where('active', true)->where('sale',         true)->orderBy('created_at', 'desc')->take(10)->get();
+            $productsRecommended = Product::where('active', true)->where('recommended',  true)->orderBy('created_at', 'desc')->take(10)->get();
+            $productsBestSeller =  Product::where('active', true)->where('best_sellers', true)->orderBy('created_at', 'desc')->take(10)->get();
             $metaDescription = json_decode($product->description, true);
-            return view('store.show')->with('categories', $categories)->with('subCategories', $subCategories)->with('product', $product)->with('cart', $cart)->with('metaDescription', $metaDescription);
+            return view('store.show')
+                ->with('categories', $categories)
+                ->with('subCategories', $subCategories)
+                ->with('product', $product)
+                ->with('cart', $cart)
+                ->with('metaDescription', $metaDescription)
+                ->with('productsSale', $productsSale)
+                ->with('productsRecommended', $productsRecommended)
+                ->with('productsBestSeller', $productsBestSeller);
         }
         else
         {

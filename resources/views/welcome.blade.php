@@ -2,9 +2,9 @@
 
 @section('content')
     <style>
-
         #carousel-example-generic.carousel {
             width: 99%;
+            height: 100%;
             margin: 0 auto;
 
         }
@@ -13,13 +13,15 @@
         #carousel-example-generic .carousel-indicators .active {
             background-color: #2980b9;
         }
+
         #carousel-example-generic .carousel-indicators {
             position: absolute;
             margin: 0 auto;
-            bottom: 12%;
+            top: 5%;
             left: 50%;
             z-index: 15;
-            width: 60%;
+            width: 10%;
+            height: 20px;
             padding-left: 0;
             list-style: none;
             text-align: center;
@@ -45,7 +47,7 @@
             font-size: 20px;
             color: #fff;
             text-align: center;
-            text-shadow: 0 1px 2px rgba(0,0,0,.6);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
         }
 
         #carousel-example-generic .carousel-control.left,
@@ -70,9 +72,12 @@
         #carousel-example-generic .carousel-control .icon-prev,
         #carousel-example-generic .carousel-control .icon-next {
             position: absolute;
-            top: 45%;
             z-index: 5;
             display: inline-block;
+        }
+
+        #carousel-example-generic .icon-prev, #carousel-example-generic .icon-next {
+            top: 25%;
         }
 
         #carousel-example-generic .carousel-control .glyphicon-chevron-left,
@@ -84,7 +89,6 @@
         #carousel-example-generic .carousel-control .icon-next {
             right: 0;
         }
-
 
         #carousel-example-generic .carousel-control.left span:hover,
         #carousel-example-generic .carousel-control.right span:hover {
@@ -121,6 +125,7 @@
         }
 
         #carousel-example-generic .btn-theme {
+            z-index: 20;
             color: #fff;
             background-color: transparent;
             border: 2px solid #fff;
@@ -132,199 +137,163 @@
             background-color: #fff;
             border-color: #fff;
         }
-        .slider_titles{
+
+        .slider_titles {
             color: #fa5a7f;
             text-align: center;
             font-family: 'Marck Script', cursive;
             font-size: 3em;
             margin-bottom: 5%;
         }
-
     </style>
 
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <!------ Include the above in your HEAD tag ---------->
+
     <!-- Carousel -->
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-        </ol>
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-            <div class="item active">
-                <img src="https://cdn.shopify.com/s/files/1/0949/5440/products/IMG_5790EDIT_1024x1024.jpg?v=1480510669" alt="First slide">
-                <!-- Static Header -->
-                <div class="header-text hidden-xs">
-                    <div class="col-md-12 text-center">
-                        <h2>
-                            <span>Welcome to <strong>LOREM IPSUM</strong></span>
-                        </h2>
-                        <br>
-                        <h3>
-                            <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
-                        </h3>
-                        <br>
-                        <div class="">
-                            <a class="btn btn-theme btn-sm btn-min-block" href="#">Login</a><a class="btn btn-theme btn-sm btn-min-block" href="#">Register</a></div>
+    @if(isset($allSliderData))
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                @foreach($allSliderData as $target_key=>$_)
+                    <li data-target="#carousel-example-generic"
+                        data-slide-to="{{$target_key}}"  {{ $target_key == 0 ?  'class=active' : ''}}></li>
+                @endforeach
+            </ol>
+
+            <div class="carousel-inner">
+                @foreach($allSliderData as $key=>$slider_data)
+                    <div class="{{ $key == 0 ?  'item active' : 'item'}}">
+                        <img class="img-responsive" src="/storage/common_pictures/{{$slider_data->slider_img}}">
+
+                        <!-- Static Header -->
+                        <div class="header-text hidden-xs">
+                            <div class="col-md-12 text-center">
+                                <h2><span>{{ $slider_data->title }}</span></h2>
+                                <br>
+
+                                <h3><span>{{ $slider_data->description }}</span></h3>
+
+                                <br>
+
+                                <div class="">
+                                    <a class="btn btn-theme btn-sm btn-min-block" href="/login">Вход</a>
+                                    <a class="btn btn-theme btn-sm btn-min-block" href="/register">Регистрация</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /header-text -->
+
                     </div>
-                </div><!-- /header-text -->
+                @endforeach
+
             </div>
-            <div class="item">
-                <img src="https://hips.hearstapps.com/bpc.h-cdn.co/assets/17/41/1600x800/landscape-1507667726-vegan-bags.jpg?resize=768:*" alt="Second slide">
-                <!-- Static Header -->
-                <div class="header-text hidden-xs">
-                    <div class="col-md-12 text-center">
-                        <h2>
-                            <span>Welcome to LOREM IPSUM</span>
-                        </h2>
-                        <br>
-                        <h3>
-                            <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
-                        </h3>
-                        <br>
-                        <div class="">
-                            <a class="btn btn-theme btn-sm btn-min-block" href="#">Login</a><a class="btn btn-theme btn-sm btn-min-block" href="#">Register</a></div>
-                    </div>
-                </div><!-- /header-text -->
-            </div>
-            <div class="item">
-                <img src="http://uiconstock.com/wp-content/uploads/2015/12/Free-Shopping-Bag-Mockup.jpg" alt="Third slide">
-                <!-- Static Header -->
-                <div class="header-text hidden-xs">
-                    <div class="col-md-12 text-center">
-                        <h2>
-                            <span>Welcome to LOREM IPSUM</span>
-                        </h2>
-                        <br>
-                        <h3>
-                            <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
-                        </h3>
-                        <br>
-                        <div class="">
-                            <a class="btn btn-theme btn-sm btn-min-block" href="#">Login</a><a class="btn btn-theme btn-sm btn-min-block" href="#">Register</a></div>
-                    </div>
-                </div><!-- /header-text -->
-            </div>
+
+
+            <!-- Controls -->
+            <a class="left carousel-control icon-prev" href="#carousel-example-generic" data-slide="prev"><span
+                        class="glyphicon glyphicon-chevron-left"></span></a>
+            <a class="right carousel-control icon-next" href="#carousel-example-generic" data-slide="next"><span
+                        class="glyphicon glyphicon-chevron-right"></span></a>
         </div>
-        <!-- Controls -->
-        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-        </a>
-        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right"></span>
-        </a>
-    </div><!-- /carousel -->
+    @else
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+            </ol>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="https://cdn.shopify.com/s/files/1/0949/5440/products/IMG_5790EDIT_1024x1024.jpg?v=1480510669"
+                         alt="First slide">
+                    <!-- Static Header -->
+                    <div class="header-text hidden-xs">
+                        <div class="col-md-12 text-center">
+                            <h2>
+                                <span>Welcome to <strong>LOREM IPSUM</strong></span>
+                            </h2>
+                            <br>
 
-    <div class="slider-item-content">
+                            <h3>
+                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+                            </h3>
+                            <br>
 
-            @if(count($productsSale) > 0)
-            <hr/>
-            <h1 class="slider_titles">Разпродажба</h1>
-
-            <div class="owl-carousel" id="slider_product_sale">
-                    @foreach($productsSale as $prSale)
-                        <?php $descriptSale = json_decode($prSale->description, true); ?>
-                            @if (isset($descriptSale['main_picture_url']))
-                                <div class="item" style="background-image: url('{{ $descriptSale['main_picture_url'] }}');">
-                            @elseif(isset($descriptSale['upload_main_picture']))
-                                <div class="item" style="background-image: url('/storage/upload_pictures/{{ $prSale->id }}/{{ $descriptSale['upload_main_picture'] }}');">
-                            @else
-                                <div class="item" style="background-image: url('/storage/common_pictures/noimage.jpg');">
-                            @endif
-                                    <a href="/store/{{ $prSale->id }}/">{{ $descriptSale['title_product'] }}</a>
-                                     <span class="product_price">
-                                                    <div>
-                                                        <span class="price">
-
-                                                            <strong>
-                                                                {{ isset($descriptSale['price']) ? $descriptSale['price'] : '' }}
-                                                                {{ isset($descriptSale['currency']) ? $descriptSale['currency'] : '' }}
-                                                            </strong>
-                                                         </span>
-
-                                                        @if(isset($descriptSale['old_price']))
-                                                            <span class="price_old">
-                                                                <del>
-                                                                    {{ $descriptSale['old_price'] }}
-                                                                    {{ isset($descriptSale['currency']) ? $descriptSale['currency'] : '' }}
-                                                                </del>
-                                                            </span>
-                                                        @endif
-                                                    </div>
-                                                </span>
-
+                            <div class="">
+                                <a class="btn btn-theme btn-sm btn-min-block" href="/login">Вход</a>
+                                <a class="btn btn-theme btn-sm btn-min-block" href="/register">Регистрация</a></div>
                         </div>
-                    @endforeach
+                    </div>
+                    <!-- /header-text -->
                 </div>
-            @endif
 
-            @if(count($productsRecommended) > 0)
-                                    <hr/>
-                                    <h1 class="slider_titles">Препоръчани продукти</h1>
-                <div class="owl-carousel" id="slider_product_recommended">
 
-                    @foreach($productsRecommended as $prRecommended)
-                        <?php $descriptRecommended = json_decode($prRecommended->description, true); ?>
-                            @if (isset($descriptRecommended['main_picture_url']))
-                                <div class="item" style="background-image: url('{{ $descriptRecommended['main_picture_url'] }}');">
-                            @elseif(isset($descriptRecommended['upload_main_picture']))
-                                <div class="item" style="background-image: url('/storage/upload_pictures/{{ $prRecommended->id }}/{{ $descriptRecommended['upload_main_picture'] }}');">
-                            @else
-                                <div class="item" style="background-image: url('/storage/common_pictures/noimage.jpg');">
-                            @endif
+                <div class="item">
+                    <img src="https://hips.hearstapps.com/bpc.h-cdn.co/assets/17/41/1600x800/landscape-1507667726-vegan-bags.jpg?resize=768:*"
+                         alt="Second slide">
+                    <!-- Static Header -->
+                    <div class="header-text hidden-xs">
+                        <div class="col-md-12 text-center">
+                            <h2>
+                                <span>Welcome to LOREM IPSUM</span>
+                            </h2>
+                            <br>
 
-                                    {{ $descriptRecommended['title_product'] }}
+                            <h3>
+                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+                            </h3>
+                            <br>
+
+                            <div class="">
+                                <a class="btn btn-theme btn-sm btn-min-block" href="#">Login</a>
+                                <a class="btn btn-theme btn-sm btn-min-block" href="#">Register</a>
+                            </div>
                         </div>
-                    @endforeach
+                    </div>
+                    <!-- /header-text -->
                 </div>
-            @endif
 
-            @if(count($productsBestSeller)> 0)
-                                    <hr/>
-                                    <h1 class="slider_titles">Най - продaвани продукти</h1>
-                <div class="owl-carousel" id="slider_best_seller">
+                <div class="item">
+                    <img src="http://uiconstock.com/wp-content/uploads/2015/12/Free-Shopping-Bag-Mockup.jpg"
+                         alt="Third slide">
+                    <!-- Static Header -->
+                    <div class="header-text hidden-xs">
+                        <div class="col-md-12 text-center">
+                            <h2>
+                                <span>Welcome to LOREM IPSUM</span>
+                            </h2>
+                            <br>
 
-                    @foreach($productsBestSeller as $prBestSeller)
-                        <?php $descriptBestSeller = json_decode($prBestSeller->description, true); ?>
-                        <div class="item">
-                            @if (isset($descriptBestSeller['main_picture_url']))
-                                <div class="item" style="background-image: url('{{ $descriptBestSeller['main_picture_url'] }}');">
-                            @elseif(isset($descriptBestSeller['upload_main_picture']))
-                                <div class="item" style="background-image: url('/storage/upload_pictures/{{ $prBestSeller->id }}/{{ $descriptBestSeller['upload_main_picture'] }}');">
-                            @else
-                                <div class="item" style="background-image: url('/storage/common_pictures/noimage.jpg');">
-                            @endif
-                                    {{ $descriptBestSeller['title_product'] }}
+                            <h3>
+                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+                            </h3>
+                            <br>
+
+                            <div class="">
+                                <a class="btn btn-theme btn-sm btn-min-block" href="/login">Вход</a>
+                                <a class="btn btn-theme btn-sm btn-min-block" href="/register">Регистрация</a>
+                            </div>
                         </div>
-                    @endforeach
+                    </div>
+                    <!-- /header-text -->
                 </div>
-            @endif
+            </div>
+
+            <!-- Controls -->
+            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev"><span
+                        class="glyphicon glyphicon-chevron-left"></span></a>
+            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next"><span
+                        class="glyphicon glyphicon-chevron-right"></span></a>
         </div>
-    </div>
+        <!-- /carousel -->
+    @endif
 
 
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js" ></script>
-    <script type="text/javascript" src="js/owl.carousel.js"></script>
-
-    <script type="text/javascript">
-
-        $(document).ready(function(){
-            $('#slider_product_sale, #slider_product_recommended, #slider_best_seller').owlCarousel({
-                autoplay:true,
-                autoplayTimeout:2000,
-                autoplayHoverPause:true,
-                margin: 30,
-                items: 5,
-                nav: true
-            });
-        });
-
-    </script>
-
-    <script type="text/javascript" src="js/owl.carousel.js"></script>
+    @include('partials.items_slider')
 @endsection

@@ -19,8 +19,6 @@ class WelcomeController extends Controller
 {
     public function welcome()
     {
-        //$categories = Category::all();
-        //$subCategories = SubCategory::all();
 
         $productsSale =        Product::where('active', true)->where('sale',         true)->orderBy('created_at', 'desc')->take(10)->get();
         $productsRecommended = Product::where('active', true)->where('recommended',  true)->orderBy('created_at', 'desc')->take(10)->get();

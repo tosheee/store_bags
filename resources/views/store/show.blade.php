@@ -138,7 +138,7 @@
             }
             ?>
 
-            <div class="addToCart">
+        <div class="addToCart">
                 <div class="qntySection">
                     <span class="btn minus-button" data-type="remove">-</span>
                     <span class="show-page" id="quantity-product">{{ isset($product_qty) ? $product_qty : '1' }}</span>
@@ -171,7 +171,7 @@
                         });
                     });
                 </script>
-
+            @if ($descriptions['product_status']!= 'Не е наличен')
 
                 <button class="add-cart-large add-product-button">
                     Добави
@@ -189,8 +189,10 @@
                     <input id="id-product" type="hidden" value="{{ $product->id }}"/>
                 </button>
 
-
-            </div>
+            @else
+                <button class="add-cart-large add-product-button" disabled title="Очаква се доставка">Очаквайте скоро</button>
+            @endif
+        </div>
 
 
         </div>

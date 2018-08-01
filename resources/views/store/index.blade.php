@@ -31,6 +31,22 @@
                 @foreach($products as $product)
                     <?php $descriptions = json_decode($product->description, true); ?>
                         <div class="col-md-3 product">
+
+                            @if ($product->sale == 1)
+                                <div class="ribbon-wrapper-1">
+                                    <div class="ribbon-1" style="z-index: 100; font-size: 12px;  background-color: #ff3f0e;">Разпродажба</div>
+                                </div>
+                            @elseif($product->recommended == 1)
+                                <div class="ribbon-wrapper-1">
+                                    <div class="ribbon-1" style="z-index: 100; font-size: 12px;  background-color: #ff99a1;">Препоръчан</div>
+                                </div>
+
+                            @elseif($product->best_sellers == 1)
+                                <div class="ribbon-wrapper-1">
+                                    <div class="ribbon-1" style="z-index: 100; font-size: 12px;   background-color: #6daaab;">Най-продаван</div>
+                                </div>
+                            @endif
+
                             <div class="info-large">
                                 <h4>{{ $descriptions['title_product'] }}</h4>
                                 <div class="sku">
@@ -64,6 +80,7 @@
                                        <p> {{ isset($descriptions['short_description']) ? $descriptions['short_description'] : '' }}</p>
                                     </div>
 -->
+                            @if ($descriptions['product_status']!= 'Не е наличен')
                                 <button class="add-cart-large add-product-button">
                                     Добави
                                     <i class="fa fa-shopping-cart" ></i>
@@ -89,6 +106,9 @@
 
                                     <input id="id-product" type="hidden" value="{{ $product->id }}"/>
                                 </button>
+                            @else
+                                <button class="add_to_cart" style="background-color: #ff99a1" disabled title="Очаква се доставка">Очаквайте</button>
+                            @endif
 
                             </div>
                             <div class="make3D">
@@ -106,7 +126,7 @@
                                     <div class="image_overlay"></div>
 
 
-
+                                    @if ($descriptions['product_status']!= 'Не е наличен')
                                          <button class="add-product-button add_to_cart" title="Добави в количката" >
                                             Добави
                                             <i class="fa fa-shopping-cart" ></i>
@@ -117,7 +137,6 @@
                                                 {
                                                     $product_qty = $oldCart->items[$product->id]['qty'];
                                                 }
-
                                             }
                                             ?>
                                             @if(!empty($oldCart->items[$product->id]) )
@@ -130,7 +149,9 @@
 
                                             <input id="id-product" type="hidden" value="{{ $product->id }}"/>
                                         </button>
-
+                                    @else
+                                        <button class="add-product-button add_to_cart" style="background-color: #ff99a1" disabled title="Очаква се доставка">Очаквайте</button>
+                                    @endif
 
                                     <div class="view_gallery">Галерия</div>
                                     <a href="/store/{{ $product->id }}">

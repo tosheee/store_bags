@@ -13,13 +13,9 @@
     margin-bottom: 50px;
 }
 
-.owl-carousel .item{
-    height: 300px;
-
+.owl-carousel .item-product-slider{
+    height: 420px;
     text-align: center;
-    font-size: 28px;
-    font-weight: bold;
-    text-transform: uppercase;
     background-size: 90%;
     background-repeat: no-repeat;
 }
@@ -33,13 +29,4 @@
     bottom: 1%;
     color: red;
     font-size: 0.7em;
-}
-
-.owl-next, .owl-prev{
-    display: block;
-    padding: 10px;
-    border: 1px solid black;
-    float: left;
-    width: auto;
-    font-size: 20px;
 }

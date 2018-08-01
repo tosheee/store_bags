@@ -1,17 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="col-md-1" id="vertical-nav-bar">
-
-    </div>
-    @if (count($cart) > 0)
+        <div class="col-md-1" id="vertical-nav-bar"></div>
+    @if (isset($cart))
         <div id="modalOfficeLocate" class="modal-search-office">
-        <div class="modal-content-search-office">
+           <div class="modal-content-search-office">
              <span class="close">&times;</span>
             <span>Моля, попълнете полето за населеното място и натиснете бутона "Търсене", след това изберете най - удобния офис на Еконт за Вас.</span>
             <iframe frameborder="0" id="officeLocator" scrolling="no" frameborder="0" style="border: medium none; width: 800px; height: 450px;" src="https://www.bgmaps.com/templates/econt?office_type=to_office_courier&shop_url={{ Request::fullUrl() }}&address= --- Изберете ---" class="cboxIframe"></iframe>
         </div>
-    </div>
+        </div>
+
         <div  class="container">
         <div class="row">
             <div class="col-sm-11">
@@ -92,7 +91,7 @@
                         
                         <label id="order-location">
                             <span id="span-populated-pace">Населено място: <sup style="color: red;">*</sup></span>  
-                                <select id="select-search-city" name="address[populated_place]" class="search-city" style="width: 70.6%; padding: 20px;">
+                            <select id="select-search-city" name="address[populated_place]" class="search-city" style="width: 70.6%; padding: 20px;">
                         			<option value=""></option>
                         			<option value="Абланица">Абланица</option>
                         			<option value="Айдемир">Айдемир</option>
@@ -500,7 +499,6 @@
 
                 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
                 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
-             
             </div>
         </div>
     </div>

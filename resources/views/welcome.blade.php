@@ -296,4 +296,16 @@
 
 
     @include('partials.items_slider')
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#slider_product_sale, #slider_product_recommended, #slider_best_seller').owlCarousel({
+                autoplay: true,
+                autoplayTimeout: 2000,
+                autoplayHoverPause: true,
+                margin: 30,
+                items: 5
+            });
+        });
+    </script>
 @endsection

@@ -233,6 +233,22 @@
                 @endif
             </div>
         </div>
+        <script type="text/javascript" src="{{ asset('js/owl.carousel.js') }}"></script>
+        @include('partials.items_slider')
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#slider_product_sale, #slider_product_recommended, #slider_best_seller').owlCarousel({
+                    autoplay: true,
+                    autoplayTimeout: 2000,
+                    autoplayHoverPause: true,
+                    margin: 30,
+                    items: 4,
+                    nav: true,
+                    navText: ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"]
+                });
+            });
+        </script>
     </div>
 
     <script>
@@ -264,28 +280,4 @@
         }
     </script>
 
-
-
-    @include('partials.items_slider')
-
-    <script type="text/javascript"
-            src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript"
-            src="js/owl.carousel.js"></script>
-
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#slider_product_sale, #slider_product_recommended, #slider_best_seller').owlCarousel({
-                autoplay: true,
-                autoplayTimeout: 2000,
-                autoplayHoverPause: true,
-                margin: 30,
-                items: 5,
-                nav: true
-            });
-        });
-    </script>
-
-    <script type="text/javascript"
-            src="js/owl.carousel.js"></script>
-    @endsection
+@endsection

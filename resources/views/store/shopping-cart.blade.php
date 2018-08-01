@@ -13,7 +13,7 @@
 
     <br/><br/><br/>
     <div class="col-sm-10">
-        @if(count($products) > 0)
+        @if(isset($products))
             <div class="basket">
 
                 <div class="basket-module">

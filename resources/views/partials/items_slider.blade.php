@@ -278,12 +278,12 @@
 </div>
 
 <div class="slider-item-content">
-    @if(count($productsRecommended) > 0)
+    @if(count($productsBestSeller) > 0)
 
         <h1 class="slider_titles">Най-продаван</h1>
 
         <div class="owl-carousel" id="slider_product_sale">
-            @foreach($productsRecommended as $product)
+            @foreach($productsBestSeller as $product)
                 <?php $descriptSale = json_decode($product->description, true); ?>
                 <div class="item-product-slider">
 

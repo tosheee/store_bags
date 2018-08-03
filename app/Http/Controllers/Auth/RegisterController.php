@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Session;
+use App\Mail\Welcome;
 
 class RegisterController extends Controller
 {
@@ -37,10 +38,15 @@ class RegisterController extends Controller
 
     protected function create(array $data)
     {
-        return User::create([
+        $user =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+
+
+        \Mail::to($user)->send(new Welcome($user));
+
+        return $user;
     }
 }

@@ -8,15 +8,12 @@
         $view->with('pagesButtonsRender', App\Admin\Page::where('active_page', true)->get());
     });
 
-    Route::get('/welcome_test', function(){
-       return view('emails.welcome_test');
-    });
-
-
     Auth::routes();
 
+    //emails
     Route::get('/', 'WelcomeController@welcome');
 
+    //store
     Route::get('/store',                       ['uses' => 'StoreController@index',          'as'   => 'store.index']);
     Route::get('/store/view_user_orders/{id}', ['uses' => 'StoreController@viewUserOrders', 'as'   => 'store.index']);
     Route::get('/store/search',                ['uses' => 'SearchController@search',        'as'   => 'store.search']);
@@ -71,4 +68,9 @@
         }
 
         return $subCategoryOptions;
+    });
+
+    //tests
+    Route::get('/welcome_test', function(){
+        return view('emails.welcome_test');
     });

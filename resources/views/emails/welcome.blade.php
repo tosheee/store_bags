@@ -22,8 +22,8 @@
             }
         }
     </style>
-    <table class="wrapper" width="100%" cellpadding="0" cellspacing="0" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; background-color: #e4838b; margin: 0; padding: 0; width: 100%; -premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 100%;">
-        <tr>
+    <table class="wrapper" width="100%" cellpadding="0" cellspacing="0" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box;  margin: 0; padding: 0; width: 100%; -premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 100%;">
+        <tr style="background-color: #e4838b;">
             <td align="center" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box;">
                 <table class="content" width="100%" cellpadding="0" cellspacing="0" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; margin: 0; padding: 0; width: 100%; -premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 100%;">
                     <tr>
@@ -39,10 +39,10 @@
                                 <!-- Body content --><tr>
                                     <td class="content-cell" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; padding: 35px;">
                                         <h1 style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; color: #2F3133; font-size: 19px; font-weight: bold; margin-top: 0; text-align: left;">
-                                            Добре дошли, !
+                                            Добре дошли, {{ $user['name'] }}!
                                         </h1>
                                         <pre style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box;">
-                                            <code>Благодарим Ви, че се регистрирахте в нашия сайт.</code>
+                                            <code>Благодарим Ви, че се регистрирахте в нашия сайт: <strong>{{ $user['email'] }}</strong>.</code>
                                             <code>Няшия екип искрено се надява да намерите това което търсите при нас.</code>
                                         </pre>
                                             <table class="action" align="center" width="100%" cellpadding="0" cellspacing="0" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; margin: 30px auto; padding: 0; text-align: center; width: 100%; -premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 100%;"><tr>
@@ -67,7 +67,7 @@
 
                                             </table>
                                             <pre style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box;">
-                                                <code>
+                                                <code style="text-align: center;">
                                                     Благодарим ви, че избрахте нас.
                                                 </code>
                                             </pre>

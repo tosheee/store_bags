@@ -7,7 +7,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class Welcome extends Mailable
+class OrderProcess extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -16,11 +16,11 @@ class Welcome extends Mailable
      *
      * @return void
      */
-    public $user;
+    public $user_order;
 
-    public function __construct($user)
+    public function __construct($user_order)
     {
-        $this->user = $user;
+        $this->user_order = $user_order;
     }
 
     /**
@@ -31,8 +31,8 @@ class Welcome extends Mailable
     public function build()
     {
         return $this->from('shop@thebags.bg')
-            ->subject('Добре Дошли!')
-            ->view('emails.welcome')
-            ->with('user', $this->user);
+            ->subject('Поръчката е приета!')
+            ->view('emails.order_process')
+            ->with('user_order', $this->user_order);
     }
 }

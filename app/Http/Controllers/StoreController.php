@@ -123,7 +123,6 @@ class StoreController extends Controller
         return view('store.shopping-cart')->with('products', $cart->items)->with('totalPrice', $cart->totalPrice)->with('totalQuantity', $cart->totalQty);
     }
     
-    
     // checkout
     public function getCheckout()
     {
@@ -157,7 +156,7 @@ class StoreController extends Controller
 
         $oldCart = Session::get('cart');
         $delivery_address = json_encode( $request->input('address'), JSON_UNESCAPED_UNICODE );
-        $cart = new Cart($oldCart);
+        $cart = base64_encode(serialize(new Cart($oldCart)));
 
         $order = new Order();
         $order->user_id         = $request->input('user_id');
@@ -171,7 +170,7 @@ class StoreController extends Controller
         $order->company         = $request->input('company');
         $order->bulstat         = $request->input('bulstat');
         $order->note            = $request->input('note');
-        $order->cart = base64_encode(serialize($cart));
+        $order->cart            = $cart;
 
         if(isset(Auth::user()->name))
         {
@@ -184,12 +183,19 @@ class StoreController extends Controller
 
         Session::forget('cart');
 
+        $user_order = [
+            'name'  => $request->input('name'),
+            'email' => $request->input('email'),
+            'cart'  => $cart
+        ];
+
+        \Mail::to($user_order)->send(new Welcome($user_order));
+
         $categories = Category::all();
         $subCategories = SubCategory::all();
         $products = Product::where('active', true)->paginate(18);
 
         return view('store.index')->with('categories', $categories)->with('subCategories', $subCategories)->with('products', $products);
-        
     }
 
     // show-pages
@@ -258,7 +264,7 @@ class StoreController extends Controller
         return $cart_product;
     }
 
-   public function postUserMessage(Request $request)
+    public function postUserMessage(Request $request)
    {
         $this->validate($request, [
             'name'    => 'required',

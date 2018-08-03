@@ -8,6 +8,11 @@
         $view->with('pagesButtonsRender', App\Admin\Page::where('active_page', true)->get());
     });
 
+    Route::get('/welcome_test', function(){
+       return view('emails.welcome_test');
+    });
+
+
     Auth::routes();
 
     Route::get('/', 'WelcomeController@welcome');

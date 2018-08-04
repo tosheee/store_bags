@@ -44,7 +44,7 @@
                                         Вашата поръчка е приета, {{ $user_order['name'] }}!
                                     </h1>
                                         <pre style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box;">
-                                            <code>Благодарим Ви, за направената поръчка: <strong>{{ $user['email'] }}</strong>.</code>
+                                            <code>Благодарим Ви, за направената поръчка: <strong>{{ $user_order['email'] }}</strong>.</code>
                                             <code>Няшия екип прави всичко възможно за да получите поръчката по - бързо и качествено.</code>
                                         </pre>
                                     <table class="action" align="center" width="100%" cellpadding="0" cellspacing="0" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; margin: 30px auto; padding: 0; text-align: center; width: 100%; -premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 100%;"><tr>

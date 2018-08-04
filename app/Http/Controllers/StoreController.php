@@ -15,6 +15,7 @@ use App\Admin\UserMessage;
 use App\Admin\SubCategory;
 use App\Admin\SupportMessage;
 
+use App\Mail\OrderProcess;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -189,7 +190,7 @@ class StoreController extends Controller
             'cart'  => $cart
         ];
 
-        \Mail::to($user_order)->send(new Welcome($user_order));
+        \Mail::to($user_order)->send(new OrderProcess($user_order));
 
         $categories = Category::all();
         $subCategories = SubCategory::all();

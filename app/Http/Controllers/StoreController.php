@@ -187,10 +187,10 @@ class StoreController extends Controller
         $user_order = [
             'name'  => $request->input('name'),
             'email' => $request->input('email'),
-            'cart'  => $cart
+            'cart'  => $oldCart
         ];
 
-        \Mail::to($user_order)->send(new OrderProcess($user_order));
+        \Mail::to($user_order['email'])->send(new OrderProcess($user_order));
 
         $categories = Category::all();
         $subCategories = SubCategory::all();

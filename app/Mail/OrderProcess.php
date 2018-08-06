@@ -11,11 +11,6 @@ class OrderProcess extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
     public $user_order;
 
     public function __construct($user_order)
@@ -23,16 +18,28 @@ class OrderProcess extends Mailable
         $this->user_order = $user_order;
     }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
     public function build()
     {
-        return $this->from('shop@thebags.bg')
-            ->subject('Поръчката е приета!')
-            ->view('emails.order_process')
-            ->with('user_order', $this->user_order);
+        //dd($this->user_order['cart']);
+        /*
+                foreach($this->user_order['cart']->items as $item){
+
+
+                    echo $item['item_title'];
+                    echo $item['qty'];
+                    echo $item['item_price'];
+                    echo $item['total_item_price'];
+                    echo $item['item_pic'];
+                }
+
+               echo $this->user_order['cart']->totalQty ;
+                echo $this->user_order['cart']->totalPrice ;
+
+                */
+
+               return $this->from('shop@thebag.bg')
+                    ->subject('Успешна поръчка в thebag.bg')
+                    ->view('emails.order_process')
+                    ->with('user_order', $this->user_order);
     }
 }

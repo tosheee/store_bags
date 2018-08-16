@@ -1,6 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+    <style>
+        .slider_titles {
+            color: #fa5a7f;
+            text-align: center;
+            font-family: 'Marck Script', cursive;
+            font-size: 3em;
+            margin-bottom: 5%;
+        }
+    </style>
 
     <div class="col-md-2" id="vertical-nav-bar">
         @include('partials.vertical_navigation')
@@ -106,9 +115,9 @@
                     <span class="productId">Продуктов код: {{ $descriptions['article_id'] }}</span>
                     <div class="subProdInfo">
                         <span class="price">
-                            Цена: {{ number_format($descriptions['price'], 2) }} {{ $descriptions['currency'] }}
+                            <p>Цена: <strong>{{ number_format($descriptions['price'], 2) }}</strong> {{ $descriptions['currency'] }}</p>
                             @if (isset($descriptions['old_price']))
-                                <span class="old-price">   {{ number_format($descriptions['old_price'], 2) }} {{ $descriptions['currency'] }}</span>
+                                <span class="price_old">  Вместо: <del style="color: red"> {{ number_format($descriptions['old_price'], 2) }} {{ $descriptions['currency'] }}</del></span>
                             @endif
                         </span>
                         <span class="stock"></span>

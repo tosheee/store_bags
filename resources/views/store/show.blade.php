@@ -129,13 +129,27 @@
                     <div class="select-wrapper">
                         <span class="stock">Статус: {{ isset($descriptions['product_status'])  ? $descriptions['product_status'] : '' }}</span>
 
+
+
                     </div>
 
                     <div class="colors">
-                        <div class="color selected" style="background-color: #222" title="Black"></div>
-                        <div class="color" style="background-color: #FFF" title="White"></div>
-                        <div class="color" style="background-color: #00F" title="Dark Blue"></div>
-                        <div class="color" style="background-color: #08F" title="Light Blue"></div>
+                        <div class="section">
+                            <div class="fb-share-button" data-href="{{ Request::fullUrl() }}" data-layout="button_count" data-size="small" data-mobile-iframe="true">
+                                <a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ Request::fullUrl() }}&amp;src=sdkpreparse">Споделяне</a>
+                            </div>
+
+                            <div id="fb-root"></div>
+                            <script>
+                                (function(d, s, id) {
+                                    var js, fjs = d.getElementsByTagName(s)[0];
+                                    if (d.getElementById(id)) return;
+                                    js = d.createElement(s); js.id = id;
+                                    js.src = 'https://connect.facebook.net/bg_BG/sdk.js#xfbml=1&version=v2.11';
+                                    fjs.parentNode.insertBefore(js, fjs);
+                                }(document, 'script', 'facebook-jssdk'));
+                            </script>
+                        </div>
                     </div>
 
                     <?php if(Session::has('cart'))
@@ -205,6 +219,7 @@
                 </div>
 
 
+
         </div>
                     </div>
     </div>
@@ -248,6 +263,8 @@
                     </table>
                 @endif
             </div>
+    <hr/>
+    <br/>
     <div class="col-md-9">
         <script type="text/javascript" src="{{ asset('js/owl.carousel.js') }}"></script>
         @include('partials.items_slider')
@@ -269,11 +286,6 @@
                 });
             </script>
     </div>
-
-
-
-
-
 
     <script>
         var slider = document.getElementById("sliderImages");

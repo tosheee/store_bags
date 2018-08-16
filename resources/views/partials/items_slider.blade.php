@@ -15,7 +15,7 @@
 
                     <div class="product">
                         <div class="ribbon-wrapper-1">
-                            <div class="ribbon-1">Разпродажба</div>
+                            <div class="ribbon-1" style="z-index: 100; font-size: 12px; background-color: #ff99a1;">Разпродажба</div>
                         </div>
                         <div class="info-large">
                             <h4>{{ $descriptSale['title_product'] }}</h4>

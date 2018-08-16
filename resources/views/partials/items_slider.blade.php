@@ -273,8 +273,6 @@
             @endforeach
         </div>
     @endif
-
-    <script type="text/javascript" src="{{ asset('js/owl.carousel.js') }}"></script>
 </div>
 
 <div class="slider-item-content">
@@ -411,8 +409,6 @@
             @endforeach
         </div>
     @endif
-
-    <script type="text/javascript" src="{{ asset('js/owl.carousel.js') }}"></script>
 </div>
 
 

@@ -10,6 +10,7 @@
 /public/storage
 /public/symlink.php
 /public/css/old_files/*
+/public/.htaccess
 
 symlink.php
 

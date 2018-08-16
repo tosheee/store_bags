@@ -11,28 +11,29 @@
     <div class="col-md-10">
         <div class="row">
             <ul style="padding: 20px 20px 20px 20px; ">
-        <li>
-            <div class="order-breadcrumb">
-                <a href="/" class="">Начало</a>
-                @foreach($categories as $category)
-                    @if($product->category_id == $category->id)
-                        › <a href="/store/search?category={{ $category->id }}" class=""> {{ $category->name }}</a>
-                    @endif
-                @endforeach
+                <li>
+                    <div class="order-breadcrumb">
+                        <a href="/" class="">Начало</a>
+                        @foreach($categories as $category)
+                            @if($product->category_id == $category->id)
+                                › <a href="/store/search?category={{ $category->id }}" class=""> {{ $category->name }}</a>
+                            @endif
+                        @endforeach
 
-                @foreach($subCategories as $subCategory)
-                    @if($product->sub_category_id == $subCategory->id)
-                        › <a href="/store/search?sub_category={{ $subCategory->identifier }}" class="active">{{ $subCategory->name }}</a>
-                    @endif
-                @endforeach
-            </div>
-        </li>
-    </ul>
+                        @foreach($subCategories as $subCategory)
+                            @if($product->sub_category_id == $subCategory->id)
+                                › <a href="/store/search?sub_category={{ $subCategory->identifier }}" class="active">{{ $subCategory->name }}</a>
+                            @endif
+                        @endforeach
+                    </div>
+                </li>
+            </ul>
+
             <div class="show-page-product">
-        <div id="showPageProductImages">
-            <div class="container-fluid">
-
-                <div class="product-slider" id="product-slider-id">
+                <div class="col-md-6">
+                <div id="showPageProductImages">
+                    <div class="container-fluid">
+                        <div class="product-slider" id="product-slider-id">
                     <div id="carousel" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
                             <div class="item active">
@@ -96,123 +97,127 @@
                         <!-- /thumbcarousel -->
                     </div>
                 </div>
-            </div>
-        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="col-md-5">
+                <div class="productInfo">
+                    <h1 class="title">{{ $descriptions['title_product'] }}</h1>
+                    <span class="productId">Продуктов код: {{ $descriptions['article_id'] }}</span>
+                    <div class="subProdInfo">
+                        <span class="price">
+                            Цена: {{ number_format($descriptions['price'], 2) }} {{ $descriptions['currency'] }}
+                            @if (isset($descriptions['old_price']))
+                                <span class="old-price">   {{ number_format($descriptions['old_price'], 2) }} {{ $descriptions['currency'] }}</span>
+                            @endif
+                        </span>
+                        <span class="stock"></span>
+                    </div>
+
+                    <p> {{ isset($descriptions['short_description']) ? $descriptions['short_description'] : '' }}</p>
+
+                    <label><a href="#"></a></label>
+                    <div class="select-wrapper">
+                        <span class="stock">Статус: {{ isset($descriptions['product_status'])  ? $descriptions['product_status'] : '' }}</span>
+
+                    </div>
+
+                    <div class="colors">
+                        <div class="color selected" style="background-color: #222" title="Black"></div>
+                        <div class="color" style="background-color: #FFF" title="White"></div>
+                        <div class="color" style="background-color: #00F" title="Dark Blue"></div>
+                        <div class="color" style="background-color: #08F" title="Light Blue"></div>
+                    </div>
+
+                    <?php if(Session::has('cart'))
+                    {
+                        $oldCart = Session::get('cart');
+                        if(isset($oldCart->items[$product->id]['qty']))
+                        {
+                            $product_qty = $oldCart->items[$product->id]['qty'];
+                        }
+                    }
+                    ?>
+
+                <div class="addToCart">
+                        <div class="qntySection">
+                            <span class="btn minus-button" data-type="remove">-</span>
+                            <span class="show-page" id="quantity-product">{{ isset($product_qty) ? $product_qty : '1' }}</span>
+                            <input id="id-product-show-page" type="hidden" name="q" value="{{ $product->id }}"/>
+                            <span class="btn plus-button" data-type="add">+</span>
+                        </div>
 
 
-        <div class="productInfo">
-            <h1 class="title">{{ $descriptions['title_product'] }}</h1>
-            <span class="productId">Продуктов код: {{ $descriptions['article_id'] }}</span>
-            <div class="subProdInfo">
-                <span class="price">
-                    Цена: {{ number_format($descriptions['price'], 2) }} {{ $descriptions['currency'] }}
-                    @if (isset($descriptions['old_price']))
-                        <span class="old-price">   {{ number_format($descriptions['old_price'], 2) }} {{ $descriptions['currency'] }}</span>
+                        <script>
+                            $(document).ready(function() {
+                                $(".plus-button").on('click', function() {
+                                    var $quantityProduct = $('#quantity-product');
+                                    var plusValue = parseInt($quantityProduct.html());
+
+                                    if (!isNaN(plusValue)) {
+                                        $quantityProduct.html(plusValue + 1);
+                                    } else {
+                                        $quantityProduct.html(1);
+                                    }
+                                });
+
+                                $(".minus-button").on('click', function() {
+                                    var $quantityProduct = $('#quantity-product');
+                                    var minusValue = parseInt($quantityProduct.html());
+                                    if (!isNaN(minusValue) && minusValue > 1) {
+                                        $quantityProduct.html(minusValue - 1);
+                                    } else {
+                                        $quantityProduct.html(1);
+                                    }
+                                });
+                            });
+                        </script>
+                    @if ($descriptions['product_status']!= 'Не е наличен')
+
+                        <button class="add-cart-large add-product-button">
+                            Добави
+                            <i class="fa fa-shopping-cart" ></i>
+
+
+                            @if(!empty($oldCart->items[$product->id]) )
+                                <sup id="sup-product-qty"> {{ isset($product_qty) ? $product_qty : '' }}</sup>
+                                <input id="quantity-product" type="hidden" value="{{ isset($product_qty) ? $product_qty + 1 : '1' }}"  >
+                            @else
+                                <sup id="sup-product-qty"></sup>
+                                <input id="quantity-product" type="hidden" value="1"  >
+                            @endif
+
+                            <input id="id-product" type="hidden" value="{{ $product->id }}"/>
+                        </button>
+
+                    @else
+                        <button class="add-cart-large add-product-button" disabled title="Очаква се доставка">Очаквайте скоро</button>
                     @endif
-                </span>
-                <span class="stock"></span>
-            </div>
-
-            <p> {{ isset($descriptions['short_description']) ? $descriptions['short_description'] : '' }}</p>
-
-            <label><a href="#"></a></label>
-            <div class="select-wrapper">
-                <span class="stock">Статус: {{ isset($descriptions['product_status'])  ? $descriptions['product_status'] : '' }}</span>
-
-            </div>
-
-            <div class="colors">
-                <div class="color selected" style="background-color: #222" title="Black"></div>
-                <div class="color" style="background-color: #FFF" title="White"></div>
-                <div class="color" style="background-color: #00F" title="Dark Blue"></div>
-                <div class="color" style="background-color: #08F" title="Light Blue"></div>
-            </div>
-
-            <?php if(Session::has('cart'))
-            {
-                $oldCart = Session::get('cart');
-                if(isset($oldCart->items[$product->id]['qty']))
-                {
-                    $product_qty = $oldCart->items[$product->id]['qty'];
-                }
-            }
-            ?>
-
-        <div class="addToCart">
-                <div class="qntySection">
-                    <span class="btn minus-button" data-type="remove">-</span>
-                    <span class="show-page" id="quantity-product">{{ isset($product_qty) ? $product_qty : '1' }}</span>
-                    <input id="id-product-show-page" type="hidden" name="q" value="{{ $product->id }}"/>
-                    <span class="btn plus-button" data-type="add">+</span>
                 </div>
 
 
-                <script>
-                    $(document).ready(function() {
-                        $(".plus-button").on('click', function() {
-                            var $quantityProduct = $('#quantity-product');
-                            var plusValue = parseInt($quantityProduct.html());
-
-                            if (!isNaN(plusValue)) {
-                                $quantityProduct.html(plusValue + 1);
-                            } else {
-                                $quantityProduct.html(1);
-                            }
-                        });
-
-                        $(".minus-button").on('click', function() {
-                            var $quantityProduct = $('#quantity-product');
-                            var minusValue = parseInt($quantityProduct.html());
-                            if (!isNaN(minusValue) && minusValue > 1) {
-                                $quantityProduct.html(minusValue - 1);
-                            } else {
-                                $quantityProduct.html(1);
-                            }
-                        });
-                    });
-                </script>
-            @if ($descriptions['product_status']!= 'Не е наличен')
-
-                <button class="add-cart-large add-product-button">
-                    Добави
-                    <i class="fa fa-shopping-cart" ></i>
-
-
-                    @if(!empty($oldCart->items[$product->id]) )
-                        <sup id="sup-product-qty"> {{ isset($product_qty) ? $product_qty : '' }}</sup>
-                        <input id="quantity-product" type="hidden" value="{{ isset($product_qty) ? $product_qty + 1 : '1' }}"  >
-                    @else
-                        <sup id="sup-product-qty"></sup>
-                        <input id="quantity-product" type="hidden" value="1"  >
-                    @endif
-
-                    <input id="id-product" type="hidden" value="{{ $product->id }}"/>
-                </button>
-
-            @else
-                <button class="add-cart-large add-product-button" disabled title="Очаква се доставка">Очаквайте скоро</button>
-            @endif
         </div>
-
-
-        </div>
+                    </div>
     </div>
         </div>
-        <div class="col-md-9">
-            <div>
-                @if(isset($descriptions['general_description']))
-                    <ul class="menu-items">
-                        <li class="active">Информация за продукта</li>
-                        <li></li>
-                        <li></li>
-                    </ul>
 
-                    <div style="width:100%;border-top:1px solid silver">
-                        <p style="padding:15px;">
-                        <p style="font-size: 150%;"> {!! $descriptions['general_description'] !!} </p>
-                        </p>
+
+
+        @if(isset($descriptions['general_description']))
+                    <div class="col-md-9">
+                        <div>
+                            <ul class="menu-items">
+                                <li class="active">Информация за продукта</li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+
+                            <div style="width:100%;border-top:1px solid silver">
+                                <p style="padding:15px;"><p style="font-size: 150%;"> {!! $descriptions['general_description'] !!} </p> </p>
+                            </div>
+                        </div>
                     </div>
-                @endif
+            @endif
 
                 @if(isset($descriptions['properties']))
                     <?php $table_data = array_chunk($descriptions['properties'], 2) ?>
@@ -234,24 +239,32 @@
                     </table>
                 @endif
             </div>
-        </div>
+    <div class="col-md-9">
         <script type="text/javascript" src="{{ asset('js/owl.carousel.js') }}"></script>
         @include('partials.items_slider')
 
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('#slider_product_sale, #slider_product_recommended, #slider_best_seller').owlCarousel({
-                    autoplay: true,
-                    autoplayTimeout: 2000,
-                    autoplayHoverPause: true,
-                    margin: 30,
-                    items: 4,
-                    nav: true,
-                    navText: ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"]
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#slider_product_sale, #slider_product_recommended, #slider_best_seller').owlCarousel({
+                        autoplay: true,
+                        autoplayTimeout: 2000,
+                        autoplayHoverPause: true,
+                        margin: 30,
+                        responsive:{
+                            0:{items: 1},
+                            600:{items: 2},
+                            1300:{items: 3},
+                            1580:{items: 4}
+                        }
+                    });
                 });
-            });
-        </script>
+            </script>
     </div>
+
+
+
+
+
 
     <script>
         var slider = document.getElementById("sliderImages");

@@ -18,7 +18,7 @@
             <ul class="nav navbar-nav">
                 <li class="dropdown megaDropMenu">
 
-                    <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="false" id="store-button">Продукти <i class="fa fa-angle-down ml-5"></i></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="false" id="store-button">Продукти <i class="fa fa-angle-down ml-5"></i></a>
                     <ul class="dropdown-menu row">
                         @foreach($categoriesButtonsName as $categoryButton)
                             <li class="col-sm-3 col-xs-12">

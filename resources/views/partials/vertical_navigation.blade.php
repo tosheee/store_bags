@@ -1,7 +1,9 @@
 <div id="sidebar">
     <?php $paramOfUrl = explode('=', Request::fullUrl()) ?>
     @foreach($categoriesButtonsName as $categoryButton)
-        <h3>{{ $categoryButton->name }}</h3>
+        <h3>
+            <a class="v-nav-a" href="/store/search?category={{ $categoryButton->id }}" title="Вижте продуктите в категорията"> {{ $categoryButton->name }}</a>
+        </h3>
         <div class="checklist categories">
             <ul class="">
 

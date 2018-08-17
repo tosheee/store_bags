@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
     <head>
-
         @if(isset($product))
             @if(isset($metaDescription))
-
                 <meta property="fb:app_id" content="966242223397117" />
                 <meta property="og:url" content="{{ Request::fullUrl() }}" />
                 <meta property="og:type" content="product" />
@@ -28,25 +26,23 @@
         <link href="https://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Great+Vibes" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Marck+Script" rel="stylesheet">
+
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-            <style>
-                canvas {
-                    position: fixed;
-                    z-index: 0;
-                }
-            </style>
-            <script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
-                $(document).ready(function () {
-                    var part_url = window.location.pathname.split('/')[1];
+        <script>
+            $(document).ready(function () {
+                var part_url = window.location.pathname.split('/')[1];
 
-                    if (part_url == 'admin') {
-                        $("header").css('display', 'none')
-                    };
-                });
-            </script>
-            <script src="{{ asset('js/jquery.imgareaselect.js') }}"></script>
+                if (part_url == 'admin') {
+                    $("header").css('display', 'none')
+                };
+            });
+        </script>
+
+        <script src="{{ asset('js/jquery.imgareaselect.js') }}"></script>
+
+        <style>canvas {position: fixed; z-index: 0;}</style>
 
     </head>
 

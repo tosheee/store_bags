@@ -18,7 +18,7 @@
             <ul class="nav navbar-nav">
                 <li class="dropdown megaDropMenu">
 
-                    <a href="/store" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="false" id="store-button">Продукти <i class="fa fa-angle-down ml-5"></i></a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="false" id="store-button">Продукти <i class="fa fa-angle-down ml-5"></i></a>
                     <ul class="dropdown-menu row">
                         @foreach($categoriesButtonsName as $categoryButton)
                             <li class="col-sm-3 col-xs-12">
@@ -34,14 +34,6 @@
                         @endforeach
                     </ul>
                 </li>
-
-                <script>
-                    $(document).ready(function(){
-                        $('#store-button').click(function(){
-                            window.location.href ='/store'
-                        });
-                    });
-                </script>
 
                 @foreach($pagesButtonsRender as $pageButton)
                     <li><a href="/page?show={{ $pageButton->url_page }}" class="dropdown-toggle"  data-hover="dropdown" data-close-others="false">{{ $pageButton->name_page }}</a></li>

@@ -55,5 +55,14 @@
     .product{
         margin: 0 auto;
     }
+
+    .navbar-default .navbar-collapse li.dropdown.megaDropMenu .dropdown-menu li ul li a {
+        text-align: center;
+        display: block;
+        color: rgb(255, 255, 255);
+        font-size: 14px;
+        text-decoration: none;
+        padding: 4px 15px;
+    }
 }
 

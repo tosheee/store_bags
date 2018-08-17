@@ -17,7 +17,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(UrlGenerator $url)
     {
-        URL::forceScheme('https');
+        if ($_SERVER['HTTP_HOST'] == 'localhost:8000'){
+            URL::forceScheme('http');
+        }else{
+            URL::forceScheme('https');
+        }
     }
 
     /**

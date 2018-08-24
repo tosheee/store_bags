@@ -2,7 +2,7 @@
     <?php $paramOfUrl = explode('=', Request::fullUrl()) ?>
     @foreach($categoriesButtonsName as $categoryButton)
         <h3>
-            <a class="v-nav-a" href="/store/search?category={{ $categoryButton->id }}" title="Вижте продуктите в категорията"> {{ $categoryButton->name }}</a>
+            <a class="v-nav-a" href="/store/search?category={{ $categoryButton->id }}" title="Вижте продуктите в {{ $categoryButton->name }}"> {{ $categoryButton->name }}</a>
         </h3>
         <div class="checklist categories">
             <ul class="">
@@ -11,9 +11,9 @@
                     @if ($subCategoryButtonsName->category_id == $categoryButton->id)
 
                         @if(isset($paramOfUrl[1]) && urldecode($paramOfUrl[1]) == $subCategoryButtonsName->identifier)
-                            <li class="" ><span></span><a style="color: #5ff7d2;" class="" href="/store/search?sub_category={{ $subCategoryButtonsName->identifier }}">{{ $subCategoryButtonsName->name }}</a></li>
+                            <li class="" ><span></span><a style="color: #5ff7d2;" class="" href="/store/search?sub_category={{ $subCategoryButtonsName->identifier }}" title="{{ $subCategoryButtonsName->name }}">{{ $subCategoryButtonsName->name }}</a></li>
                         @else
-                            <li class=""><a class="" href="/store/search?sub_category={{ $subCategoryButtonsName->identifier }}">{{ $subCategoryButtonsName->name }}</a></li>
+                            <li class=""><a class="" href="/store/search?sub_category={{ $subCategoryButtonsName->identifier }}" title="{{ $subCategoryButtonsName->name }}">{{ $subCategoryButtonsName->name }}</a></li>
                         @endif
 
                     @endif

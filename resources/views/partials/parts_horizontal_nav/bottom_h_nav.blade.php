@@ -15,11 +15,11 @@
             <ul class="nav navbar-nav">
                 @foreach($categoriesButtonsName as $categoryButton)
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="false">{{ $categoryButton->name }}<i class="fa fa-angle-down ml-5"></i></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="false" title="{{ $categoryButton->name }}">{{ $categoryButton->name }}<i class="fa fa-angle-down ml-5"></i></a>
                     <ul class="dropdown-menu dropdown-menu-left">
                         @foreach($subCategoriesButtonsName as $subCategoryButton)
                             @if ($subCategoryButton->category_id == $categoryButton->id)
-                                <li><a href="/store/search?sub_category={{ $subCategoryButton->identifier }}">{{ $subCategoryButton->name }}</a></li>
+                                <li><a href="/store/search?sub_category={{ $subCategoryButton->identifier }}" title="{{ $subCategoryButton->name }}">{{ $subCategoryButton->name }}</a></li>
                             @endif
                         @endforeach
                     </ul>
@@ -39,7 +39,7 @@
                     //});
                 </script>
                 @foreach($pagesButtonsRender as $pageButton)
-                    <li><a href="/page?show={{ $pageButton->url_page }}" class="dropdown-toggle"  data-hover="dropdown" data-close-others="false">{{ $pageButton->name_page }}</a></li>
+                    <li><a href="/page?show={{ $pageButton->url_page }}" class="dropdown-toggle"  data-hover="dropdown" data-close-others="false" title="{{ $pageButton->name_page }}">{{ $pageButton->name_page }}</a></li>
                 @endforeach
 
 

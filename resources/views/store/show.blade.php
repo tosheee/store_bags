@@ -111,7 +111,7 @@
                 </div>
                 <div class="col-md-5">
                 <div class="productInfo">
-                    <h1 class="title">{{ $descriptions['title_product'] }}</h1>
+                    <h1 class="title" title="{{ $descriptions['title_product'] }}">{{ $descriptions['title_product'] }}</h1>
                     <span class="productId">Продуктов код: {{ $descriptions['article_id'] }}</span>
                     <div class="subProdInfo">
                         <span class="price">

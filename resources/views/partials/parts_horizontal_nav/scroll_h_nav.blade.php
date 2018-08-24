@@ -23,10 +23,10 @@
                         @foreach($categoriesButtonsName as $categoryButton)
                             <li class="col-sm-3 col-xs-12">
                                 <ul class="list-unstyled">
-                                    <li><a href="/store/search?category={{ $categoryButton->id }}"><strong>{{ $categoryButton->name }}</strong></a></li>
+                                    <li><a href="/store/search?category={{ $categoryButton->id }}" title="{{ $categoryButton->name }}"><strong>{{ $categoryButton->name }}</strong></a></li>
                                     @foreach($subCategoriesButtonsName as $subCategoryButton)
                                         @if ($subCategoryButton->category_id == $categoryButton->id)
-                                            <li><a href="/store/search?sub_category={{ $subCategoryButton->identifier }}">{{ $subCategoryButton->name }}</a></li>
+                                            <li><a href="/store/search?sub_category={{ $subCategoryButton->identifier }}" title="{{ $subCategoryButton->name }}">{{ $subCategoryButton->name }}</a></li>
                                         @endif
                                     @endforeach
                                 </ul>
@@ -36,7 +36,7 @@
                 </li>
 
                 @foreach($pagesButtonsRender as $pageButton)
-                    <li><a href="/page?show={{ $pageButton->url_page }}" class="dropdown-toggle"  data-hover="dropdown" data-close-others="false">{{ $pageButton->name_page }}</a></li>
+                    <li><a href="/page?show={{ $pageButton->url_page }}" class="dropdown-toggle"  data-hover="dropdown" data-close-others="false" title="{{ $pageButton->name_page }}">{{ $pageButton->name_page }}</a></li>
                 @endforeach
             </ul>
 

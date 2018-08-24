@@ -48,7 +48,7 @@
                             @endif
 
                             <div class="info-large">
-                                <h4>{{ $descriptions['title_product'] }}</h4>
+                                <h4 title="{{ $descriptions['title_product'] }}" >{{ $descriptions['title_product'] }}</h4>
                                 <div class="sku">
                                     PRODUCT SKU: <strong>89356</strong>
                                 </div>
@@ -162,7 +162,7 @@
                                     <div class="stats">
                                         <div class="stats-container">
 
-                                            <span class="product_name">{{ $descriptions['title_product'] }}</span>
+                                            <span class="product_name" title="{{ $descriptions['title_product'] }}">{{ $descriptions['title_product'] }}</span>
                                             <br/>
                                                 <span class="product_price">
                                                     <div>
@@ -207,9 +207,9 @@
                                             @if (isset($descriptions['main_picture_url']))
                                                 <li><img src="{{ $descriptions['main_picture_url'] }}"  /></li>
                                             @elseif(isset($descriptions['upload_main_picture']))
-                                                <li><img src="/storage/upload_pictures/{{ $product->id }}/{{ $descriptions['upload_main_picture'] }}" alt="pic" /></li>
+                                                <li><img src="/storage/upload_pictures/{{ $product->id }}/{{ $descriptions['upload_main_picture'] }}" alt="{{ $descriptions['title_product'] }}" /></li>
                                             @else
-                                                <li><img src="/storage/common_pictures/noimage.jpg" alt="pic" /></li>
+                                                <li><img src="/storage/common_pictures/noimage.jpg" alt="no image" /></li>
                                             @endif
 
                                             @if(isset($descriptions['gallery']))

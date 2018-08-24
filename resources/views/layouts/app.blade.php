@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
     <head>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124589373-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-124589373-1');
+        </script>
+
         @if(isset($product))
             @if(isset($metaDescription))
                 <meta property="fb:app_id" content="966242223397117" />

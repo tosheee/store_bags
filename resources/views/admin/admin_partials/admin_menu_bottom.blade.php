@@ -71,8 +71,5 @@
             $("#right-container").toggleClass("full-width");
         });
     });
-
-
-
-
 </script>
+<div class="clearfix"/>

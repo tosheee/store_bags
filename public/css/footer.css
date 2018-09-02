@@ -1,4 +1,5 @@
 footer#footer-content {
+    z-index: 100;
     padding: 50px 0 20px 0;
     color: #878c94;
     background-color: #00193A;

@@ -288,4 +288,6 @@
             slider.style.transform = "translateX(-"+move+"%)";
         }
     </script>
+
+    <div class="clearfix"/>
 @endsection

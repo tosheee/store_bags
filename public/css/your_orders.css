@@ -31,7 +31,7 @@
     margin: 0 5px;
 }
 #user-orders .order_sorter li.selected {
-    border-bottom-color: #5def8a;
+    border-bottom-color: #f1120e;
     font-weight: 700;
 }
 #user-orders .order_sorter a {

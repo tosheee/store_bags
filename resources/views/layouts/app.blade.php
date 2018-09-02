@@ -71,7 +71,9 @@
 
         <div class="wrapper-main-content">
             @yield('content')
+            <div class="clearfix"/>
         </div>
+
 
         @include('partials.footer')
 

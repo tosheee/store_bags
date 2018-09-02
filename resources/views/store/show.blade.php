@@ -289,5 +289,5 @@
         }
     </script>
 
-    <div class="clearfix"/>
+
 @endsection

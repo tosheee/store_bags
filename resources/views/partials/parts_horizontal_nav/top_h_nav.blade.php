@@ -9,7 +9,9 @@
         </ul>
 
         <ul class="topBarNav  pull-right">
-            <li class="dropdown">test</li>
+            @foreach($pagesButtonsRender as $pageButton)
+                <li ><a href="/page?show={{ $pageButton->url_page }}" class="dropdown-toggle"  data-hover="dropdown" data-close-others="false" style="color: #f2f7ff;">{{ $pageButton->name_page }}</a></li>
+            @endforeach
 
             <li class="dropdown">
                 <ul class="dropdown-menu w-100" role="menu"></ul>

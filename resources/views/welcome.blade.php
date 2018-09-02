@@ -178,11 +178,12 @@
                                 <h3><span>{{ $slider_data->description }}</span></h3>
 
                                 <br>
-
-                                <div class="">
-                                    <a class="btn btn-theme btn-sm btn-min-block" href="/login">Вход</a>
-                                    <a class="btn btn-theme btn-sm btn-min-block" href="/register">Регистрация</a>
-                                </div>
+                                @if (Auth::guest())
+                                    <div class="">
+                                        <a class="btn btn-theme btn-sm btn-min-block" href="/login">Вход</a>
+                                        <a class="btn btn-theme btn-sm btn-min-block" href="/register">Регистрация</a>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         <!-- /header-text -->

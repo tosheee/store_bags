@@ -11,11 +11,6 @@ class Welcome extends Mailable
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
     public $user;
 
     public function __construct($user)
@@ -23,14 +18,9 @@ class Welcome extends Mailable
         $this->user = $user;
     }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
     public function build()
     {
-        return $this->from('shop@thebags.bg')
+        return $this->from('thebag.bg')
             ->subject('Добре Дошли!')
             ->view('emails.welcome')
             ->with('user', $this->user);

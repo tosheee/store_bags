@@ -17,15 +17,16 @@
                 <meta property="fb:app_id" content="966242223397117" />
                 <meta property="og:url" content="{{ Request::fullUrl() }}" />
                 <meta property="og:type" content="product" />
-                <meta property="og:title" content="The Bag - {{isset($metaDescription) ? $metaDescription['title_product'] : '' }}" />
+                <meta property="og:title" content="thebag.bg - {{isset($metaDescription) ? $metaDescription['title_product'] : '' }}" />
                 <meta property="og:description" content="{{isset($metaDescription) ? $metaDescription['title_product'] : '' }}" />
                 <meta property="og:image" content="{{ asset('storage/upload_pictures')}}/{{ $product->id }}/{{ isset($metaDescription['upload_main_picture']) ? $metaDescription['upload_main_picture'] : '' }}" />
                 <script src="//connect.facebook.net/bg_BG/sdk.js#xfbml=1&version=v2.11"></script>
             @endif
         @endif
 
-        <meta name="description" content="Онлайн магазин за дамски и мъжки чанти, куфари, портмонета сакове. Пазарувай онлайн!" />
-        <meta name="keywords" content="чанти, дамски дамски, мъжки чанти, портмонета, раници, куфари, сакове." />
+        <base href="https://thebag.bg/" />
+        <meta name="description" content="Дамски и мъжки чанти, куфари, портмонета, сакове. Пазарувай онлайн!" />
+        <meta name="keywords" content="чанти, 4анти, chanti, дамски, мъжки, портмонета, раници, куфари, сакове, цени,  damski, оферти отстъпки, намеления, евтини." />
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,12 +36,12 @@
         <title>
             @if(isset($product))
                 @if(isset($metaDescription))
-                    {{ isset($metaDescription) ? $metaDescription['title_product'] : ' Thebag.bg - Магазин за чанти, раници и куфари.' }}
+                    {{ isset($metaDescription) ? $metaDescription['title_product'] : ' thebag.bg - Магазин за чанти, раници и куфари.' }}
                 @else
-                    Thebag.bg - Магазин за чанти, раници и куфари.
+                    thebag.bg - Магазин за чанти, раници и куфари.
                 @endif
             @else
-                Thebag.bg - Магазин за чанти, раници и куфари.
+                thebag.bg - Магазин за чанти, раници и куфари.
             @endif
         </title>
 

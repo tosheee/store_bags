@@ -116,11 +116,11 @@
                                     <div class="shadow"></div>
 
                                     @if (isset($descriptions['main_picture_url']))
-                                        <img style="max-width: 270px; max-height: 320px;" src="{{ $descriptions['main_picture_url'] }}"  />
+                                        <img style="max-width: 270px; max-height: 320px;" src="{{ $descriptions['main_picture_url'] }}"  alt="{{ $descriptions['title_product'] }}"/>
                                     @elseif(isset($descriptions['upload_main_picture']))
-                                        <img style="max-width: 270px; max-height: 320px;" src="/storage/upload_pictures/{{ $product->id }}/{{ $descriptions['upload_main_picture'] }}" alt="pic" />
+                                        <img style="max-width: 270px; max-height: 320px;" src="/storage/upload_pictures/{{ $product->id }}/{{ $descriptions['upload_main_picture'] }}" alt="{{ $descriptions['title_product'] }}" />
                                     @else
-                                        <img style="max-width: 400px; max-height: 450px;" src="/storage/common_pictures/noimage.jpg" alt="pic" />
+                                        <img style="max-width: 400px; max-height: 450px;" src="/storage/common_pictures/noimage.jpg" alt="{{ $descriptions['title_product'] }}" />
                                     @endif
 
                                     <div class="image_overlay"></div>
@@ -205,11 +205,11 @@
                                     <div class="carousel">
                                         <ul class="carousel-container">
                                             @if (isset($descriptions['main_picture_url']))
-                                                <li><img src="{{ $descriptions['main_picture_url'] }}"  /></li>
+                                                <li><img src="{{ $descriptions['main_picture_url'] }}"  alt="{{ $descriptions['title_product'] }}"/></li>
                                             @elseif(isset($descriptions['upload_main_picture']))
                                                 <li><img src="/storage/upload_pictures/{{ $product->id }}/{{ $descriptions['upload_main_picture'] }}" alt="{{ $descriptions['title_product'] }}" /></li>
                                             @else
-                                                <li><img src="/storage/common_pictures/noimage.jpg" alt="no image" /></li>
+                                                <li><img src="/storage/common_pictures/noimage.jpg" alt="no image" alt="{{ $descriptions['title_product'] }}"/></li>
                                             @endif
 
                                             @if(isset($descriptions['gallery']))

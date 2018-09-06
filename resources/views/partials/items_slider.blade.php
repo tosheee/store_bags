@@ -18,7 +18,7 @@
                             <div class="ribbon-1" style="z-index: 100; font-size: 12px; background-color: #ff99a1;">Разпродажба</div>
                         </div>
                         <div class="info-large">
-                            <h4>{{ $descriptSale['title_product'] }}</h4>
+                            <h4 title="{{ $descriptSale['title_product'] }}">{{ $descriptSale['title_product'] }}</h4>
                             <div class="sku">
                                 PRODUCT SKU: <strong>89356</strong>
                             </div>
@@ -39,11 +39,11 @@
                             <div class="product-front">
 
                                 @if (isset($descriptSale['main_picture_url']))
-                                    <img style="max-width: 270px; max-height: 320px;" src="{{ $descriptSale['main_picture_url'] }}"  />
+                                    <img style="max-width: 270px; max-height: 320px;" src="{{ $descriptSale['main_picture_url'] }}"  alt="{{ $descriptSale['title_product'] }}"/>
                                 @elseif(isset($descriptSale['upload_main_picture']))
-                                    <img style="max-width: 270px; max-height: 320px;" src="/storage/upload_pictures/{{ $product->id }}/{{ $descriptSale['upload_main_picture'] }}" alt="pic" />
+                                    <img style="max-width: 270px; max-height: 320px;" src="/storage/upload_pictures/{{ $product->id }}/{{ $descriptSale['upload_main_picture'] }}" alt="{{ $descriptSale['title_product'] }}"/>
                                 @else
-                                    <img style="max-width: 270px; max-height: 320px;" src="/storage/common_pictures/noimage.jpg" alt="pic" />
+                                    <img style="max-width: 270px; max-height: 320px;" src="/storage/common_pictures/noimage.jpg" alt="{{ $descriptSale['title_product'] }}" />
                                 @endif
 
                                 <div class="image_overlay"></div>
@@ -56,7 +56,7 @@
                                 <div class="stats">
 
                                     <div class="stats-container">
-                                        <span class="product_name">{{ $descriptSale['title_product'] }}</span>
+                                        <span class="product_name" title="{{ $descriptSale['title_product'] }}">{{ $descriptSale['title_product'] }}</span>
                                         <br/>
                                             <span class="product_price">
                                                 <div>
@@ -93,11 +93,11 @@
                                 <div class="carousel">
                                     <ul class="carousel-container">
                                         @if (isset($descriptSale['main_picture_url']))
-                                            <li><img style="max-width: 270px; max-height: 320px;" src="{{ $descriptSale['main_picture_url'] }}"  /></li>
+                                            <li><img style="max-width: 270px; max-height: 320px;" src="{{ $descriptSale['main_picture_url'] }}" alt="{{ $descriptSale['title_product'] }}" /></li>
                                         @elseif(isset($descriptSale['upload_main_picture']))
-                                            <li><img style="max-width: 270px; max-height: 320px;" src="/storage/upload_pictures/{{ $product->id }}/{{ $descriptSale['upload_main_picture'] }}" alt="pic" /></li>
+                                            <li><img style="max-width: 270px; max-height: 320px;" src="/storage/upload_pictures/{{ $product->id }}/{{ $descriptSale['upload_main_picture'] }}" alt="{{ $descriptSale['title_product'] }}" /></li>
                                         @else
-                                            <li><img style="max-width: 270px; max-height: 320px;" src="/storage/common_pictures/noimage.jpg" alt="pic" /></li>
+                                            <li><img style="max-width: 270px; max-height: 320px;" src="/storage/common_pictures/noimage.jpg" alt="{{ $descriptSale['title_product'] }}" /></li>
                                         @endif
 
                                         @if(isset($descriptSale['gallery']))
@@ -154,7 +154,7 @@
                             <div class="ribbon-1" style="z-index: 100; font-size: 12px; background-color: #ff99a1;">Препоръчан</div>
                         </div>
                         <div class="info-large">
-                            <h4>{{ $descriptSale['title_product'] }}</h4>
+                            <h4 title="{{ $descriptSale['title_product'] }}">{{ $descriptSale['title_product'] }}</h4>
                             <div class="sku">
                                 PRODUCT SKU: <strong>89356</strong>
                             </div>
@@ -175,11 +175,11 @@
                             <div class="product-front">
 
                                 @if (isset($descriptSale['main_picture_url']))
-                                    <img style="max-width: 270px; max-height: 320px;" src="{{ $descriptSale['main_picture_url'] }}"  />
+                                    <img style="max-width: 270px; max-height: 320px;" src="{{ $descriptSale['main_picture_url'] }}"  alt="{{ $descriptSale['title_product'] }}"/>
                                 @elseif(isset($descriptSale['upload_main_picture']))
-                                    <img style="max-width: 270px; max-height: 320px;" src="/storage/upload_pictures/{{ $product->id }}/{{ $descriptSale['upload_main_picture'] }}" alt="pic" />
+                                    <img style="max-width: 270px; max-height: 320px;" src="/storage/upload_pictures/{{ $product->id }}/{{ $descriptSale['upload_main_picture'] }}" alt="{{ $descriptSale['title_product'] }}" />
                                 @else
-                                    <img style="max-width: 270px; max-height: 320px;" src="/storage/common_pictures/noimage.jpg" alt="pic" />
+                                    <img style="max-width: 270px; max-height: 320px;" src="/storage/common_pictures/noimage.jpg" alt="{{ $descriptSale['title_product'] }}" />
                                 @endif
 
                                 <div class="image_overlay"></div>
@@ -192,7 +192,7 @@
                                 <div class="stats">
 
                                     <div class="stats-container">
-                                        <span class="product_name">{{ $descriptSale['title_product'] }}</span>
+                                        <span class="product_name" title="{{ $descriptSale['title_product'] }}">{{ $descriptSale['title_product'] }}</span>
                                         <br/>
                                             <span class="product_price">
                                                 <div>
@@ -229,11 +229,11 @@
                                 <div class="carousel">
                                     <ul class="carousel-container">
                                         @if (isset($descriptSale['main_picture_url']))
-                                            <li><img style="max-width: 270px; max-height: 320px;" src="{{ $descriptSale['main_picture_url'] }}"  /></li>
+                                            <li><img style="max-width: 270px; max-height: 320px;" src="{{ $descriptSale['main_picture_url'] }}"  alt="{{ $descriptSale['title_product'] }}"/></li>
                                         @elseif(isset($descriptSale['upload_main_picture']))
-                                            <li><img style="max-width: 270px; max-height: 320px;" src="/storage/upload_pictures/{{ $product->id }}/{{ $descriptSale['upload_main_picture'] }}" alt="pic" /></li>
+                                            <li><img style="max-width: 270px; max-height: 320px;" src="/storage/upload_pictures/{{ $product->id }}/{{ $descriptSale['upload_main_picture'] }}" alt="{{ $descriptSale['title_product'] }}" /></li>
                                         @else
-                                            <li><img style="max-width: 270px; max-height: 320px;" src="/storage/common_pictures/noimage.jpg" alt="pic" /></li>
+                                            <li><img style="max-width: 270px; max-height: 320px;" src="/storage/common_pictures/noimage.jpg" alt="{{ $descriptSale['title_product'] }}" /></li>
                                         @endif
 
                                         @if(isset($descriptSale['gallery']))
@@ -290,7 +290,7 @@
                             <div class="ribbon-1" style="z-index: 100; font-size: 12px; background-color: #6daaab;">Най-продаван</div>
                         </div>
                         <div class="info-large">
-                            <h4>{{ $descriptSale['title_product'] }}</h4>
+                            <h4 title="{{ $descriptSale['title_product'] }}" >{{ $descriptSale['title_product'] }}</h4>
                             <div class="sku">
                                 PRODUCT SKU: <strong>89356</strong>
                             </div>
@@ -311,11 +311,11 @@
                             <div class="product-front">
 
                                 @if (isset($descriptSale['main_picture_url']))
-                                    <img style="max-width: 270px; max-height: 320px;" src="{{ $descriptSale['main_picture_url'] }}"  />
+                                    <img style="max-width: 270px; max-height: 320px;" src="{{ $descriptSale['main_picture_url'] }}"  alt="{{ $descriptSale['title_product'] }}"/>
                                 @elseif(isset($descriptSale['upload_main_picture']))
-                                    <img style="max-width: 270px; max-height: 320px;" src="/storage/upload_pictures/{{ $product->id }}/{{ $descriptSale['upload_main_picture'] }}" alt="pic" />
+                                    <img style="max-width: 270px; max-height: 320px;" src="/storage/upload_pictures/{{ $product->id }}/{{ $descriptSale['upload_main_picture'] }}" alt="{{ $descriptSale['title_product'] }}" />
                                 @else
-                                    <img style="max-width: 270px; max-height: 320px;" src="/storage/common_pictures/noimage.jpg" alt="pic" />
+                                    <img style="max-width: 270px; max-height: 320px;" src="/storage/common_pictures/noimage.jpg" alt="{{ $descriptSale['title_product'] }}" />
                                 @endif
 
                                 <div class="image_overlay"></div>
@@ -328,7 +328,7 @@
                                 <div class="stats">
 
                                     <div class="stats-container">
-                                        <span class="product_name">{{ $descriptSale['title_product'] }}</span>
+                                        <span class="product_name" title="{{ $descriptSale['title_product'] }}">{{ $descriptSale['title_product'] }}</span>
                                         <br/>
                                             <span class="product_price">
                                                 <div>
@@ -365,11 +365,11 @@
                                 <div class="carousel">
                                     <ul class="carousel-container">
                                         @if (isset($descriptSale['main_picture_url']))
-                                            <li><img style="max-width: 270px; max-height: 320px;" src="{{ $descriptSale['main_picture_url'] }}"  /></li>
+                                            <li><img style="max-width: 270px; max-height: 320px;" src="{{ $descriptSale['main_picture_url'] }}"  alt="{{ $descriptSale['title_product'] }}"/></li>
                                         @elseif(isset($descriptSale['upload_main_picture']))
-                                            <li><img style="max-width: 270px; max-height: 320px;" src="/storage/upload_pictures/{{ $product->id }}/{{ $descriptSale['upload_main_picture'] }}" alt="pic" /></li>
+                                            <li><img style="max-width: 270px; max-height: 320px;" src="/storage/upload_pictures/{{ $product->id }}/{{ $descriptSale['upload_main_picture'] }}" alt="{{ $descriptSale['title_product'] }}" /></li>
                                         @else
-                                            <li><img style="max-width: 270px; max-height: 320px;" src="/storage/common_pictures/noimage.jpg" alt="pic" /></li>
+                                            <li><img style="max-width: 270px; max-height: 320px;" src="/storage/common_pictures/noimage.jpg" alt="{{ $descriptSale['title_product'] }}" /></li>
                                         @endif
 
                                         @if(isset($descriptSale['gallery']))

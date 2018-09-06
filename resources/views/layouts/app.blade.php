@@ -24,12 +24,14 @@
             @endif
         @endif
 
+        <meta name="description" content="Онлайн магазин за дамски и мъжки чанти, куфари, портмонета сакове. Пазарувай онлайн!" />
+        <meta name="keywords" content="чанти, дамски дамски, мъжки чанти, портмонета, раници, куфари, сакове." />
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="_token" content="{{ csrf_token() }}">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-
+        <meta name="robots" content="index">
         <title>
             @if(isset($product))
                 @if(isset($metaDescription))

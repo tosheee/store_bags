@@ -17,7 +17,7 @@
 @import url(listing_panel.css);
 
 @import url(index_blocks_products.css);
-/*@import url(show_product.css);*/
+@import url(show_product.css);
 
 @import url(shopping_cart.css);
 @import url(checkout.css);
